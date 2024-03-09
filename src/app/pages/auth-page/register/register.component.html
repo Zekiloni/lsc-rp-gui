@@ -1,0 +1,20 @@
+
+<form [formGroup]="form" (ngSubmit)="register()">
+    <p-floatLabel>
+        <input type="text" pInputText formControlName="username" id="username" />
+        <label for="username">Username</label>
+    </p-floatLabel>
+     
+    <p-floatLabel>
+        <input type="text" pInputText formControlName="email" id="email" />
+        <label for="email">Email</label>
+    </p-floatLabel>
+
+    <p-floatLabel>
+        <input type="password" pInputText formControlName="password" id="password" />
+        <label for="password">Password</label>
+    </p-floatLabel>
+
+
+    <button pButton type="submit" label="Submit" [disabled]="form.invalid"></button>
+</form>
