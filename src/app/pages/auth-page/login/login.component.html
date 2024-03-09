@@ -1,13 +1,8 @@
 
-<form [formGroup]="form" (ngSubmit)="register()">
+<form [formGroup]="form" (ngSubmit)="login()">
     <p-floatLabel>
         <input type="text" pInputText formControlName="username" id="username" />
         <label for="username">Username</label>
-    </p-floatLabel>
-     
-    <p-floatLabel>
-        <input type="text" pInputText formControlName="email" id="email" />
-        <label for="email">Email</label>
     </p-floatLabel>
 
     <p-floatLabel>
@@ -15,5 +10,5 @@
         <label for="password">Password</label>
     </p-floatLabel>
 
-    <button pButton type="submit" label="Sign up" [disabled]="form.invalid"></button>
+    <button pButton type="submit" label="Sign in"></button>
 </form>

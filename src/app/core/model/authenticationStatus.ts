@@ -9,14 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Account } from './account';
 
-export interface Account { 
-    id: number;
-    username: string;
-    email: string;
-    lastLoginAt?: Date;
-    updatedAt?: Date;
-    admin: number;
-    referralCode?: string;
-    createdAt: Date;
+export interface AuthenticationStatus { 
+    token: string;
+    account: Account;
 }

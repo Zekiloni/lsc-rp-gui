@@ -10,13 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface Account { 
-    id: number;
+export interface Authentication { 
     username: string;
-    email: string;
-    lastLoginAt?: Date;
-    updatedAt?: Date;
-    admin: number;
-    referralCode?: string;
-    createdAt: Date;
+    password: string;
 }

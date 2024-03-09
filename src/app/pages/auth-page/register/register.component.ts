@@ -6,8 +6,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 
-import { AccountApiService } from '../../../core/api';
-import { AccountCreate } from '../../../core/model/accountCreate';
+import { AccountApiService } from '../../../core/api/api';
+import { AccountCreate } from '../../../core/model/models';
 
 @Component({
    selector: 'app-register',
