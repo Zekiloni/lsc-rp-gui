@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
 
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -13,13 +13,15 @@ enum AuthPageAction {
 }
 
 @Component({
-   selector: 'app-auth-page',
+   selector: 'app-auth-modal',
    standalone: true,
-   imports: [CardModule, ButtonModule, RegisterComponent, LoginComponent],
-   templateUrl: './auth-page.component.html',
-   styleUrl: './auth-page.component.scss',
+   imports: [DialogModule, ButtonModule, RegisterComponent, LoginComponent],
+   templateUrl: './auth-modal.component.html',
+   styleUrl: './auth-modal.component.scss',
 })
-export class AuthPageComponent {
+export class AuthModalComponent {
+   @Input() isAuthModalVisible!: boolean;
+
    AuthPageAction = AuthPageAction;
    selecedAction: AuthPageAction = AuthPageAction.LOGIN;
 

@@ -1,0 +1,26 @@
+<p-dialog [(visible)]="isAuthModalVisible">
+    <ng-template pTemplate="headless">
+        <div class="authorization">
+            @switch (selecedAction) {
+                @case (AuthPageAction.LOGIN) {
+                    <app-register />
+                }
+                @case (AuthPageAction.REGISTER) {
+                    <app-login />
+                }
+            }
+    
+            <p-button [text]="true" severity="plain" (onClick)="switchAction()" class="switch-auth-action">
+                @switch (selecedAction) {
+                    @case (AuthPageAction.LOGIN) {
+                        Already have an account
+                    }
+                    @case (AuthPageAction.REGISTER) {
+                        Create a new account
+                    }
+                }
+            </p-button>
+        </div>
+
+    </ng-template>
+</p-dialog>
