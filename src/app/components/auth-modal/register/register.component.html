@@ -1,5 +1,5 @@
 
-<form [formGroup]="form" (ngSubmit)="register()">
+<form [formGroup]="form">
     <p-floatLabel>
         <input type="text" pInputText formControlName="username" id="username" />
         <label for="username">Username</label>
@@ -15,5 +15,5 @@
         <label for="password">Password</label>
     </p-floatLabel>
 
-    <button pButton type="submit" label="Sign up" [disabled]="form.invalid"></button>
+    <button pButton type="button" (click)="register()" label="Sign up"></button>
 </form>

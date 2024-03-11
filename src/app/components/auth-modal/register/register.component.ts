@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
-
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 
-import { AccountApiService } from '../../../core/api/api';
 import { AccountCreate } from '../../../core/model/models';
 
 @Component({
@@ -18,11 +16,12 @@ import { AccountCreate } from '../../../core/model/models';
       ButtonModule,
       FloatLabelModule,
    ],
-   providers: [AccountApiService],
    templateUrl: './register.component.html',
    styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+   @Output() submit = new EventEmitter<AccountCreate>();
+
    form = this.fb.group({
       username: [
          '',
@@ -43,10 +42,7 @@ export class RegisterComponent {
       ],
    });
 
-   constructor(
-      private fb: FormBuilder,
-      private accountApiService: AccountApiService
-   ) {}
+   constructor(private fb: FormBuilder) {}
 
    register() {
       if (this.form.invalid) {
@@ -59,13 +55,6 @@ export class RegisterComponent {
          password: this.form.get('password')!.value as string,
       };
 
-      this.accountApiService.createAccount(accountCreate).subscribe({
-         next: (account) => {
-            console.log(account);
-         },
-         error: (err) => {
-            console.log(err);
-         },
-      });
+      this.submit.emit(accountCreate);
    }
 }

@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+export const enum StorageItemKey {
+   AccessToken = 'ACCESS_TOKEN',
+}
+
 @Injectable()
 export class LocalStorageService {
    constructor() {}
@@ -9,6 +13,7 @@ export class LocalStorageService {
    }
 
    save(key: string, value: any) {
+      console.log(`LocalStorageService.save ${key} = ${value}`);
       localStorage.setItem(key, JSON.stringify(value));
    }
 

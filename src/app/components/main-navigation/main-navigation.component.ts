@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { AuthModalComponent } from '../auth-modal';
+import { Router } from '@angular/router';
 
 @Component({
    selector: 'app-main-navigation',
    standalone: true,
    imports: [MenubarModule, ButtonModule, AuthModalComponent],
+   providers: [DialogService],
    templateUrl: './main-navigation.component.html',
    styleUrl: './main-navigation.component.scss',
 })
-export class MainNavigationComponent implements OnInit {
-   isAuthModalActive: boolean = false;
+export class MainNavigationComponent implements OnInit, OnDestroy {
    items: MenuItem[] | undefined;
+
+   authDialogRef: DynamicDialogRef | undefined;
+
+   constructor(private dialogService: DialogService, private router: Router) {}
 
    ngOnInit() {
       this.items = [
@@ -37,7 +43,21 @@ export class MainNavigationComponent implements OnInit {
       ];
    }
 
-   toggleAuthModal() {
-      this.isAuthModalActive = !this.isAuthModalActive;
+   ngOnDestroy(): void {
+      if (this.authDialogRef) {
+         this.authDialogRef.close();
+      }
+   }
+
+   toggleAuthentication() {
+      this.authDialogRef = this.dialogService.open(AuthModalComponent, {});
+
+      this.authDialogRef.onClose.subscribe({
+         next: (response?: true) => {
+            if (response) {
+               this.router.navigate(['ucp']);
+            }
+         },
+      });
    }
 }

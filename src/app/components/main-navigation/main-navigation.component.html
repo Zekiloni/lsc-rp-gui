@@ -4,10 +4,8 @@
             <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" class="logo" />
         </ng-template>
         <ng-template pTemplate="end">
-            <p-button label="Join us now" [outlined]="true" icon="pi pi-sign-in" severity="primary" (onClick)="toggleAuthModal()"></p-button>
+            <p-button label="Join us now" [outlined]="true" icon="pi pi-sign-in" severity="primary" (onClick)="toggleAuthentication()"></p-button>
         </ng-template>
     </p-menubar>
 </div>
 
-
-<app-auth-modal [isAuthModalVisible]="isAuthModalActive" />
