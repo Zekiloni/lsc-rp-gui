@@ -1,10 +1,17 @@
 <div class="navigation card">
-    <p-menubar [model]="items">
+    <p-menubar [model]="mainNavItems">
         <ng-template pTemplate="start">
             <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" class="logo" />
         </ng-template>
         <ng-template pTemplate="end">
-            <p-button label="Join us now" [outlined]="true" icon="pi pi-sign-in" severity="primary" (onClick)="toggleAuthentication()"></p-button>
+            <div class="account" *ngIf="(userAccount$ | async) as userAccount; else join">
+                <p-menu #menu [model]="accNavItems" [popup]="true"></p-menu>
+                <button pButton type="button" icon="pi pi-bars" (click)="menu.toggle($event)" [label]="userAccount.username"></button>
+            </div>
+
+            <ng-template #join>
+                <p-button label="Join us now" [outlined]="true" icon="pi pi-sign-in" severity="primary" (onClick)="toggleAuthentication()"></p-button>
+            </ng-template>
         </ng-template>
     </p-menubar>
 </div>

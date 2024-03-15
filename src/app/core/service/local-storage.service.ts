@@ -4,7 +4,9 @@ export const enum StorageItemKey {
    AccessToken = 'ACCESS_TOKEN',
 }
 
-@Injectable()
+@Injectable({
+   providedIn: 'root',
+})
 export class LocalStorageService {
    constructor() {}
 

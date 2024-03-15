@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
    {
       path: '',
       loadComponent: () =>
          import('./layouts/landing-layout').then(
-            (m) => m.LandingLayoutComponent
+            (m) => m.LandingLayoutComponent,
          ),
       children: [
          {
@@ -18,16 +19,17 @@ export const routes: Routes = [
    },
    {
       path: 'ucp',
+      canActivate: [authGuard],
       loadComponent: () =>
          import('./layouts/dashboard-layout').then(
-            (m) => m.DashboardLayoutComponent
+            (m) => m.DashboardLayoutComponent,
          ),
       children: [
          {
-            title: 'Home',
+            title: 'Dashboard',
             path: '',
             loadComponent: () =>
-               import('./pages/home-page').then((m) => m.HomePageComponent),
+               import('./pages/dashboard-page').then((m) => m.DashboardPageComponent),
          },
       ],
    },
