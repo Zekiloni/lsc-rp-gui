@@ -22,7 +22,13 @@ export const routes: Routes = [
             loadComponent: () =>
                import('./pages/dashboard-page').then((m) => m.DashboardPageComponent),
          },
-
+         {
+            title: 'View Character',
+            path: 'character/:id',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/character-view-page').then((m) => m.CharacterViewPageComponent),
+         },
          {
             path: '**',
             pathMatch: 'full',

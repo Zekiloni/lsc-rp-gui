@@ -1,5 +1,4 @@
 import {
-   ChangeDetectorRef,
    Component,
    Inject,
    OnDestroy,
@@ -50,15 +49,16 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
       @Inject(Store) private store: Store,
       private localStorageService: LocalStorageService,
       private dialogService: DialogService,
-      private router: Router
-   ) {}
+      private router: Router,
+   ) {
+   }
 
    ngOnInit() {
       this.mainNavItems = [
          {
             label: 'Home',
             icon: 'pi pi-fw pi-home',
-            routerLink: '',
+            routerLink: '/',
          },
          {
             label: 'About',
@@ -70,36 +70,36 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
             icon: 'pi pi-fw pi-comments',
             routerLink: '/forum',
          },
+         {
+            label: 'Discord',
+            icon: 'pi pi-fw pi-discord',
+            routerLink: '',
+         }
       ];
 
       this.accNavItems = [
          {
+            label: 'Navigate',
+            items: [
+               {
+                  label: 'Dashboard',
+                  icon: 'pi pi-table',
+                  routerLink: 'dashboard',
+               },
+            ],
+         },
+         {
             label: 'Options',
             items: [
                {
-                  label: 'Update',
-                  icon: 'pi pi-refresh',
-                  command: () => {},
+                  label: 'Settings',
+                  icon: 'pi pi-cog',
+                  routerLink: '/settings',
                },
                {
                   label: 'Logout',
                   icon: 'pi pi-sign-out',
                   command: () => this.logout(),
-               },
-            ],
-         },
-         {
-            label: 'Navigate',
-            items: [
-               {
-                  label: 'Angular',
-                  icon: 'pi pi-external-link',
-                  url: 'http://angular.io',
-               },
-               {
-                  label: 'Router',
-                  icon: 'pi pi-upload',
-                  routerLink: '/fileupload',
                },
             ],
          },
@@ -116,6 +116,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
       this.store.dispatch(setAccount({ account: null }));
       this.store.dispatch(setAuthenticated({ isAuthenticated: false }));
       this.localStorageService.delete(StorageItemKey.AccessToken);
+      this.router.navigate(['/']);
    }
 
    toggleAuthentication() {

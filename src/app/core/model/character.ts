@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Vehicle } from './vehicle';
 
 export interface Character { 
     id?: number;
@@ -31,6 +32,7 @@ export interface Character {
     angle: number;
     virtualWorld: number;
     interior: number;
+    vehicles?: Array<Vehicle>;
     factionId?: number;
     rankId?: number;
     isLeader: boolean;
@@ -46,6 +48,7 @@ export interface Character {
      * The fighting style of the character
      */
     fightingStyle: number;
+    createdAt: Date;
 }
 export namespace Character {
     export type GenderEnum = '0' | '1';

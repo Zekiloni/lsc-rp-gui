@@ -1,19 +1,2 @@
-@for (character of characters; track character.id; let idx = $index) {
-   <p-card [header]="character.name.replace('_', ' ')" [subheader]="'#' + (idx + 1).toString()" [style]="{ width: '300px' }" class="character-card">
-      <ng-template pTemplate="header">
-         <div class="skin-preview">
-            <img [ngSrc]="getSkinImage(character.skin)" alt="character-skin-preview" fill />
-         </div>
-      </ng-template>
-      <ul class="short-details">
-         <li><b>Birthday</b> {{ character.birthday | date }}</li>
-         <li><b>Gender</b> {{ character.gender ? "Female" : "Male" }}</li>
-      </ul>
-      <ng-template pTemplate="footer">
-         <p-button label="More details" icon="pi pi-info-circle" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>
-      </ng-template>
-   </p-card>
 
-} @empty {
-   <li>There are no items.</li>
-}
+<app-characters-cards />

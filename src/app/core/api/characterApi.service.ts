@@ -93,7 +93,7 @@ export class CharacterApiService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<Character>('post',`${this.basePath}/characters`,
+        return this.httpClient.request<Character>('post',`${this.basePath}/character`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -134,7 +134,7 @@ export class CharacterApiService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('delete',`${this.basePath}/characters/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/character/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -170,7 +170,7 @@ export class CharacterApiService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<Character>>('get',`${this.basePath}/characters`,
+        return this.httpClient.request<Array<Character>>('get',`${this.basePath}/character`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -221,7 +221,7 @@ export class CharacterApiService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<Character>('patch',`${this.basePath}/characters/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<Character>('patch',`${this.basePath}/character/${encodeURIComponent(String(id))}`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -263,7 +263,7 @@ export class CharacterApiService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Character>('get',`${this.basePath}/characters/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<Character>('get',`${this.basePath}/character/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

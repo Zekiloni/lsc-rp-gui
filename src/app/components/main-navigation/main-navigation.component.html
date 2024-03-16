@@ -1,7 +1,7 @@
 <div class="navigation card">
     <p-menubar [model]="mainNavItems">
         <ng-template pTemplate="start">
-            <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" class="logo" />
+            <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2 logo" alt="ada"/>
         </ng-template>
         <ng-template pTemplate="end">
             <div class="account" *ngIf="(userAccount$ | async) as userAccount; else join">

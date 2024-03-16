@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
                this.store.dispatch(setAccount({ account }));
             },
             error: (err) => {
+               this.localStorageService.delete(StorageItemKey.AccessToken);
                console.log(err);
             },
          });

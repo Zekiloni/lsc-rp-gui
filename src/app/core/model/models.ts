@@ -7,3 +7,6 @@ export * from './authenticationStatus';
 export * from './character';
 export * from './characterCreate';
 export * from './characterUpdate';
+export * from './vehicle';
+export * from './vehicleCreate';
+export * from './vehicleUpdate';
