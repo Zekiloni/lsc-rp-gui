@@ -21,6 +21,7 @@ import {
    setAccount,
    setAuthenticated,
 } from '../../stores/account/account.actions';
+import { LocalStorageService, StorageItemKey } from '../../core/service/local-storage.service';
 
 @Component({
    selector: 'app-main-navigation',
@@ -33,7 +34,7 @@ import {
       NgIf,
       AsyncPipe,
    ],
-   providers: [DialogService],
+   providers: [DialogService, LocalStorageService],
    templateUrl: './main-navigation.component.html',
    styleUrl: './main-navigation.component.scss',
 })
@@ -47,6 +48,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
 
    constructor(
       @Inject(Store) private store: Store,
+      private localStorageService: LocalStorageService,
       private dialogService: DialogService,
       private router: Router
    ) {}
@@ -82,7 +84,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
                {
                   label: 'Logout',
                   icon: 'pi pi-sign-out',
-                  command: () => this.logout,
+                  command: () => this.logout(),
                },
             ],
          },
@@ -113,6 +115,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
    logout() {
       this.store.dispatch(setAccount({ account: null }));
       this.store.dispatch(setAuthenticated({ isAuthenticated: false }));
+      this.localStorageService.delete(StorageItemKey.AccessToken);
    }
 
    toggleAuthentication() {
@@ -121,7 +124,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
       this.authDialogRef.onClose.subscribe({
          next: (response?: true) => {
             if (response) {
-               this.router.navigate(['ucp']);
+               this.router.navigate(['dashboard']);
             }
          },
       });

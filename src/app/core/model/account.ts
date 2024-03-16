@@ -9,11 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Character } from './character';
 
 export interface Account { 
     id: number;
     username: string;
     email: string;
+    characters?: Array<Character>;
     lastLoginAt?: Date;
     updatedAt?: Date;
     admin: number;

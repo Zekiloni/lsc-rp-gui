@@ -63,8 +63,9 @@ export class AuthModalComponent {
       private accountApiService: AccountApiService,
       private authApiService: AuthenticationApiService,
       private localStorageService: LocalStorageService,
-      @Inject(Store) private readonly store: Store
-   ) {}
+      @Inject(Store) private readonly store: Store,
+   ) {
+   }
 
    switchAction() {
       this.selecedAction =
@@ -89,7 +90,7 @@ export class AuthModalComponent {
          next: (response) => {
             this.localStorageService.save(
                StorageItemKey.AccessToken,
-               `Bearer ${response.token}`
+               response.token,
             );
             this.store.dispatch(setAuthenticated({ isAuthenticated: true }));
             this.store.dispatch(setAccount({ account: response.account }));

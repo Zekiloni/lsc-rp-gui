@@ -5,8 +5,8 @@ export const routes: Routes = [
    {
       path: '',
       loadComponent: () =>
-         import('./layouts/landing-layout').then(
-            (m) => m.LandingLayoutComponent,
+         import('./layouts/main-layout').then(
+            (m) => m.MainLayoutComponent,
          ),
       children: [
          {
@@ -15,29 +15,21 @@ export const routes: Routes = [
             loadComponent: () =>
                import('./pages/home-page').then((m) => m.HomePageComponent),
          },
-      ],
-   },
-   {
-      path: 'ucp',
-      canActivate: [authGuard],
-      loadComponent: () =>
-         import('./layouts/dashboard-layout').then(
-            (m) => m.DashboardLayoutComponent,
-         ),
-      children: [
          {
             title: 'Dashboard',
-            path: '',
+            path: 'dashboard',
+            canActivate: [authGuard],
             loadComponent: () =>
                import('./pages/dashboard-page').then((m) => m.DashboardPageComponent),
          },
-      ],
-   },
 
-   {
-      path: '**',
-      pathMatch: 'full',
-      loadComponent: () =>
-         import('./pages/not-found-page').then((m) => m.NotFoundPageComponent),
+         {
+            path: '**',
+            pathMatch: 'full',
+            loadComponent: () =>
+               import('./pages/not-found-page').then((m) => m.NotFoundPageComponent),
+         },
+      ],
+
    },
 ];

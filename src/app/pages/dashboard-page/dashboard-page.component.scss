@@ -1,0 +1,17 @@
+
+.character-card {
+  .skin-preview {
+    position: relative;;
+    height: 200px;
+    max-width: 200px;
+  }
+
+  ul.short-details {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 8px 0;
+    }
+  }
+}
