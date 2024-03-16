@@ -1,0 +1,113 @@
+<div class="surface-section px-6 py-5" *ngIf="character">
+   <div class="flex align-items-start flex-column lg:flex-row lg:justify-content-between">
+      <div class="flex align-items-start flex-column md:flex-row"><img
+         [src]="getSkinImage(character.skin, true)" class="mr-5 mb-3 lg:mb-0"
+         style="width: 90px; height: 90px;">
+         <div><span class="text-900 font-medium text-3xl">{{ beautifyName(character.name) }}</span>
+            <div class="flex align-items-center flex-wrap text-sm">
+               <div class="mr-5 mt-3"><span class="font-medium text-500">Level</span>
+                  <div class="text-700 mt-2">{{ character.level }}</div>
+               </div>
+               <div class="mr-5 mt-3"><span class="font-medium text-500">Hours</span>
+                  <div class="text-700 mt-2">{{ character.hours }}</div>
+               </div>
+               <div class="mr-5 mt-3"><span class="font-medium text-500">Minutes</span>
+                  <div class="text-700 mt-2">{{ character.minutes }}</div>
+               </div>
+               <div class="mt-3"><span class="font-medium text-500">Created at</span>
+                  <div class="text-700 mt-2">{{ character.createdAt | date }}</div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="mt-3 lg:mt-0">
+         <button pButton pRipple icon="pi pi-cog"
+                 class="p-element p-ripple p-button-rounded mr-2 p-button p-component p-button-icon-only"><span
+            class="p-button-icon pi pi-cog" aria-hidden="true"></span><span class="p-ink"></span></button>
+      </div>
+   </div>
+</div>
+
+<div class="px-6 py-5" *ngIf="character">
+   <div class="surface-card p-4 shadow-2 border-round">
+      <div class="font-medium text-3xl text-900 mb-3">Informacije</div>
+      <div class="text-500 mb-5">Osnovne informacije u vezi vašeg karaktera, informacije o imovini i vozilima.</div>
+      <ul class="list-none p-0 m-0 border-top-1 border-300">
+         <li class="flex align-items-center py-3 px-2 flex-wrap ">
+            <div class="text-500 w-full md:w-2 font-medium">Novac</div>
+            <div class="text-900 w-full md:w-10">{{ formatCurrency(character.money) }}</div>
+         </li>
+         <li class="flex align-items-center py-3 px-2 flex-wrap  surface-ground">
+            <div class="text-500 w-full md:w-2 font-medium">Stanje Banka</div>
+            <div class="text-900 w-full md:w-10">{{ formatCurrency(character.bank) }}</div>
+         </li>
+         <li class="flex align-items-center py-3 px-2 flex-wrap">
+            <div class="text-500 w-full md:w-2 font-medium">Stanje Štednja</div>
+            <div class="text-900 w-full md:w-10">{{ formatCurrency(character.savings) }}</div>
+         </li>
+         <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+            <div class="text-500 w-full md:w-2 font-medium">Zarada</div>
+            <div class="text-900 w-full md:w-10">{{ formatCurrency(character.paycheck) }}</div>
+         </li>
+         <li class="flex align-items-center py-3 px-2 flex-wrap">
+            <div class="text-500 w-full md:w-2 font-medium">Dozvole</div>
+            <div class="text-900 w-full md:w-10">
+               <p-tag styleClass="mr-2" class="p-element"><span
+                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Vozačka dozvola</span></span>
+               </p-tag>
+               <p-tag styleClass="mr-2" class="p-element"><span
+                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Dozvola za kamion</span></span>
+               </p-tag>
+               <p-tag styleClass="mr-2" class="p-element"><span
+                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Dozvola za taksi</span></span>
+               </p-tag>
+            </div>
+         </li>
+         <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
+            <div class="text-500 w-full md:w-2 font-medium">Imovina</div>
+            <div class="text-900 w-full md:w-10">
+               <div class="grid mt-0 mr-0">
+                  <div class="col-12 md:col-6">
+                     <div class="p-3 border-1 surface-border border-round surface-card">
+                        <div class="text-900 mb-2"><i class="pi pi-home mr-2"></i><span
+                           class="font-medium">Kuća</span></div>
+                        <div class="text-700">Jeffrey's St. 24</div>
+                     </div>
+                  </div>
+                  <div class="col-12 md:col-6">
+                     <div class="p-3 border-1 surface-border border-round surface-card">
+                        <div class="text-900 mb-2"><i class="pi pi-briefcase mr-2"></i><span
+                           class="font-medium">Idlewood Gas Station</span></div>
+                        <div class="text-700">Idlewood 15</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </li>
+         <li class="flex align-items-center py-3 px-2 flex-wrap">
+            <div class="text-500 w-full md:w-2 font-medium">Vozila</div>
+            <div class="text-900 w-full md:w-10">
+               <div class="grid mt-0 mr-0">
+                  @for (vehicle of character.vehicles; track vehicle.id) {
+                     <div class="col-8 md:col-6" #vehicleInfo>
+                        <div class="p-3 border-1 surface-border border-round surface-ground">
+                           <div class="text-900 mb-2"><i class="pi pi-car mr-2"></i><span
+                              class="font-medium">{{ getVehicleName(vehicle.model) }}</span></div>
+                           <div class="text-700">#{{ vehicle.numberplate }}</div>
+                           <div class="text-700  mb-4 money">{{ formatCurrency(vehicle.price) }}</div>
+                           <p-button (click)="vehiclePhoto.show($event, vehicleInfo)" icon="pi pi-image"
+                                     label="See Photo"></p-button>
+                        </div>
+                     </div>
+
+                     <p-overlayPanel #vehiclePhoto>
+                        <img [ngSrc]="getVehicleImage(vehicle.model)" alt="vehicle model preview" priority />
+                     </p-overlayPanel>
+                  }
+               </div>
+            </div>
+         </li>
+      </ul>
+   </div>
+</div>

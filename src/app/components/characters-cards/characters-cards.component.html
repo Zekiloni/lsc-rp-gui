@@ -1,0 +1,96 @@
+<!--<div class="characters">-->
+<!--   @for (slot of characterSlots; track slot; let idx = $index) {-->
+<!--      @if (isSlotAvailable(slot)) {-->
+<!--         <p-card [header]="getCharacter(slot).name.replace('_', ' ')" [subheader]="'#' + (idx + 1).toString()"-->
+<!--                 class="character-card">-->
+<!--            <ng-template pTemplate="header">-->
+<!--               <div class="skin-preview">-->
+<!--                  <img [ngSrc]="getSkinImage(getCharacter(slot).skin)" alt="character-skin-preview" fill priority />-->
+<!--               </div>-->
+<!--            </ng-template>-->
+<!--            <ul class="short-details">-->
+<!--               <li><b>Birthday</b> {{ getCharacter(slot).birthday | date }}</li>-->
+<!--               <li><b>Gender</b> {{ getCharacter(slot).gender ? "Female" : "Male" }}</li>-->
+<!--            </ul>-->
+<!--            <ng-template pTemplate="footer">-->
+<!--               <p-button (click)="viewCharacter(getCharacter(slot).id!)" label="More details"-->
+<!--                         icon="pi pi-info-circle" styleClass="p-button-secondary"></p-button>-->
+<!--            </ng-template>-->
+<!--         </p-card>-->
+<!--      } @else {-->
+<!--         <p-card header="character.name.replace('_', ' ')" [subheader]="'#' + (idx + 1).toString()"-->
+<!--                 class="character-card">-->
+<!--            <ng-template pTemplate="header">-->
+<!--               <div class="skin-preview">-->
+
+<!--               </div>-->
+<!--            </ng-template>-->
+
+<!--            <ng-template pTemplate="footer">-->
+<!--               <p-button label="More details"-->
+<!--                         icon="pi pi-info-circle" styleClass="p-button-secondary"></p-button>-->
+<!--            </ng-template>-->
+<!--         </p-card>-->
+<!--      }-->
+<!--   }-->
+<!--</div>-->
+
+<div class=" px-4 py-8 md:px-6 lg:px-8">
+   <div class="text-900 font-bold text-6xl mb-4 text-center">Vasi karakteri</div>
+
+   <div class="grid">
+      @for (slot of characterSlots; track slot; ) {
+         @if (isSlotAvailable(slot)) {
+            <div class="col-12 lg:col-4">
+               <div class="p-3 h-full">
+                  <div
+                     class="shadow-2 p-3 h-full flex flex-column surface-card"
+                     style="border-radius: 6px">
+                     <div class="text-900 font-medium text-xl mb-2">Nema karaktera</div>
+                     <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                     <div class="flex align-items-center justify-content-center">
+                        <div class="skin-preview">
+                           <img ngSrc="./assets/images/no-character.png" alt="character-skin-preview" fill
+                                priority />
+                        </div>
+                     </div>
+                     <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                     <div class="flex align-items-center">
+                        <span class="ml-2 font-medium text-600 text-justify">Informacije nisu dostupne</span>
+                     </div>
+                     <button pButton pRipple label="Kreiraj karaktera" (click)="createCharacter()"
+                             class="p-3 w-full mt-auto"></button>
+                  </div>
+               </div>
+            </div>
+         } @else {
+            <div class="col-12 lg:col-4">
+               <div class="p-3 h-full">
+                  <div class="shadow-2 p-3 flex flex-column surface-card" style="border-radius: 6px">
+                     <div class="text-900 font-medium text-xl mb-2">{{ beautifyName(getCharacter(slot).name) }}</div>
+                     <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                     <div class="flex align-items-center justify-content-center">
+                        <div class="skin-preview">
+                           <img [ngSrc]="getSkinImage(getCharacter(slot).skin, true)" alt="character-skin-preview" fill
+                                priority />
+                        </div>
+                     </div>
+                     <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                     <ul class="list-none p-0 m-0 flex-grow-1">
+                        <li class="flex align-items-center mb-3">
+                           <span class="text-900">Pol: {{ getCharacter(slot).gender ? "Muško" : "Žensko" }}</span>
+                        </li>
+                        <li class="flex align-items-center mb-3">
+                           <span class="text-900">Datum rođenja: {{ getCharacter(slot).birthday | date }}</span>
+                        </li>
+                     </ul>
+                     <hr class="mb-3 mx-0 border-top-1 border-none surface-border" />
+                     <button pButton pRipple label="Vise detalja" (click)="viewCharacter(getCharacter(slot).id!)"
+                             class="p-3 w-full p-button-outlined"></button>
+                  </div>
+               </div>
+            </div>
+         }
+      }
+   </div>
+</div>
