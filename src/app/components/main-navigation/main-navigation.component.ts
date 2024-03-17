@@ -82,9 +82,9 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
             label: 'Navigate',
             items: [
                {
-                  label: 'Dashboard',
-                  icon: 'pi pi-table',
-                  routerLink: 'dashboard',
+                  label: 'User Control Panel',
+                  icon: 'pi pi-user',
+                  routerLink: 'ucp',
                },
             ],
          },
