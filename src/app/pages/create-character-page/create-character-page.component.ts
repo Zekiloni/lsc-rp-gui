@@ -44,11 +44,11 @@ export class CreateCharacterPageComponent {
 
    skinSelectDialogRef: DynamicDialogRef | undefined;
 
-   genderOptions = [{ label: 'Muško', value: CharacterGender.NUMBER_0 }, { label: 'Žensko', value: CharacterGender.NUMBER_1 }];
+   genderOptions = [{ label: 'Muško', value: CharacterGender.MALE }, { label: 'Žensko', value: CharacterGender.FEMALE }];
 
    form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(24)]],
-      gender: [CharacterGender.NUMBER_0, [Validators.required]],
+      gender: [CharacterGender.MALE, [Validators.required]],
       birthday: ['', Validators.required, this.validateCharacterAge],
    });
 
@@ -116,6 +116,8 @@ export class CreateCharacterPageComponent {
                skin: this.selectedSkin,
                accountId: account.id,
             };
+
+            console.log(characterCreate)
 
             this.characterApiService.createCharacter(characterCreate).subscribe({
                next: (character) => {
