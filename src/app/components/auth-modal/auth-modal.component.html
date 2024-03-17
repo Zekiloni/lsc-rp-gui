@@ -1,5 +1,5 @@
 <div class="authorization">
-    @switch (selecedAction) {
+    @switch (selectedAction) {
         @case (AuthAction.LOGIN) {
             <app-register (submit)="onCreateAccount($event)" />
         }
@@ -9,7 +9,7 @@
     }
 
     <p-button [text]="true" severity="plain" (onClick)="switchAction()" class="switch-auth-action">
-        @switch (selecedAction) {
+        @switch (selectedAction) {
             @case (AuthAction.LOGIN) {
                 Already have an account
             }

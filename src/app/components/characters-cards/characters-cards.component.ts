@@ -10,8 +10,8 @@ import { RippleModule } from 'primeng/ripple';
 import { beautifyName, getSkinImage } from '../../util/character.util';
 
 @Component({
-  selector: 'app-characters-cards',
-  standalone: true,
+   selector: 'app-characters-cards',
+   standalone: true,
    imports: [
       NgOptimizedImage,
       CardModule,
@@ -20,8 +20,8 @@ import { beautifyName, getSkinImage } from '../../util/character.util';
       RouterLink,
       RippleModule,
    ],
-  templateUrl: './characters-cards.component.html',
-  styleUrl: './characters-cards.component.scss'
+   templateUrl: './characters-cards.component.html',
+   styleUrl: './characters-cards.component.scss',
 })
 export class CharactersCardsComponent implements OnInit {
    characterSlots: number[] = [0, 1, 2];
@@ -43,8 +43,8 @@ export class CharactersCardsComponent implements OnInit {
       this.store.select(selectAccount).subscribe(({
          next: (account) => {
             this.characters = account!.characters;
-         }
-      }))
+         },
+      }));
 
    }
 
@@ -53,7 +53,7 @@ export class CharactersCardsComponent implements OnInit {
    }
 
    createCharacter() {
-
+      this.router.navigate(['create-character']);
    }
 
    protected readonly getSkinImage = getSkinImage;

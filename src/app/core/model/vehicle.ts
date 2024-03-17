@@ -12,28 +12,30 @@
 import { Character } from './character';
 
 export interface Vehicle { 
-    id?: number;
+    id: number;
     /**
      * Model ID of the vehicle
      */
     model: number;
-    numberplate: string;
-    owner?: Character;
-    positionX?: number;
-    positionY?: number;
-    positionZ?: number;
-    rotation?: number;
+    owner: Character;
     price: number;
-    parkPositionX?: number;
-    parkPositionY?: number;
-    parkPositionZ?: number;
-    parkRotation?: number;
+    health?: number;
+    numberplate?: string;
+    positionX: number;
+    positionY: number;
+    positionZ: number;
+    rotation: number;
+    parkPositionX: number;
+    parkPositionY: number;
+    parkPositionZ: number;
+    parkRotation: number;
     /**
      * Primary color code
      */
-    primaryColor?: number;
+    primaryColor: number;
     /**
      * Secondary color code
      */
-    secondaryColor?: number;
+    secondaryColor: number;
+    createdAt?: Date;
 }

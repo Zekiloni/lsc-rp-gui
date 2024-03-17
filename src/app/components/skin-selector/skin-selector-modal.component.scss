@@ -1,0 +1,26 @@
+
+
+
+.skin-selector {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .skin-preview {
+    width: 75px;
+    height: 205px;
+    transition: all .35s ease;
+
+    &:hover {
+      position: relative;
+      filter: brightness(2.0);
+      z-index: 999;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}

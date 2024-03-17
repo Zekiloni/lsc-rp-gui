@@ -1,0 +1,7 @@
+<div class="skin-selector">
+   @for (skinId of availableSkins; track skinId) {
+    <div class="skin-preview" (click)="selectSkin(skinId)">
+       <img [src]="getSkinImage(skinId)" alt="skin preview model"/>
+    </div>
+   }
+</div>

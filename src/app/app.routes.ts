@@ -30,6 +30,13 @@ export const routes: Routes = [
                import('./pages/character-view-page').then((m) => m.CharacterViewPageComponent),
          },
          {
+            title: 'Create Character',
+            path: 'create-character',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/create-character-page').then((m) => m.CreateCharacterPageComponent),
+         },
+         {
             path: '**',
             pathMatch: 'full',
             loadComponent: () =>

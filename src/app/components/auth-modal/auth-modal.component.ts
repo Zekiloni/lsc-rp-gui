@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-
+import { Store } from '@ngrx/store';
 import {
    DynamicDialogModule,
    DynamicDialogRef,
@@ -9,9 +9,8 @@ import {
 } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
-
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register';
+import { LoginComponent } from './login';
 import { Authentication, AccountCreate } from '../../core/model/models';
 import {
    AccountApiService,
@@ -21,7 +20,6 @@ import {
    LocalStorageService,
    StorageItemKey,
 } from '../../core/service/local-storage.service';
-import { Store } from '@ngrx/store';
 import {
    setAccount,
    setAuthenticated,
@@ -55,7 +53,7 @@ export class AuthModalComponent {
    instance: DynamicDialogComponent | undefined;
 
    AuthAction = AuthAction;
-   selecedAction: AuthAction = AuthAction.LOGIN;
+   selectedAction: AuthAction = AuthAction.LOGIN;
 
    constructor(
       public ref: DynamicDialogRef,
@@ -68,8 +66,8 @@ export class AuthModalComponent {
    }
 
    switchAction() {
-      this.selecedAction =
-         this.selecedAction == AuthAction.LOGIN
+      this.selectedAction =
+         this.selectedAction == AuthAction.LOGIN
             ? AuthAction.REGISTER
             : AuthAction.LOGIN;
    }

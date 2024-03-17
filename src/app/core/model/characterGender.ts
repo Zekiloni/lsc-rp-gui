@@ -9,12 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CharacterGender } from './characterGender';
 
-export interface CharacterCreate { 
-    accountId: number;
-    name: string;
-    birthday: string;
-    gender: CharacterGender;
-    skin?: number;
-}
+export type CharacterGender = 0 | 1;
+
+export const CharacterGender = {
+    NUMBER_0: 0 as CharacterGender,
+    NUMBER_1: 1 as CharacterGender
+};

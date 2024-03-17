@@ -9,13 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CharacterGender } from './characterGender';
 import { Vehicle } from './vehicle';
 
 export interface Character { 
     id?: number;
     name: string;
     birthday: string;
-    gender: Character.GenderEnum;
+    gender: CharacterGender;
     health: number;
     armour: number;
     skin: number;
@@ -38,6 +39,7 @@ export interface Character {
     isLeader: boolean;
     job: number;
     state: number;
+    maskId?: string;
     respawnTime: number;
     drugAddiction: number;
     /**
@@ -49,11 +51,4 @@ export interface Character {
      */
     fightingStyle: number;
     createdAt: Date;
-}
-export namespace Character {
-    export type GenderEnum = '0' | '1';
-    export const GenderEnum = {
-        _0: '0' as GenderEnum,
-        _1: '1' as GenderEnum
-    };
 }
