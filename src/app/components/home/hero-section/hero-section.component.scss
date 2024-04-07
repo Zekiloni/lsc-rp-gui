@@ -12,6 +12,7 @@
   .hero-image {
     border-radius: 16px;
     filter: grayscale(1.0);
+    object-fit: cover;
     transition: filter .15s ease-in-out;
   }
 }
