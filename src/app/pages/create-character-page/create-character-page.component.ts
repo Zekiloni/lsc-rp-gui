@@ -53,7 +53,7 @@ export class CreateCharacterPageComponent {
    }];
 
    form = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(24)]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(24), this.validateCharacterName]],
       gender: [CharacterGender.MALE, [Validators.required]],
       birthday: ['', Validators.required, this.validateCharacterAge],
    });
@@ -86,6 +86,18 @@ export class CreateCharacterPageComponent {
       return of(null);
    };
 
+   validateCharacterName(control: AbstractControl) {
+      if (!control.value) {
+         return null;
+      }
+
+      if (!/^[A-Z][a-zA-Z]*_[A-Z][a-zA-Z]*$/.test(control.value)) {
+         return { 'invalidCharacterName': true };
+      }
+
+      return null;
+   }
+
    toggleSkinSelector() {
       this.skinSelectDialogRef = this.dialogService.open(SkinSelectorModalComponent, {
          header: 'Odaberite skin',
@@ -106,6 +118,7 @@ export class CreateCharacterPageComponent {
          for (const name of Object.keys(this.form.controls) as (keyof typeof this.form.controls)[]) {
             if (this.form.controls[name].invalid) {
                console.log(name, 'is invalid');
+               console.log(this.form.controls[name].errors);
             }
          }
          return;
@@ -134,8 +147,8 @@ export class CreateCharacterPageComponent {
                      this.router.navigate(['character', character.id]);
                   },
                   error: (error: ApiError) => {
-                     console.log(error)
-                     this.messageService.add({ severity: 'error', detail: error.message })
+                     console.log(error);
+                     this.messageService.add({ severity: 'error', detail: error.message });
                   },
                });
          },
@@ -143,4 +156,7 @@ export class CreateCharacterPageComponent {
 
 
    }
+
+   protected readonly CHARACTER_MIN_AGE = CHARACTER_MIN_AGE;
+   protected readonly CHARACTER_MAX_AGE = CHARACTER_MAX_AGE;
 }

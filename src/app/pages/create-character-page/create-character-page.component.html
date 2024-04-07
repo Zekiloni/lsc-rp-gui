@@ -5,23 +5,28 @@
       <form class="flex-auto p-fluid" [formGroup]="form" (ngSubmit)="submitCharacterCreate()">
          <div class="mb-4 w-5 ">
             <label for="name" class="block font-medium text-900 mb-2">Ime</label>
-            <input pInputText type="text" formControlName="name" id="name">
+            <input pInputText type="text" aria-describedby="name-help" formControlName="name" id="name">
+            <small id="name-help" class="text-color-secondary">Format Ime_Prezime</small>
          </div>
 
          <div class="mb-4 w-5 ">
             <label for="birthday" class="block font-medium text-900 mb-2">Datum rođenja</label>
-            <p-calendar formControlName="birthday" id="birthday"></p-calendar>
+            <p-calendar formControlName="birthday" aria-describedby="age-help" id="birthday"></p-calendar>
+            <small id="age-help" class="text-color-secondary">Ne sme biti mladji od {{ CHARACTER_MIN_AGE }} ili stariji
+               od {{ CHARACTER_MAX_AGE }}</small>
          </div>
 
          <div class="mb-5 w-5">
-            <p-selectButton [options]="genderOptions" formControlName="gender" optionLabel="label" optionValue="value"></p-selectButton>
+            <p-selectButton [options]="genderOptions" formControlName="gender" optionLabel="label"
+                            optionValue="value"></p-selectButton>
          </div>
 
          <button pButton type="submit" label="Kreiraj" class="w-4"></button>
       </form>
       <div class="flex flex-column align-items-center flex-or"><span
          class="font-medium text-900 mb-2">Skin</span>
-         <img [src]="getSkinImage(selectedSkin)" class="selected-skin-preview h-27rem w-20rem" alt="selected skin preview model">
+         <img [src]="getSkinImage(selectedSkin)" class="selected-skin-preview h-27rem w-20rem"
+              alt="selected skin preview model">
          <button pButton type="submit" icon="pi pi-pencil" (click)="toggleSkinSelector()"
                  class="p-element p-button-rounded -mt-4 p-button p-component p-button-icon-only"><span
             class="p-button-icon pi pi-pencil" aria-hidden="true"></span></button>
