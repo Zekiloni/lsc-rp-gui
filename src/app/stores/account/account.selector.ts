@@ -9,6 +9,11 @@ export const selectIsAuthenticated = createSelector(
    (state: AccountState) => state.isAuthenticated
 );
 
+export const selectIsAdministrator = createSelector(
+   selectAccountState,
+   (state: AccountState) => state.account && state.account.admin
+)
+
 export const selectAccount = createSelector(
    selectAccountState,
    (state: AccountState) => state.account

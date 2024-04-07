@@ -120,12 +120,14 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
    }
 
    toggleAuthentication() {
-      this.authDialogRef = this.dialogService.open(AuthModalComponent, {});
+      this.authDialogRef = this.dialogService.open(AuthModalComponent, {
+         header: 'Authorization'
+      });
 
       this.authDialogRef.onClose.subscribe({
          next: (response?: true) => {
             if (response) {
-               this.router.navigate(['dashboard']);
+               this.router.navigate(['ucp']);
             }
          },
       });

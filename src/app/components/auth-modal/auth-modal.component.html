@@ -1,21 +1,21 @@
 <div class="authorization">
-    @switch (selectedAction) {
-        @case (AuthAction.LOGIN) {
-            <app-register (submit)="onCreateAccount($event)" />
-        }
-        @case (AuthAction.REGISTER) {
-            <app-login (submit)="onAuthAccount($event)"/>
-        }
-    }
+   @switch (selectedAction) {
+      @case (AuthAction.LOGIN) {
+         <app-register (submit)="onCreateAccount($event)" />
+      }
+      @case (AuthAction.REGISTER) {
+         <app-login (submit)="onAuthAccount($event)" />
+      }
+   }
 
-    <p-button [text]="true" severity="plain" (onClick)="switchAction()" class="switch-auth-action">
-        @switch (selectedAction) {
-            @case (AuthAction.LOGIN) {
-                Already have an account
-            }
-            @case (AuthAction.REGISTER) {
-                Create a new account
-            }
-        }
-    </p-button>
+   <p-button [text]="true" (onClick)="switchAction()" class="switch-auth-action">
+      @switch (selectedAction) {
+         @case (AuthAction.LOGIN) {
+            Already have an account
+         }
+         @case (AuthAction.REGISTER) {
+            Create a new account
+         }
+      }
+   </p-button>
 </div>

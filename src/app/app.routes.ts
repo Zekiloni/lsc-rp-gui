@@ -23,6 +23,13 @@ export const routes: Routes = [
                import('./pages/dashboard-page').then((m) => m.DashboardPageComponent),
          },
          {
+            title: 'Account Settings',
+            path: 'settings',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/account-settings-page').then((m) => m.AccountSettingsPageComponent),
+         },
+         {
             title: 'View Character',
             path: 'character/:id',
             canActivate: [authGuard],

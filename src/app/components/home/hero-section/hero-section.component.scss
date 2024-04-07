@@ -1,0 +1,17 @@
+
+.hero {
+  position: relative;
+
+
+  &:hover {
+    .hero-image {
+      filter: none;
+    }
+  }
+
+  .hero-image {
+    border-radius: 16px;
+    filter: grayscale(1.0);
+    transition: filter .15s ease-in-out;
+  }
+}
