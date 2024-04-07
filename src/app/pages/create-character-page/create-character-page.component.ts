@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { of } from 'rxjs';
+import { catchError, of, throwError } from 'rxjs';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
@@ -10,7 +10,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CharacterApiService } from '../../core/api/api';
-import { CharacterCreate, CharacterGender } from '../../core/model/models';
+import { ApiError, CharacterCreate, CharacterGender } from '../../core/model/models';
 import { getSkinImage } from '../../util/character.util';
 
 import { SkinSelectorModalComponent } from '../../components/skin-selector';
@@ -18,6 +18,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectAccount } from '../../stores/account/account.selector';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 const [CHARACTER_MIN_AGE, CHARACTER_MAX_AGE] = [18, 90];
 
@@ -34,8 +36,9 @@ const [CHARACTER_MIN_AGE, CHARACTER_MAX_AGE] = [18, 90];
       ReactiveFormsModule,
       CalendarModule,
       SelectButtonModule,
+      ToastModule,
    ],
-   providers: [CharacterApiService, DialogService],
+   providers: [CharacterApiService, DialogService, MessageService],
    templateUrl: './create-character-page.component.html',
    styleUrl: './create-character-page.component.scss',
 })
@@ -44,7 +47,10 @@ export class CreateCharacterPageComponent {
 
    skinSelectDialogRef: DynamicDialogRef | undefined;
 
-   genderOptions = [{ label: 'Muško', value: CharacterGender.MALE }, { label: 'Žensko', value: CharacterGender.FEMALE }];
+   genderOptions = [{ label: 'Muško', value: CharacterGender.MALE }, {
+      label: 'Žensko',
+      value: CharacterGender.FEMALE,
+   }];
 
    form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(24)]],
@@ -59,7 +65,9 @@ export class CreateCharacterPageComponent {
       private dialogService: DialogService,
       private characterApiService: CharacterApiService,
       private router: Router,
-      @Inject(Store) private store: Store) {
+      @Inject(Store) private store: Store,
+      private messageService: MessageService,
+   ) {
    }
 
    validateCharacterAge(control: AbstractControl) {
@@ -78,7 +86,7 @@ export class CreateCharacterPageComponent {
       return of(null);
    };
 
-   toggleCharacterSelector() {
+   toggleSkinSelector() {
       this.skinSelectDialogRef = this.dialogService.open(SkinSelectorModalComponent, {
          header: 'Odaberite skin',
          width: '50%',
@@ -117,16 +125,19 @@ export class CreateCharacterPageComponent {
                accountId: account.id,
             };
 
-            console.log(characterCreate)
+            console.log(characterCreate);
 
-            this.characterApiService.createCharacter(characterCreate).subscribe({
-               next: (character) => {
-                  this.router.navigate(['character', character.id]);
-               },
-               error: (err) => {
-                  console.log(err);
-               },
-            });
+            this.characterApiService.createCharacter(characterCreate)
+               .pipe(catchError(error => throwError(() => error.error)))
+               .subscribe({
+                  next: (character) => {
+                     this.router.navigate(['character', character.id]);
+                  },
+                  error: (error: ApiError) => {
+                     console.log(error)
+                     this.messageService.add({ severity: 'error', detail: error.message })
+                  },
+               });
          },
       });
 

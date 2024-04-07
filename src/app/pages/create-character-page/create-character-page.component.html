@@ -22,9 +22,11 @@
       <div class="flex flex-column align-items-center flex-or"><span
          class="font-medium text-900 mb-2">Skin</span>
          <img [src]="getSkinImage(selectedSkin)" class="selected-skin-preview h-27rem w-20rem" alt="selected skin preview model">
-         <button pButton type="submit" icon="pi pi-pencil" (click)="toggleCharacterSelector()"
+         <button pButton type="submit" icon="pi pi-pencil" (click)="toggleSkinSelector()"
                  class="p-element p-button-rounded -mt-4 p-button p-component p-button-icon-only"><span
             class="p-button-icon pi pi-pencil" aria-hidden="true"></span></button>
       </div>
+      <p-toast></p-toast>
+
    </div>
 </div>
