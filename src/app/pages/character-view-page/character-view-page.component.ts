@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { CharacterApiService } from '../../core/api/characterApi.service';
-import { Character } from '../../core/model/character';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe, JsonPipe, NgIf, NgOptimizedImage } from '@angular/common';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
 import { beautifyName, getSkinImage } from '../../util/character.util';
-import { formatCurrency } from '../../util/currency.util';
 import { getVehicleImage, getVehicleName } from '../../util/vehicle.util';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { formatCurrency } from '../../util/currency.util';
+import { CharacterApiService } from '../../core/api/characterApi.service';
+import { Character } from '../../core/model/character';
 
 @Component({
    selector: 'app-character-view-page',
@@ -33,9 +33,13 @@ export class CharacterViewPageComponent implements OnInit {
    protected readonly beautifyName = beautifyName;
    protected readonly formatCurrency = formatCurrency;
 
+   protected readonly getVehicleName = getVehicleName;
+   protected readonly getVehicleImage = getVehicleImage;
+
    character: Character | undefined;
 
-   constructor(private characterApiService: CharacterApiService, private route: ActivatedRoute) {
+   constructor(private characterApiService: CharacterApiService, private route: ActivatedRoute,
+               private router: Router) {
    }
 
    ngOnInit(): void {
@@ -44,10 +48,10 @@ export class CharacterViewPageComponent implements OnInit {
          next: (character) => {
             this.character = character;
          },
-         error: (err) => console.log(err)
+         error: (err) => {
+
+            this.router.navigate(['/ucp']);
+         }
       })
    }
-
-   protected readonly getVehicleName = getVehicleName;
-   protected readonly getVehicleImage = getVehicleImage;
 }

@@ -22,5 +22,12 @@ export const accountReducer = createReducer(
    on(AccountActions.setAccount, (state, { account }) => ({
       ...state,
       account,
-   }))
+   })),
+   on(AccountActions.addAccountCharacter, (state, { character }) => ({
+      ...state,
+      account: state.account ? { // Check if account exists
+         ...state.account,
+         characters: [...(state.account.characters || []), character], // Add character to characters array
+      } : null,
+   })),
 );

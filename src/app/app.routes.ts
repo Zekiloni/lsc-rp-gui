@@ -16,6 +16,12 @@ export const routes: Routes = [
                import('./pages/home-page').then((m) => m.HomePageComponent),
          },
          {
+            title: 'About',
+            path: 'about',
+            loadComponent: () =>
+               import('./pages/about-page').then((m) => m.AboutPageComponent),
+         },
+         {
             title: 'Dashboard',
             path: 'ucp',
             canActivate: [authGuard],

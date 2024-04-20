@@ -20,6 +20,7 @@ import { Store } from '@ngrx/store';
 import { selectAccount } from '../../stores/account/account.selector';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { addAccountCharacter } from '../../stores/account/account.actions';
 
 const [CHARACTER_MIN_AGE, CHARACTER_MAX_AGE] = [18, 90];
 
@@ -44,6 +45,9 @@ const [CHARACTER_MIN_AGE, CHARACTER_MAX_AGE] = [18, 90];
 })
 export class CreateCharacterPageComponent {
    protected readonly getSkinImage = getSkinImage;
+
+   protected readonly CHARACTER_MIN_AGE = CHARACTER_MIN_AGE;
+   protected readonly CHARACTER_MAX_AGE = CHARACTER_MAX_AGE;
 
    skinSelectDialogRef: DynamicDialogRef | undefined;
 
@@ -138,25 +142,18 @@ export class CreateCharacterPageComponent {
                accountId: account.id,
             };
 
-            console.log(characterCreate);
-
             this.characterApiService.createCharacter(characterCreate)
                .pipe(catchError(error => throwError(() => error.error)))
                .subscribe({
                   next: (character) => {
+                     this.store.dispatch(addAccountCharacter({ character }));
                      this.router.navigate(['character', character.id]);
                   },
                   error: (error: ApiError) => {
-                     console.log(error);
                      this.messageService.add({ severity: 'error', detail: error.message });
                   },
                });
          },
       });
-
-
    }
-
-   protected readonly CHARACTER_MIN_AGE = CHARACTER_MIN_AGE;
-   protected readonly CHARACTER_MAX_AGE = CHARACTER_MAX_AGE;
 }

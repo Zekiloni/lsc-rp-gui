@@ -10,6 +10,11 @@
 
    }
 
+   ::ng-deep .p-menubar-button {
+      margin-left: auto;
+      margin-right: 16px;
+   }
+
    ::ng-deep .p-menubar-end {
       margin-left: 0;
       align-self: center;
