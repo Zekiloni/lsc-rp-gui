@@ -21,6 +21,7 @@ import {
    setAuthenticated,
 } from '../../stores/account/account.actions';
 import { LocalStorageService, StorageItemKey } from '../../core/service/local-storage.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
    selector: 'app-main-navigation',
@@ -68,12 +69,12 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
          {
             label: 'Forum',
             icon: 'pi pi-fw pi-comments',
-            routerLink: '/forum',
+            url: environment.forumUrl
          },
          {
             label: 'Discord',
             icon: 'pi pi-fw pi-discord',
-            routerLink: '',
+            url: environment.discordInviteLink,
          }
       ];
 
