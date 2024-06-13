@@ -22,6 +22,7 @@ import {
 } from '../../stores/account/account.actions';
 import { LocalStorageService, StorageItemKey } from '../../core/service/local-storage.service';
 import { environment } from '../../../environments/environment';
+import { DiscordApiService } from '../../core/api/discordApi.service';
 
 @Component({
    selector: 'app-main-navigation',
@@ -34,7 +35,7 @@ import { environment } from '../../../environments/environment';
       NgIf,
       AsyncPipe,
    ],
-   providers: [DialogService, LocalStorageService],
+   providers: [DialogService, LocalStorageService, DiscordApiService],
    templateUrl: './main-navigation.component.html',
    styleUrl: './main-navigation.component.scss',
 })
@@ -46,8 +47,11 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
 
    authDialogRef: DynamicDialogRef | undefined;
 
+   discordInviteLink: string | undefined;
+
    constructor(
       @Inject(Store) private store: Store,
+      private discordApiService: DiscordApiService,
       private localStorageService: LocalStorageService,
       private dialogService: DialogService,
       private router: Router,
@@ -74,7 +78,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
          {
             label: 'Discord',
             icon: 'pi pi-fw pi-discord',
-            url: environment.discordInviteLink,
+            command: () => this.inviteToDiscord()
          }
       ];
 
@@ -132,5 +136,14 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
             }
          },
       });
+   }
+
+   private inviteToDiscord() {
+      return  this.discordApiService.getDiscordServer().subscribe({
+         next: (response) => {
+
+            window.open(response.instant_invite);
+         }
+      })
    }
 }
