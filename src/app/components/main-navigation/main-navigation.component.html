@@ -5,7 +5,7 @@
         </ng-template>
         <ng-template pTemplate="end">
             <div class="account" *ngIf="(userAccount$ | async) as userAccount; else join">
-                <p-menu #menu [model]="accNavItems" [popup]="true"></p-menu>
+                <p-menu #menu [model]="accountNavItems" [popup]="true"></p-menu>
                 <button pButton type="button" icon="pi pi-bars" (click)="menu.toggle($event)" [label]="userAccount.username"></button>
             </div>
 

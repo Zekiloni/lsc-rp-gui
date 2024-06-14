@@ -1,9 +1,4 @@
-import {
-   Component,
-   Inject,
-   OnDestroy,
-   OnInit,
-} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
@@ -16,13 +11,11 @@ import { AuthModalComponent } from '../auth-modal';
 import { Store } from '@ngrx/store';
 import { selectAccount } from '../../stores/account/account.selector';
 import { AsyncPipe, NgIf } from '@angular/common';
-import {
-   setAccount,
-   setAuthenticated,
-} from '../../stores/account/account.actions';
+import { setAccount, setAuthenticated } from '../../stores/account/account.actions';
 import { LocalStorageService, StorageItemKey } from '../../core/service/local-storage.service';
 import { environment } from '../../../environments/environment';
 import { DiscordApiService } from '../../core/api/discordApi.service';
+import { map } from 'rxjs';
 
 @Component({
    selector: 'app-main-navigation',
@@ -41,13 +34,11 @@ import { DiscordApiService } from '../../core/api/discordApi.service';
 })
 export class MainNavigationComponent implements OnInit, OnDestroy {
    mainNavItems: MenuItem[] | undefined;
-   accNavItems: MenuItem[] | undefined;
+   accountNavItems: MenuItem[] | undefined;
 
    userAccount$ = this.store.select(selectAccount);
 
    authDialogRef: DynamicDialogRef | undefined;
-
-   discordInviteLink: string | undefined;
 
    constructor(
       @Inject(Store) private store: Store,
@@ -73,42 +64,52 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
          {
             label: 'Forum',
             icon: 'pi pi-fw pi-comments',
-            url: environment.forumUrl
+            url: environment.forumUrl,
          },
          {
             label: 'Discord',
             icon: 'pi pi-fw pi-discord',
-            command: () => this.inviteToDiscord()
-         }
+            command: () => this.inviteToDiscord(),
+         },
       ];
 
-      this.accNavItems = [
-         {
-            label: 'Navigate',
-            items: [
+      this.userAccount$.pipe(
+         map(account => account!.admin || 0))
+         .subscribe(admin => {
+            this.accountNavItems = [
                {
-                  label: 'User Control Panel',
-                  icon: 'pi pi-user',
-                  routerLink: 'ucp',
+                  label: 'Navigacija',
+                  items: [
+                     {
+                        label: 'User Control Panel',
+                        icon: 'pi pi-user',
+                        routerLink: 'ucp',
+                     },
+
+                     ...(admin > 0 ? [{
+                        label: 'Admin Panel',
+                        icon: 'pi pi-shield',
+                        routerLink: 'admin',
+                     }] : []),
+                  ],
                },
-            ],
-         },
-         {
-            label: 'Options',
-            items: [
                {
-                  label: 'Settings',
-                  icon: 'pi pi-cog',
-                  routerLink: '/settings',
+                  label: 'Opcije',
+                  items: [
+                     {
+                        label: 'Podešavanja',
+                        icon: 'pi pi-cog',
+                        routerLink: '/settings',
+                     },
+                     {
+                        label: 'Odjavi se',
+                        icon: 'pi pi-sign-out',
+                        command: () => this.logout(),
+                     },
+                  ],
                },
-               {
-                  label: 'Logout',
-                  icon: 'pi pi-sign-out',
-                  command: () => this.logout(),
-               },
-            ],
-         },
-      ];
+            ];
+         });
    }
 
    ngOnDestroy(): void {
@@ -126,7 +127,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
 
    toggleAuthentication() {
       this.authDialogRef = this.dialogService.open(AuthModalComponent, {
-         header: 'Authorization'
+         header: 'Authorization',
       });
 
       this.authDialogRef.onClose.subscribe({
@@ -139,11 +140,11 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
    }
 
    private inviteToDiscord() {
-      return  this.discordApiService.getDiscordServer().subscribe({
+      return this.discordApiService.getDiscordServer().subscribe({
          next: (response) => {
 
             window.open(response.instant_invite);
-         }
-      })
+         },
+      });
    }
 }
