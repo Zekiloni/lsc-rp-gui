@@ -43,6 +43,13 @@ export const routes: Routes = [
                import('./pages/character-view-page').then((m) => m.CharacterViewPageComponent),
          },
          {
+            title: 'Admin Panel',
+            path: 'admin',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/admin-panel-page').then((m) => m.AdminPanelPageComponent),
+         },
+         {
             title: 'Create Character',
             path: 'create-character',
             canActivate: [authGuard],
