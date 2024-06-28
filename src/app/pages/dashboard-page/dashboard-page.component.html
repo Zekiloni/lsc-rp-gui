@@ -1,2 +1,11 @@
+<p-tabView>
+   <p-tabPanel header="Pregled karaktera">
+      <app-characters-cards />
+   </p-tabPanel>
+   <p-tabPanel header="Administrativna evidencija">
+      <ng-container *ngIf="(userAccount$ | async) as userAccount">
+         <app-bans-table *ngIf="userAccount && userAccount.id != null" [accountId]="userAccount.id" />
+      </ng-container>
+   </p-tabPanel>
+</p-tabView>
 
-<app-characters-cards />
