@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { CharacterGender } from './characterGender';
+import { Property } from './property';
 import { Vehicle } from './vehicle';
 
 export interface Character { 
@@ -34,6 +35,7 @@ export interface Character {
     virtualWorld: number;
     interior: number;
     vehicles?: Array<Vehicle>;
+    properties?: Array<Property>;
     factionId?: number;
     rankId?: number;
     isLeader: boolean;

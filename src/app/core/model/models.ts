@@ -4,6 +4,8 @@ export * from './accountUpdate';
 export * from './apiError';
 export * from './authentication';
 export * from './authenticationStatus';
+export * from './ban';
+export * from './banCreate';
 export * from './character';
 export * from './characterCreate';
 export * from './characterGender';

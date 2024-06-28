@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { Property } from '../model/property';
+import { PropertyType } from '../model/propertyType';
 import { PropertyUpdate } from '../model/propertyUpdate';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -110,10 +111,10 @@ export class PropertyApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listProperties(type?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Property>>;
-    public listProperties(type?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Property>>>;
-    public listProperties(type?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Property>>>;
-    public listProperties(type?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listProperties(type?: PropertyType, observe?: 'body', reportProgress?: boolean): Observable<Array<Property>>;
+    public listProperties(type?: PropertyType, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Property>>>;
+    public listProperties(type?: PropertyType, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Property>>>;
+    public listProperties(type?: PropertyType, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});

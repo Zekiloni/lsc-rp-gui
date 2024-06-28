@@ -10,33 +10,33 @@ export const routes: Routes = [
          ),
       children: [
          {
-            title: 'Home',
+            title: 'Početna',
             path: '',
             loadComponent: () =>
                import('./pages/home-page').then((m) => m.HomePageComponent),
          },
          {
-            title: 'About',
+            title: 'O nama',
             path: 'about',
             loadComponent: () =>
                import('./pages/about-page').then((m) => m.AboutPageComponent),
          },
          {
-            title: 'Dashboard',
+            title: 'User Control Panel',
             path: 'ucp',
             canActivate: [authGuard],
             loadComponent: () =>
                import('./pages/dashboard-page').then((m) => m.DashboardPageComponent),
          },
          {
-            title: 'Account Settings',
+            title: 'Podešavanja računa',
             path: 'settings',
             canActivate: [authGuard],
             loadComponent: () =>
                import('./pages/account-settings-page').then((m) => m.AccountSettingsPageComponent),
          },
          {
-            title: 'View Character',
+            title: 'Pregled karaktera',
             path: 'character/:id',
             canActivate: [authGuard],
             loadComponent: () =>
@@ -50,7 +50,7 @@ export const routes: Routes = [
                import('./pages/admin-panel-page').then((m) => m.AdminPanelPageComponent),
          },
          {
-            title: 'Create Character',
+            title: 'Kreiranje karaktera',
             path: 'create-character',
             canActivate: [authGuard],
             loadComponent: () =>
