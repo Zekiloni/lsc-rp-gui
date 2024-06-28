@@ -15,5 +15,12 @@
         <label for="password">Password</label>
     </p-floatLabel>
 
+   <p-floatLabel>
+      <input type="password" pInputText formControlName="confirmPassword" id="confirm-password" />
+      <label for="password">Confirm password</label>
+   </p-floatLabel>
+
+   <p-toast></p-toast>
+
     <button pButton type="button" (click)="register()" label="Sign up" class="mb-3"></button>
 </form>
