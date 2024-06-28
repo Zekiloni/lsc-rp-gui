@@ -52,12 +52,12 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
    ngOnInit() {
       this.mainNavItems = [
          {
-            label: 'Home',
+            label: 'Početna',
             icon: 'pi pi-fw pi-home',
             routerLink: '/',
          },
          {
-            label: 'About',
+            label: 'O nama',
             icon: 'pi pi-fw pi-info-circle',
             routerLink: '/about',
          },
@@ -74,7 +74,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
       ];
 
       this.userAccount$.pipe(
-         map(account => account!.admin || 0))
+         map(account => account ? account!.admin : 0))
          .subscribe(admin => {
             this.accountNavItems = [
                {
@@ -97,7 +97,7 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
                   label: 'Opcije',
                   items: [
                      {
-                        label: 'Podešavanja',
+                        label: 'Podešavanja računa',
                         icon: 'pi pi-cog',
                         routerLink: '/settings',
                      },
