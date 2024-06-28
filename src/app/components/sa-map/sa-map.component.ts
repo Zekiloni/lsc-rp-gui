@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { LatLngTuple } from 'leaflet';
 
 @Component({
    selector: 'app-sa-map',
@@ -9,11 +10,13 @@ import * as L from 'leaflet';
    styleUrl: './sa-map.component.scss',
 })
 export class SaMapComponent implements OnInit {
+   @Input() width: string = '400px';
+   @Input() height: string = '400px';
+
    private static mapExtent = [1022.5, 1022.5, 1022.5, 1022.5];
    private static mapZoom = { min: 0, max: 3 };
    private static mapMaxResolution = 1;
    private static mapMinResolution = Math.pow(2, SaMapComponent.mapZoom.max) * SaMapComponent.mapMaxResolution;
-   private static tileExtent = [0, 0, 0, 0];
 
    private crs: L.CRS | undefined;
    private map: L.Map | undefined;
@@ -33,22 +36,78 @@ export class SaMapComponent implements OnInit {
       });
 
       this.map = L.map('map', {
-         center: [0.0, 0.0],
-         zoom: 1,
          maxZoom: SaMapComponent.mapZoom.max,
          minZoom: SaMapComponent.mapZoom.min,
          crs: this.crs,
       });
 
-      this.layer = L.tileLayer('https://github.com/DeAardbolMan/SAMAP/tree/master/images/tiles/sat.{z}.{x}.{y}.png', {
-         minZoom: SaMapComponent.mapZoom.min, maxZoom: SaMapComponent.mapZoom.max,
+      this.layer = L.tileLayer('assets/images/tiles/sat.{z}.{x}.{y}.png', {
+         minZoom: SaMapComponent.mapZoom.min,
+         maxZoom: SaMapComponent.mapZoom.max,
          noWrap: true,
          tms: false,
       }).addTo(this.map);
 
+      const element = document.getElementsByClassName('leaflet-control-attribution');
+      (<HTMLElement>element[0]).style.display = 'none';
+
+      this.map!.fitBounds([
+         this.crs!.unproject(L.point(SaMapComponent.mapExtent[2], SaMapComponent.mapExtent[3])) as unknown as LatLngTuple,
+         this.crs!.unproject(L.point(SaMapComponent.mapExtent[0], SaMapComponent.mapExtent[1])) as unknown as LatLngTuple,
+      ]);
+
+      // this.map!.fitBounds([
+      //    [SaMapComponent.mapExtent[2], SaMapComponent.mapExtent[3]],
+      //    [SaMapComponent.mapExtent[0], SaMapComponent.mapExtent[1]]
+      // ])
    }
 
    ngOnInit(): void {
       this.initializeMap();
+   }
+
+   mirrorNumbers(min: number, max: number, num: number) {
+      let j = (max - num) - (num - min);
+      return num + j;
+   }
+
+   reverseMirrorNumbers(min: number, max: number, mirroredNum: number) {
+      return (max + min - mirroredNum);
+   }
+
+   private gameToMapCoords(x: number, y: number) {
+      const mapSideLength = 2045.0;
+      const topLeftX = -2990.0;
+      const topLeftY = 3000.0;
+
+      x = this.mirrorNumbers(0.0, mapSideLength, (x / topLeftX) * mapSideLength) / 2.0;
+      y = this.mirrorNumbers(0.0, mapSideLength, (y / topLeftY) * mapSideLength) / 2.0;
+
+      return { x, y };
+   }
+
+   mapToGameCoords(mapX: number, mapY: number) {
+      const mapSideLength = 2045.0;
+      const topLeftX = -2990.0;
+      const topLeftY = 3000.0;
+
+      let x = mapX * 2.0;
+      let y = mapY * 2.0;
+
+      x = this.reverseMirrorNumbers(0.0, mapSideLength, x);
+      y = this.reverseMirrorNumbers(0.0, mapSideLength, y);
+
+      x = (x / mapSideLength) * topLeftX;
+      y = (y / mapSideLength) * topLeftY;
+
+      return { x, y };
+   }
+
+   addToMap(x: number, y: number) {
+      const mapCoords = this.gameToMapCoords(x, y);
+      x = mapCoords.x;
+      y = mapCoords.y;
+
+      L.marker([y, x]).addTo(this.map!);
    }
 }
