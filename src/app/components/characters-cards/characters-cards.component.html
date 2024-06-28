@@ -1,42 +1,5 @@
-<!--<div class="characters">-->
-<!--   @for (slot of characterSlots; track slot; let idx = $index) {-->
-<!--      @if (isSlotAvailable(slot)) {-->
-<!--         <p-card [header]="getCharacter(slot).name.replace('_', ' ')" [subheader]="'#' + (idx + 1).toString()"-->
-<!--                 class="character-card">-->
-<!--            <ng-template pTemplate="header">-->
-<!--               <div class="skin-preview">-->
-<!--                  <img [ngSrc]="getSkinImage(getCharacter(slot).skin)" alt="character-skin-preview" fill priority />-->
-<!--               </div>-->
-<!--            </ng-template>-->
-<!--            <ul class="short-details">-->
-<!--               <li><b>Birthday</b> {{ getCharacter(slot).birthday | date }}</li>-->
-<!--               <li><b>Gender</b> {{ getCharacter(slot).gender ? "Female" : "Male" }}</li>-->
-<!--            </ul>-->
-<!--            <ng-template pTemplate="footer">-->
-<!--               <p-button (click)="viewCharacter(getCharacter(slot).id!)" label="More details"-->
-<!--                         icon="pi pi-info-circle" styleClass="p-button-secondary"></p-button>-->
-<!--            </ng-template>-->
-<!--         </p-card>-->
-<!--      } @else {-->
-<!--         <p-card header="character.name.replace('_', ' ')" [subheader]="'#' + (idx + 1).toString()"-->
-<!--                 class="character-card">-->
-<!--            <ng-template pTemplate="header">-->
-<!--               <div class="skin-preview">-->
-
-<!--               </div>-->
-<!--            </ng-template>-->
-
-<!--            <ng-template pTemplate="footer">-->
-<!--               <p-button label="More details"-->
-<!--                         icon="pi pi-info-circle" styleClass="p-button-secondary"></p-button>-->
-<!--            </ng-template>-->
-<!--         </p-card>-->
-<!--      }-->
-<!--   }-->
-<!--</div>-->
-
 <div class=" px-4 py-8 md:px-6 lg:px-8">
-   <div class="text-900 font-bold text-6xl mb-4 text-center">Vasi karakteri</div>
+   <div class="text-900 font-bold text-6xl mb-4 text-center">Vaši karakteri</div>
 
    <div class="grid">
       @for (slot of characterSlots; track slot; ) {
