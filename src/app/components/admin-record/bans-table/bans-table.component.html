@@ -1,0 +1,23 @@
+<p-table *ngIf="bans" [value]="bans">
+   <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+         Bans
+      </div>
+   </ng-template>
+   <ng-template pTemplate="header">
+      <tr>
+         <th>Razlog</th>
+         <th>Admin</th>
+         <th>Datum trajanja</th>
+         <th>Datum</th>
+      </tr>
+   </ng-template>
+   <ng-template pTemplate="body" let-ban>
+      <tr>
+         <td>{{ ban['reason'] }}</td>
+         <td>{{ ban['adminAccount'] }}</td>
+         <td>{{ ban['expiringAt'] ? (ban['expiringAt']  | date : 'dd MMMM YYYY, HH:mm:ss') : 'Permanent' }}</td>
+         <td>{{ ban['createdAt'] | date : 'dd MMMM YYYY, HH:mm:ss' }}</td>
+      </tr>
+   </ng-template>
+</p-table>
