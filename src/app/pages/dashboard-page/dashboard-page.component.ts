@@ -1,10 +1,12 @@
 import { Component, Inject } from '@angular/core';
-import { CharactersCardsComponent } from '../../components/characters-cards';
 import { TabViewModule } from 'primeng/tabview';
-import { BansTableComponent } from '../../components/admin-record/bans-table';
-import { selectAccount } from '../../stores/account/account.selector';
 import { Store } from '@ngrx/store';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { selectAccount } from '../../stores/account/account.selector';
+import { CharactersCardsComponent } from '../../components/characters-cards';
+import { BansTableComponent } from '../../components/admin-record/bans-table';
+import { KicksTableComponent } from '../../components/admin-record/kicks-table/kicks-table.component';
+import { WarnsTableComponent } from '../../components/admin-record/warns-table/warns-table.component';
 
 @Component({
    selector: 'app-dashboard-page',
@@ -15,6 +17,8 @@ import { AsyncPipe, NgIf } from '@angular/common';
       BansTableComponent,
       AsyncPipe,
       NgIf,
+      KicksTableComponent,
+      WarnsTableComponent,
    ],
    templateUrl: './dashboard-page.component.html',
    styleUrl: './dashboard-page.component.scss',
@@ -24,4 +28,5 @@ export class DashboardPageComponent {
 
    constructor(@Inject(Store) private store: Store) {
    }
+
 }
