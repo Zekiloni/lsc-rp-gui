@@ -8,7 +8,6 @@ import {
    DynamicDialogConfig,
 } from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
-import { MessageService } from 'primeng/api';
 import { RegisterComponent } from './register';
 import { LoginComponent } from './login';
 import { Authentication, AccountCreate } from '../../core/model/models';
@@ -44,7 +43,6 @@ enum AuthAction {
       AccountApiService,
       AuthenticationApiService,
       LocalStorageService,
-      MessageService,
    ],
    templateUrl: './auth-modal.component.html',
    styleUrl: './auth-modal.component.scss',
