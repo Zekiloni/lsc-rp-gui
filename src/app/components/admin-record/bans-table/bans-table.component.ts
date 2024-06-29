@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { BanApiService } from '../../../core/api/banApi.service';
 import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
-import { catchError, defaultIfEmpty, map, Observable, of, startWith } from 'rxjs';
+import { catchError, map, of, startWith } from 'rxjs';
+import { BanApiService } from '../../../core/api/banApi.service';
 import { Ban } from '../../../core/model/ban';
 
 @Component({
