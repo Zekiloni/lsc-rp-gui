@@ -5,6 +5,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { MenuItem } from 'primeng/api';
 import { beautifyName, getSkinImage } from '../../util/character.util';
 import { getVehicleImage, getVehicleName } from '../../util/vehicle.util';
 import { formatCurrency } from '../../util/currency.util';
@@ -23,6 +25,7 @@ import { Character } from '../../core/model/character';
       DatePipe,
       OverlayPanelModule,
       NgOptimizedImage,
+      BreadcrumbModule,
    ],
    providers: [CharacterApiService],
    templateUrl: './character-view-page.component.html',
@@ -38,6 +41,10 @@ export class CharacterViewPageComponent implements OnInit {
 
    character: Character | undefined;
 
+   breadcrumbItems: MenuItem[] | undefined;
+
+   back: MenuItem = { icon: 'pi pi-user', routerLink: '/ucp' };
+
    constructor(private characterApiService: CharacterApiService, private route: ActivatedRoute,
                private router: Router) {
    }
@@ -47,11 +54,16 @@ export class CharacterViewPageComponent implements OnInit {
       this.characterApiService.retrieveCharacter(id).subscribe({
          next: (character) => {
             this.character = character;
+            this.breadcrumbItems = [
+               {
+                  label: 'Pregled karaktera ' + (character.name),
+               },
+            ];
          },
          error: (err) => {
 
             this.router.navigate(['/ucp']);
-         }
-      })
+         },
+      });
    }
 }
