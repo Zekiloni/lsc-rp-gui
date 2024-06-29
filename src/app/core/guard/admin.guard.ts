@@ -5,19 +5,21 @@ import { AuthenticationApiService } from '../api/authenticationApi.service';
 import { map } from 'rxjs';
 
 export const adminGuard: CanActivateFn = (route, state) => {
+   const router = inject(Router);
+
    const token = inject(LocalStorageService).retrieve(
       StorageItemKey.AccessToken,
    );
 
    if (!token) {
-      inject(Router).navigate(['']);
+      router.navigate(['']);
    }
 
-   const isAdmin = inject(AuthenticationApiService).validate()
+   inject(AuthenticationApiService).validate()
       .pipe(map(account => account.admin || 0))
       .subscribe(admin => {
          if (!admin) {
-
+            router.navigate(['']);
          }
       });
 
