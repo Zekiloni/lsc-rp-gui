@@ -13,10 +13,11 @@ import { routes } from './app.routes';
 import { environment } from '../environments/environment.development';
 import { accountReducer } from './stores/account/account.reducer';
 import { apiErrorInterceptor } from './core/interceptor/api-error.interceptor';
+import { authInterceptor } from './core/interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
    providers: [
-      provideHttpClient(withInterceptors([apiErrorInterceptor])),
+      provideHttpClient(withInterceptors([authInterceptor, apiErrorInterceptor])),
       provideRouter(routes),
       provideAnimations(),
       MessageService,
