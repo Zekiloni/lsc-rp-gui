@@ -5,6 +5,10 @@
    <p-tabPanel header="Administrativna evidencija">
       <ng-container *ngIf="(userAccount$ | async) as userAccount">
          <app-bans-table *ngIf="userAccount && userAccount.id != null" [accountId]="userAccount.id" />
+         <br>
+         <app-kicks-table *ngIf="userAccount && userAccount.id != null" [accountId]="userAccount.id" />
+         <br>
+         <app-warns-table *ngIf="userAccount && userAccount.id != null" [accountId]="userAccount.id" />
       </ng-container>
    </p-tabPanel>
 </p-tabView>
