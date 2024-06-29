@@ -1,0 +1,26 @@
+<p-table *ngIf="warns" [value]="warns">
+   <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+         Warns
+      </div>
+   </ng-template>
+   <ng-template pTemplate="header">
+      <tr>
+         <th>Razlog</th>
+         <th>Admin</th>
+         <th>Datum</th>
+      </tr>
+   </ng-template>
+   <ng-template pTemplate="body" let-warn>
+      <tr>
+         <td>{{ warn['reason'] }}</td>
+         <td>{{ warn['adminAccount'] }}</td>
+         <td>{{ warn['createdAt'] | date : 'dd MMMM YYYY, HH:mm:ss' }}</td>
+      </tr>
+   </ng-template>
+   <ng-template pTemplate="emptymessage">
+      <tr>
+         <td colspan="3">Nemate upozorenja.</td>
+      </tr>
+   </ng-template>
+</p-table>
