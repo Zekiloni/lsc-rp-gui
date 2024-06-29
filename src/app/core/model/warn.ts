@@ -10,13 +10,10 @@
  * Do not edit the class manually.
  */
 
-export interface Ban { 
-    id: number;
+export interface Warn { 
+    id?: number;
     account: string;
     reason: string;
     adminAccount?: string;
-    ipAddress: string;
-    expiringAt: string;
-    isExpired: boolean
     createdAt: Date;
 }
