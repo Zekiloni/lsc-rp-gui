@@ -1,6 +1,6 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';
@@ -12,10 +12,11 @@ import { BASE_PATH } from './core/variables';
 import { routes } from './app.routes';
 import { environment } from '../environments/environment.development';
 import { accountReducer } from './stores/account/account.reducer';
+import { apiErrorInterceptor } from './core/interceptor/api-error.interceptor';
 
 export const appConfig: ApplicationConfig = {
    providers: [
-      provideHttpClient(),
+      provideHttpClient(withInterceptors([apiErrorInterceptor])),
       provideRouter(routes),
       provideAnimations(),
       MessageService,
