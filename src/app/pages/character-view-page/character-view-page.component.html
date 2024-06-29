@@ -1,3 +1,9 @@
+<p-breadcrumb
+   *ngIf="breadcrumbItems"
+   class="max-w-full"
+   [model]="breadcrumbItems"
+   [home]="back" />
+
 <div class="surface-section px-6 py-5" *ngIf="character">
    <div class="flex align-items-start flex-column lg:flex-row lg:justify-content-between">
       <div class="flex align-items-start flex-column md:flex-row"><img
@@ -103,7 +109,7 @@
                         </div>
 
                         <p-overlayPanel #vehiclePhoto>
-                           <img [src]="getVehicleImage(vehicle.model)" alt="vehicle model preview"  />
+                           <img [src]="getVehicleImage(vehicle.model)" alt="vehicle model preview" />
                         </p-overlayPanel>
                      }
                   } @else {
