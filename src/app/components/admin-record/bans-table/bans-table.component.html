@@ -9,15 +9,22 @@
          <th>Razlog</th>
          <th>Admin</th>
          <th>Datum trajanja</th>
+         <th>Status</th>
          <th>Datum</th>
       </tr>
    </ng-template>
    <ng-template pTemplate="body" let-ban>
       <tr>
          <td>{{ ban['reason'] }}</td>
-         <td>{{ ban['adminAccount'] }}</td>
+         <td>{{ ban['adminAccount'] ? ban['adminAccount'] : 'System' }}</td>
          <td>{{ ban['expiringAt'] ? (ban['expiringAt']  | date : 'dd MMMM YYYY, HH:mm:ss') : 'Permanent' }}</td>
+         <td>{{ ban['isExpired'] ? 'Istekao' : 'Nije istekao' }}</td>
          <td>{{ ban['createdAt'] | date : 'dd MMMM YYYY, HH:mm:ss' }}</td>
+      </tr>
+   </ng-template>
+   <ng-template pTemplate="emptymessage">
+      <tr>
+         <td colspan="4">Nemate evidencije o vašim banovima.</td>
       </tr>
    </ng-template>
 </p-table>
