@@ -4,11 +4,12 @@ import { LocalStorageService, StorageItemKey } from './core/service/local-storag
 import { AuthenticationApiService } from './core/api/api';
 import { Store } from '@ngrx/store';
 import { setAccount } from './stores/account/account.actions';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
    selector: 'app-root',
    standalone: true,
-   imports: [RouterOutlet],
+   imports: [RouterOutlet, ToastModule],
    providers: [LocalStorageService, AuthenticationApiService],
    templateUrl: './app.component.html',
    styleUrl: './app.component.scss',
