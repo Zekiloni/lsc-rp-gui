@@ -67,6 +67,11 @@ export class MainNavigationComponent implements OnInit, OnDestroy {
             url: environment.forumUrl,
          },
          {
+            label: 'Wiki',
+            icon: 'pi pi-fw pi-book',
+            url: environment.wikiUrl,
+         },
+         {
             label: 'Discord',
             icon: 'pi pi-fw pi-discord',
             command: () => this.inviteToDiscord(),
