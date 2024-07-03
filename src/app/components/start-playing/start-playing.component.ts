@@ -13,5 +13,7 @@ import { RippleModule } from 'primeng/ripple';
   styleUrl: './start-playing.component.scss'
 })
 export class StartPlayingComponent {
-
+  open(url:string) {
+    window.open(url);
+  }
 }
