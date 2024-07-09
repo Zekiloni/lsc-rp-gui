@@ -1,0 +1,1 @@
+export * from './members-view-table.component';

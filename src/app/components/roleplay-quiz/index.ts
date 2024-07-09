@@ -1,0 +1,1 @@
+export * from './roleplay-quiz.component';
