@@ -1,0 +1,16 @@
+@if (faction) {
+   <h2> {{ faction.name }}</h2>
+   <p-panel header="Osnovne informacije" [toggleable]="true">
+      <dl>
+         <dt>Skraćenica:</dt>
+         <dd>{{ faction.shortName }}</dd>
+         <dt>Budžet:</dt>
+         <dd class="money">{{  formatCurrency(faction.budget) }}</dd>
+      </dl>
+   </p-panel>
+
+   <p-panel header="Pregled članova" [toggleable]="true">
+      <app-members-view-table [factionId]="faction.id" [showActions]="showMembersActions" />
+   </p-panel>
+
+}
