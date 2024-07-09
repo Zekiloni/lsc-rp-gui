@@ -24,7 +24,11 @@ import { beautifyName, getSkinImage } from '../../util/character.util';
    styleUrl: './characters-cards.component.scss',
 })
 export class CharactersCardsComponent implements OnInit {
+   protected readonly getSkinImage = getSkinImage;
+   protected readonly beautifyName = beautifyName;
+
    characterSlots: number[] = [0, 1, 2];
+
    characters: Character[] | undefined;
 
    constructor(@Inject(Store) private store: Store, private router: Router) {
@@ -37,7 +41,6 @@ export class CharactersCardsComponent implements OnInit {
    getCharacter(slot: number) {
       return this.characters![slot];
    }
-
 
    ngOnInit(): void {
       this.store.select(selectAccount).subscribe(({
@@ -55,7 +58,4 @@ export class CharactersCardsComponent implements OnInit {
    createCharacter() {
       this.router.navigate(['create-character']);
    }
-
-   protected readonly getSkinImage = getSkinImage;
-   protected readonly beautifyName = beautifyName;
 }

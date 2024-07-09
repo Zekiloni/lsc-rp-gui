@@ -5,8 +5,8 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { selectAccount } from '../../stores/account/account.selector';
 import { CharactersCardsComponent } from '../../components/characters-cards';
 import { BansTableComponent } from '../../components/admin-record/bans-table';
-import { KicksTableComponent } from '../../components/admin-record/kicks-table/kicks-table.component';
-import { WarnsTableComponent } from '../../components/admin-record/warns-table/warns-table.component';
+import { KicksTableComponent } from '../../components/admin-record/kicks-table';
+import { WarnsTableComponent } from '../../components/admin-record/warns-table';
 
 @Component({
    selector: 'app-dashboard-page',

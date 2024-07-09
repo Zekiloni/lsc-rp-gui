@@ -8,18 +8,18 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DividerModule } from 'primeng/divider';
 import { PaginatorModule } from 'primeng/paginator';
 import { CalendarModule } from 'primeng/calendar';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CharacterApiService } from '../../core/api/api';
 import { ApiError, CharacterCreate, CharacterGender } from '../../core/model/models';
 import { getSkinImage } from '../../util/character.util';
-
 import { SkinSelectorModalComponent } from '../../components/skin-selector';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { selectAccount } from '../../stores/account/account.selector';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
 import { addAccountCharacter } from '../../stores/account/account.actions';
 
 const [CHARACTER_MIN_AGE, CHARACTER_MAX_AGE] = [18, 90];
@@ -121,7 +121,6 @@ export class CreateCharacterPageComponent {
       if (this.form.invalid) {
          for (const name of Object.keys(this.form.controls) as (keyof typeof this.form.controls)[]) {
             if (this.form.controls[name].invalid) {
-               console.log(name, 'is invalid');
                console.log(this.form.controls[name].errors);
             }
          }

@@ -10,7 +10,7 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { RegisterComponent } from './register';
 import { LoginComponent } from './login';
-import { Authentication, AccountCreate } from '../../core/model/models';
+import { Authentication, AccountCreate, ApiError } from '../../core/model/models';
 import {
    AccountApiService,
    AuthenticationApiService,
@@ -92,8 +92,8 @@ export class AuthModalComponent {
             this.store.dispatch(setAccount({ account: response.account }));
             this.ref.close(true);
          },
-         error: (err) => {
-            console.log(err);
+         error: (err: ApiError) => {
+            console.log('ApiError', err);
          },
       });
    }

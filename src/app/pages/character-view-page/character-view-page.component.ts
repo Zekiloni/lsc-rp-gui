@@ -12,6 +12,7 @@ import { getVehicleImage, getVehicleName } from '../../util/vehicle.util';
 import { formatCurrency } from '../../util/currency.util';
 import { CharacterApiService } from '../../core/api/characterApi.service';
 import { Character } from '../../core/model/character';
+import { MenuModule } from 'primeng/menu';
 
 @Component({
    selector: 'app-character-view-page',
@@ -26,6 +27,7 @@ import { Character } from '../../core/model/character';
       OverlayPanelModule,
       NgOptimizedImage,
       BreadcrumbModule,
+      MenuModule,
    ],
    providers: [CharacterApiService],
    templateUrl: './character-view-page.component.html',
@@ -45,25 +47,52 @@ export class CharacterViewPageComponent implements OnInit {
 
    back: MenuItem = { icon: 'pi pi-user', routerLink: '/ucp' };
 
+   characterMenuItems: MenuItem[] | undefined;
+
    constructor(private characterApiService: CharacterApiService, private route: ActivatedRoute,
                private router: Router) {
    }
 
    ngOnInit(): void {
-      const id = this.route.snapshot.params['id'];
-      this.characterApiService.retrieveCharacter(id).subscribe({
-         next: (character) => {
-            this.character = character;
-            this.breadcrumbItems = [
-               {
-                  label: 'Pregled karaktera ' + (character.name),
-               },
-            ];
-         },
-         error: (err) => {
+      const characterId = this.route.snapshot.params['id'];
 
-            this.router.navigate(['/ucp']);
+      this.characterApiService.retrieveCharacter(characterId)
+         .subscribe({
+            next: (character) => {
+               this.character = character;
+               this.initializeBreadCrumb(character);
+               this.initializeCharacterMenu();
+            },
+            error: (err) => {
+               this.router.navigate(['/ucp']);
+            },
+         });
+   }
+
+   private initializeCharacterMenu() {
+      this.characterMenuItems = [
+         {
+            label: 'Opcije',
+            items: [
+               {
+                  label: 'Podešavanja karaktera',
+                  icon: 'pi pi-cog',
+               },
+               {
+                  label: 'Faction Panel',
+                  icon: 'pi pi-users',
+                  routerLink: `/character/${this.character!.id}/faction`,
+               },
+            ],
          },
-      });
+      ];
+   }
+
+   private initializeBreadCrumb(character: Character) {
+      this.breadcrumbItems = [
+         {
+            label: 'Karakter ' + (character.name),
+         },
+      ];
    }
 }
