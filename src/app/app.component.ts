@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
          this.authApiService.configuration.accessToken = token;
          this.authApiService.validate().subscribe({
             next: (account) => {
-               console.log(account)
                this.store.dispatch(setAccount({ account }));
             },
             error: (err) => {
