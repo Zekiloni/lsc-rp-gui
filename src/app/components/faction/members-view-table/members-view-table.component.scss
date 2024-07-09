@@ -1,0 +1,11 @@
+small {
+  &.account-username {
+    margin-left: 16px;
+  }
+}
+
+.member-actions {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 8px;
+}

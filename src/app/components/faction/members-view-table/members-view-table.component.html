@@ -1,0 +1,69 @@
+<p-confirmDialog />
+
+<p-table [value]="factionMembers" #factionMembersTable
+         [globalFilterFields]="['characterName', 'accountUsername', 'rankName']"
+>
+   <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+         <span>Članovi fakcije</span>
+         <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText placeholder="Pretraga članova"
+                       [(ngModel)]="searchValue"
+                       (input)="filterMembersTable($event.target!)"
+                />
+            </span>
+      </div>
+   </ng-template>
+   <ng-template pTemplate="header">
+      <tr>
+         <th pSortableColumn="characterName">
+            Ime Prezime <small>(Korisničko ime)</small>
+            <p-sortIcon field="characterName" />
+         </th>
+
+         <th pSortableColumn="rankName">
+            Rank
+            <p-sortIcon field="rankName" />
+         </th>
+
+         <th pSortableColumn="isLeader">
+            Lider status
+            <p-sortIcon field="isLeader" />
+         </th>
+
+         <th pSortableColumn="averageActivity"
+             pTooltip="Koeficijent proseka dnevne aktivnosti koje je stefan meni reko kako da izracunam"
+             tooltipPosition="top">
+            Prosečna aktivnost
+            <p-sortIcon field="averageActivity" />
+         </th>
+
+         <th pSortableColumn="actions" *ngIf="showActions">
+            Akcije
+         </th>
+      </tr>
+   </ng-template>
+   <ng-template pTemplate="body" let-member>
+      <tr>
+         <td>
+            <img [src]="getSkinImage(member['characterSkin'], true)" class="mr-5 mb-3 lg:mb-0"
+                 width="37" style="vertical-align: middle" alt="lscrp skin images">
+            <span>{{ beautifyName(member['characterName']) }}</span>
+            <small class="account-username">({{ member['accountUsername'] }})</small>
+         </td>
+         <td>{{ member['rankName'] ? member['rankName'] : 'Nema' }}</td>
+         <td>
+            <p-tag [value]="member['isLeader'] ? 'Da' : 'Ne'" [severity]="member['isLeader'] ? 'success' :'danger'" />
+         </td>
+         <td>{{ member['averageActivity'] }}</td>
+
+         <td *ngIf="showActions">
+            <div class="member-actions">
+               <p-button icon="pi pi-ban" severity="danger" (click)="kickFactionMember(member)" />
+               <p-button icon="pi pi-user-edit" />
+            </div>
+         </td>
+      </tr>
+   </ng-template>
+</p-table>
