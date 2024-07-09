@@ -18,3 +18,8 @@ export const selectAccount = createSelector(
    selectAccountState,
    (state: AccountState) => state.account
 );
+
+export const selectCharacterFaction = (characterId: number) => createSelector(
+   selectAccountState,
+   (state: AccountState) => state.account && state.account.characters.find(({ id }) => id == characterId)?.factionId,
+);
