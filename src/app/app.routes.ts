@@ -44,9 +44,16 @@ export const routes: Routes = [
                import('./pages/character-view-page').then((m) => m.CharacterViewPageComponent),
          },
          {
+            title: 'Faction panel',
+            path: 'character/:id/faction',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/faction-panel-page').then((m) => m.FactionPanelPageComponent),
+         },
+         {
             title: 'Admin Panel',
             path: 'admin',
-            canActivate: [authGuard, adminGuard],
+            canActivate: [authGuard],
             loadComponent: () =>
                import('./pages/admin-panel-page').then((m) => m.AdminPanelPageComponent),
          },
