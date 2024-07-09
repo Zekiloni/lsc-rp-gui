@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
 import { catchError, map, of, startWith } from 'rxjs';
-import { BanApiService } from '../../../core/api/banApi.service';
+import { BanApiService } from '../../../core/api/api';
 import { Ban } from '../../../core/model/ban';
 
 @Component({
