@@ -1,8 +1,8 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
+import { map } from 'rxjs';
 import { LocalStorageService, StorageItemKey } from '../service/local-storage.service';
 import { AuthenticationApiService } from '../api/authenticationApi.service';
-import { map } from 'rxjs';
 
 export const adminGuard: CanActivateFn = (route, state) => {
    const router = inject(Router);
