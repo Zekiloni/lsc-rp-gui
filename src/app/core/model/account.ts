@@ -15,7 +15,7 @@ export interface Account {
     id: number;
     username: string;
     email: string;
-    characters?: Array<Character>;
+    characters: Array<Character>;
     lastLoginAt?: Date;
     updatedAt?: Date;
     admin: number;
