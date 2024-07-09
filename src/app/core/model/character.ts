@@ -14,7 +14,7 @@ import { Property } from './property';
 import { Vehicle } from './vehicle';
 
 export interface Character { 
-    id?: number;
+    id: number;
     name: string;
     birthday: string;
     gender: CharacterGender;
@@ -36,7 +36,7 @@ export interface Character {
     interior: number;
     vehicles?: Array<Vehicle>;
     properties?: Array<Property>;
-    factionId?: number;
+    factionId: number;
     rankId?: number;
     isLeader: boolean;
     job: number;

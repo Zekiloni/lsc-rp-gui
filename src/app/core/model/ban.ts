@@ -17,6 +17,6 @@ export interface Ban {
     adminAccount?: string;
     ipAddress: string;
     expiringAt: string;
-    isExpired: boolean
+    isExpired: boolean;
     createdAt: Date;
 }
