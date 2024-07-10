@@ -1,13 +1,11 @@
 @if (questions) {
-
    <form [formGroup]="quizForm" (ngSubmit)="submitQuizForm()">
       @for (question of questions; track question) {
-         <div class="question flex flex-column gap-2">
+         <div class="question flex flex-column gap-2 mt-5">
             <label class="question-label">{{ question.question }}</label>
 
             @for (answer of question.answers; track answer) {
                <div class="answer">
-
                   <p-radioButton
                      [value]="answer.id"
                      [formControlName]="question.id"
@@ -19,6 +17,6 @@
             }
          </div>
       }
-      <button pButton type="submit" label="Nastavi"></button>
+      <button pButton type="submit" label="Nastavi" class="mb-3" [disabled]="submitBtnDisabled"></button>
    </form>
 }

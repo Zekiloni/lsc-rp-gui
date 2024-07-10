@@ -23,6 +23,12 @@ export const routes: Routes = [
                import('./pages/about-page').then((m) => m.AboutPageComponent),
          },
          {
+            title: 'Autorizacija',
+            path: 'auth',
+            loadComponent: () =>
+               import('./pages/auth-page').then((m) => m.AuthPageComponent),
+         },
+         {
             title: 'User Control Panel',
             path: 'ucp',
             canActivate: [authGuard],

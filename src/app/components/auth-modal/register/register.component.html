@@ -1,24 +1,32 @@
+<p-steps [model]="registerSteps" [readonly]="true" [activeIndex]="activeStep"/>
 
-<form [formGroup]="form">
-    <p-floatLabel>
-        <input type="text" pInputText formControlName="username" id="username" />
-        <label for="username">Username</label>
-    </p-floatLabel>
-     
-    <p-floatLabel>
-        <input type="text" pInputText formControlName="email" id="email" />
-        <label for="email">Email</label>
-    </p-floatLabel>
+@switch (activeStep) {
+   @case (0) {
+      <app-roleplay-quiz (onTestSubmitResponse)="handleTestResponse($event)" />
+   }
+   @case (1) {
+      <form [formGroup]="form" class="mt-5">
+         <p-floatLabel>
+            <input type="text" pInputText formControlName="username" id="username" />
+            <label for="username">Korisničko ime</label>
+         </p-floatLabel>
 
-    <p-floatLabel>
-        <input type="password" pInputText formControlName="password" id="password" />
-        <label for="password">Password</label>
-    </p-floatLabel>
+         <p-floatLabel>
+            <input type="text" pInputText formControlName="email" id="email" />
+            <label for="email">E-mail adresa</label>
+         </p-floatLabel>
 
-   <p-floatLabel>
-      <input type="password" pInputText formControlName="confirmPassword" id="confirm-password" />
-      <label for="password">Confirm password</label>
-   </p-floatLabel>
+         <p-floatLabel>
+            <input type="password" pInputText formControlName="password" id="password" />
+            <label for="password">Korisnička šifra</label>
+         </p-floatLabel>
 
-    <button pButton type="button" (click)="register()" label="Sign up" class="mb-3"></button>
-</form>
+         <p-floatLabel>
+            <input type="password" pInputText formControlName="confirmPassword" id="confirm-password" />
+            <label for="password">Potvrda korisničke šifre</label>
+         </p-floatLabel>
+
+         <button pButton type="button" (click)="register()" label="Kreiraj račun" class="mb-3" ></button>
+      </form>
+   }
+}

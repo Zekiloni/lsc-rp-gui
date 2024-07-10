@@ -20,7 +20,7 @@ import { Authentication } from '../../../core/model/authentication';
    styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-   @Output() submit = new EventEmitter<Authentication>();
+   @Output() onAuthSubmit = new EventEmitter<Authentication>();
 
    form = this.fb.group({
       username: [
@@ -51,6 +51,6 @@ export class LoginComponent {
       const username = <string>this.form.get('username')!.value;
       const password = <string>this.form.get('password')!.value;
 
-      this.submit.emit({ username, password });
+      this.onAuthSubmit.emit({ username, password });
    }
 }

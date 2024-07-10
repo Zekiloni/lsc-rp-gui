@@ -7,7 +7,9 @@ import { ButtonModule } from 'primeng/button';
 
 import { AccountCreate } from '../../../core/model/models';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
+import { StepsModule } from 'primeng/steps';
+import { RoleplayQuizComponent } from '../../roleplay-quiz';
 
 @Component({
    selector: 'app-register',
@@ -17,13 +19,20 @@ import { MessageService } from 'primeng/api';
       InputTextModule,
       ButtonModule,
       FloatLabelModule,
-      ToastModule
+      ToastModule,
+      StepsModule,
+      RoleplayQuizComponent,
    ],
    templateUrl: './register.component.html',
    styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-   @Output() submit = new EventEmitter<AccountCreate>();
+   @Output() onSubmitCreateAccount = new EventEmitter<AccountCreate>();
+
+   activeStep: number = 0;
+   registerSteps: MenuItem[] = [
+      { label: 'Roleplay kviz' }, { label: 'Kreiranje računa' },
+   ];
 
    form = this.fb.group({
       username: [
@@ -57,11 +66,19 @@ export class RegisterComponent {
 
    register() {
       if (this.form.invalid) {
-         return;
+         return this.messageService.add({
+            severity: 'error',
+            summary: 'Greška',
+            detail: 'Ispunite sva polja',
+         });
       }
 
       if (this.form.get('password')!.value != this.form.get('confirmPassword')!.value) {
-         return this.messageService.add({ severity: 'error', summary: 'confirm not match '})
+         return this.messageService.add({
+            severity: 'error',
+            summary: 'Greška',
+            detail: 'Korisničke šifre se ne podudaraju',
+         });
       }
 
       const accountCreate: AccountCreate = {
@@ -70,6 +87,17 @@ export class RegisterComponent {
          password: this.form.get('password')!.value as string,
       };
 
-      this.submit.emit(accountCreate);
+      this.onSubmitCreateAccount.emit(accountCreate);
+   }
+
+   handleTestResponse(success: boolean) {
+      if (success) {
+         this.messageService.add({
+            severity: 'success',
+            summary: 'Uspešno',
+            detail: 'Čestitamo, prošli ste roleplay quiz',
+         });
+         this.activeStep = 1;
+      }
    }
 }
