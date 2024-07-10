@@ -1,18 +1,20 @@
 <div class="navigation card">
-    <p-menubar [model]="mainNavItems">
-        <ng-template pTemplate="start">
-            <img src="./assets/images/logo-1-text.png" height="20" class="mr-2 logo" alt="ada"/>
-        </ng-template>
-        <ng-template pTemplate="end">
-            <div class="account" *ngIf="(userAccount$ | async) as userAccount; else join">
-                <p-menu #menu [model]="accountNavItems" [popup]="true"></p-menu>
-                <button pButton type="button" icon="pi pi-bars" (click)="menu.toggle($event)" [label]="userAccount.username"></button>
-            </div>
+   <p-menubar [model]="mainNavItems">
+      <ng-template pTemplate="start">
+         <img ngSrc="./assets/images/logo-1-text.png" height="20" class="mr-2 logo" alt="ada" width="78" />
+      </ng-template>
+      <ng-template pTemplate="end">
+         <div class="account" *ngIf="(userAccount$ | async) as userAccount; else join">
+            <p-menu #menu [model]="accountNavItems" [popup]="true"></p-menu>
+            <button pButton type="button" icon="pi pi-bars" (click)="menu.toggle($event)"
+                    [label]="userAccount.username"></button>
+         </div>
 
-            <ng-template #join>
-                <p-button label="Join us now" [outlined]="true" icon="pi pi-sign-in" severity="primary" (onClick)="toggleAuthentication()"></p-button>
-            </ng-template>
-        </ng-template>
-    </p-menubar>
+         <ng-template #join>
+            <p-button label="Join us now" [outlined]="true" icon="pi pi-sign-in"
+                      (onClick)="navigateToAuth()"></p-button>
+         </ng-template>
+      </ng-template>
+   </p-menubar>
 </div>
 
