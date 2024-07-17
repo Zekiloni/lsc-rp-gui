@@ -1,0 +1,19 @@
+@if (factionMember) {
+   <h4> {{ factionMember.characterName }}</h4>
+   <form [formGroup]="updateRankForm">
+      <div class="flex flex-column gap-2">
+         <label for="rankName">Trenutni rank</label>
+         <input
+            pInputText
+            id="rankName"
+            aria-describedby="rank-name-help"
+            formControlName="rankName" />
+         <small id="rank-name-help">
+            Unesite ime ranka. Kako bi sačuvali morate uneti izmenu.
+         </small>
+      </div>
+
+      <button pButton type="button" (click)="updateRank()" [disabled]="isSaveDisabled" label="Sačuvaj"
+              class="mt-5"></button>
+   </form>
+}
