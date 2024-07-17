@@ -29,6 +29,8 @@ import { RoleplayQuizComponent } from '../../roleplay-quiz';
 export class RegisterComponent {
    @Output() onSubmitCreateAccount = new EventEmitter<AccountCreate>();
 
+   quizStarted: boolean = false;
+
    activeStep: number = 0;
    registerSteps: MenuItem[] = [
       { label: 'Roleplay kviz' }, { label: 'Kreiranje računa' },
@@ -99,5 +101,9 @@ export class RegisterComponent {
          });
          this.activeStep = 1;
       }
+   }
+
+   startQuiz() {
+      this.quizStarted = true;
    }
 }

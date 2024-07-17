@@ -1,6 +1,7 @@
 export const environment = {
-   apiBasePath: 'http://localhost:8080',
+   apiUrl: 'http://localhost:8080',
    forumUrl: 'https://forum.lscrp.net',
    discordWidgetApi: 'https://discord.com/api/guilds/1213417457998630953/widget.json',
-   wikiUrl: 'https://wiki.lscrp.net'
+   wikiUrl: 'https://wiki.lscrp.net',
+   staticUrl: 'https://static.lscrp.net'
 };

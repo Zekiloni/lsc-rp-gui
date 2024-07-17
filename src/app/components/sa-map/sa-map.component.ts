@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { LatLngTuple } from 'leaflet';
+import { environment } from '../../../environments/environment';
 
 @Component({
    selector: 'app-sa-map',
@@ -41,7 +42,7 @@ export class SaMapComponent implements OnInit {
          crs: this.crs,
       });
 
-      this.layer = L.tileLayer('assets/images/tiles/sat.{z}.{x}.{y}.png', {
+      this.layer = L.tileLayer(`${environment.staticUrl}/images/tiles/sat.{z}.{x}.{y}.png`, {
          minZoom: SaMapComponent.mapZoom.min,
          maxZoom: SaMapComponent.mapZoom.max,
          noWrap: true,

@@ -9,3 +9,12 @@ small {
   flex-wrap: wrap;
   grid-gap: 8px;
 }
+
+.in-game-status {
+  font-size: 0.5em;
+  color: tomato;
+
+  &.online {
+    color: #0dc381;
+  }
+}

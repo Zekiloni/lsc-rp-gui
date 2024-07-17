@@ -17,6 +17,11 @@
    </ng-template>
    <ng-template pTemplate="header">
       <tr>
+         <th pSortableColumn="isInGame">
+            U igri
+            <p-sortIcon field="isInGame" />
+         </th>
+
          <th pSortableColumn="characterName">
             Ime Prezime <small>(Korisničko ime)</small>
             <p-sortIcon field="characterName" />
@@ -33,7 +38,7 @@
          </th>
 
          <th pSortableColumn="averageActivity"
-             pTooltip="Koeficijent proseka dnevne aktivnosti koje je stefan meni reko kako da izracunam"
+             pTooltip="Koeficijent proseka dnevne aktivnosti"
              tooltipPosition="top">
             Prosečna aktivnost
             <p-sortIcon field="averageActivity" />
@@ -46,9 +51,13 @@
    </ng-template>
    <ng-template pTemplate="body" let-member>
       <tr>
+         <td class="text-center">
+            <i class="pi pi-circle-on in-game-status" [class.online]="member['isInGame']"></i>
+         </td>
          <td>
             <img [src]="getSkinImage(member['characterSkin'], true)" class="mr-5 mb-3 lg:mb-0"
                  width="37" style="vertical-align: middle" alt="lscrp skin images">
+
             <span>{{ beautifyName(member['characterName']) }}</span>
             <small class="account-username">({{ member['accountUsername'] }})</small>
          </td>
@@ -61,7 +70,7 @@
          <td *ngIf="showActions">
             <div class="member-actions">
                <p-button icon="pi pi-ban" severity="danger" (click)="kickFactionMember(member)" />
-               <p-button icon="pi pi-user-edit" />
+               <p-button icon="pi pi-user-edit" (click)="updateFactionMemberRank(member)" />
             </div>
          </td>
       </tr>

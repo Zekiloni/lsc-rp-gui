@@ -1,6 +1,7 @@
+import { environment } from '../../environments/environment';
 
 export const getSkinImage = (skinId: number, top: boolean = false) => {
-   return `./assets/images/skins/skin-${skinId}${top ? '_top' : ''}.png`;
+   return `${environment.staticUrl}/images/skins/skin-${skinId}${top ? '_top' : ''}.png`;
 };
 
 export const beautifyName = (name: string) => {

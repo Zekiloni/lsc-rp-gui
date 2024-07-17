@@ -23,6 +23,6 @@ export const appConfig: ApplicationConfig = {
       MessageService,
       provideStore({ account: accountReducer }),
       provideEffects(),
-      { provide: BASE_PATH, useValue: environment.apiBasePath },
+      { provide: BASE_PATH, useValue: environment.apiUrl },
    ],
 };

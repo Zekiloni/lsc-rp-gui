@@ -17,5 +17,6 @@ export interface FactionMember {
     characterSkin: number;
     rankName?: string;
     isLeader: boolean;
+    isInGame: boolean;
     averageActivity?: number;
 }
