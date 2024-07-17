@@ -1,7 +1,8 @@
 import { vehicleNames } from '../core/constant/vehicle-names';
+import { environment } from '../../environments/environment';
 
 export const getVehicleImage = (modelId: number) => {
-   return `./assets/images/vehicles/${modelId}.png`;
+   return `${environment.staticUrl}/images/vehicles/${modelId}.png`;
 }
 
 export const getVehicleName = (modelId: number) => {
