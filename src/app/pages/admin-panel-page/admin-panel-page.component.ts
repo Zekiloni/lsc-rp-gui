@@ -43,6 +43,11 @@ export class AdminPanelPageComponent {
                icon: 'pi pi-search',
                routerLink: 'characters',
             },
+            {
+               label: 'Pending Karakteri',
+               icon: 'pi pi-hourglass',
+               routerLink: 'characters/pending',
+            },
          ],
       },
       {

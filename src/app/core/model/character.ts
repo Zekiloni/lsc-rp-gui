@@ -55,4 +55,7 @@ export interface Character {
      */
     fightingStyle: number;
     createdAt: Date;
+    isApproved: boolean;
+    approvedAt?: Date;
+    approvedBy?: string;
 }

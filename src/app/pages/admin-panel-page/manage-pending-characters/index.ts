@@ -1,0 +1,1 @@
+export * from './manage-pending-characters.component';

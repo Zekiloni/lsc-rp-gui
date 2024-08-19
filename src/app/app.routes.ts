@@ -77,6 +77,11 @@ export const routes: Routes = [
                   loadComponent: () =>
                      import('./pages/admin-panel-page/manage-characters').then(m => m.ManageCharactersComponent),
                },
+               {
+                  path: 'pending/characters',
+                  loadComponent: () =>
+                     import('./pages/admin-panel-page/manage-pending-characters').then(m => m.ManagePendingCharactersComponent),
+               },
             ],
          },
          {
