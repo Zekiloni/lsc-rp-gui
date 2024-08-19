@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { Account } from '../model/account';
 import { AccountCreate } from '../model/accountCreate';
 import { AccountUpdate } from '../model/accountUpdate';
+import { LoginLogAudit } from '../model/loginLogAudit';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -206,6 +207,54 @@ export class AccountApiService {
         return this.httpClient.request<Array<Account>>('get',`${this.basePath}/account`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get a list of all account login logs
+     * 
+     * @param accountId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listAccountLoginLogs(accountId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<LoginLogAudit>>;
+    public listAccountLoginLogs(accountId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<LoginLogAudit>>>;
+    public listAccountLoginLogs(accountId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<LoginLogAudit>>>;
+    public listAccountLoginLogs(accountId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling listAccountLoginLogs.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<LoginLogAudit>>('get',`${this.basePath}/account/${encodeURIComponent(String(accountId))}/logs/login`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

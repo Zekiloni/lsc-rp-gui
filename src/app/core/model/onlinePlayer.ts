@@ -10,12 +10,10 @@
  * Do not edit the class manually.
  */
 
-export interface CharacterUpdate { 
-    name?: string;
-    health?: number;
-    armour?: number;
-    isApproved?: boolean;
-    approvedBy?: string;
-    deniedReason?: string;
-    approvedAt?: Date;
+export interface OnlinePlayer { 
+    accountUsername: string;
+    characterName: string;
+    characterSkin?: number;
+    factionName: string;
+    administrator: number;
 }

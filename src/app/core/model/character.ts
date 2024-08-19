@@ -54,8 +54,9 @@ export interface Character {
      * The fighting style of the character
      */
     fightingStyle: number;
-    createdAt: Date;
-    isApproved: boolean;
-    approvedAt?: Date;
+    isApproved?: boolean;
     approvedBy?: string;
+    deniedReason?: string;
+    approvedAt?: Date;
+    createdAt: Date;
 }

@@ -10,12 +10,9 @@
  * Do not edit the class manually.
  */
 
-export interface CharacterUpdate { 
-    name?: string;
-    health?: number;
-    armour?: number;
-    isApproved?: boolean;
-    approvedBy?: string;
-    deniedReason?: string;
-    approvedAt?: Date;
+export interface LoginLogAudit { 
+    accountId?: number;
+    ipAddress: string;
+    success: boolean;
+    createdAt: Date;
 }

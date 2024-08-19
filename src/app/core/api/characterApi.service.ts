@@ -215,6 +215,49 @@ export class CharacterApiService {
     }
 
     /**
+     * Get a list of unapproved characters
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listUnapprovedCharacter(observe?: 'body', reportProgress?: boolean): Observable<Array<Character>>;
+    public listUnapprovedCharacter(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Character>>>;
+    public listUnapprovedCharacter(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Character>>>;
+    public listUnapprovedCharacter(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<Character>>('get',`${this.basePath}/character/unapproved`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Update a character by ID
      * 
      * @param body 
