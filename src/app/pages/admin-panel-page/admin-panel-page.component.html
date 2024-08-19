@@ -1,3 +1,8 @@
-<p-card>
-   <p-panelMenu [model]="items" [style]="{'width':'300px'}" [multiple]="true" />
-</p-card>
+
+<div class="mb-3">
+   <p-menu #menu [model]="items" [popup]="true"/>
+   <p-button (onClick)="menu.toggle($event)" icon="pi pi-bars" label="Opcije" />
+</div>
+
+
+<router-outlet />

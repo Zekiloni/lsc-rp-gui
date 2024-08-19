@@ -1,11 +1,12 @@
-import { CanActivateFn, Router } from '@angular/router';
-import { inject } from '@angular/core';
 import { map } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { selectIsAdministrator } from '../../stores/account/account.selector';
 import { LocalStorageService, StorageItemKey } from '../service/local-storage.service';
-import { AuthenticationApiService } from '../api/authenticationApi.service';
 
 export const adminGuard: CanActivateFn = (route, state) => {
-   const router = inject(Router);
+   const router = inject(Router), store = inject(Store);
 
    const token = inject(LocalStorageService).retrieve(
       StorageItemKey.AccessToken,
@@ -15,14 +16,13 @@ export const adminGuard: CanActivateFn = (route, state) => {
       router.navigate(['']);
    }
 
-   inject(AuthenticationApiService).validate()
-      .pipe(map(account => account.admin || 0))
-      .subscribe(admin => {
-         if (!admin) {
+   store.select(selectIsAdministrator)
+      .pipe(map(adminLevel => adminLevel != null && adminLevel > 0))
+      .subscribe(isAdministrator => {
+         if (!isAdministrator) {
             router.navigate(['']);
          }
-      });
+      })
 
-
-   return true;
+   return !!token;
 };

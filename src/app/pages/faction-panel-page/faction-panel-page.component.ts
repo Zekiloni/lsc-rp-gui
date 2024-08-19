@@ -63,8 +63,6 @@ export class FactionPanelPageComponent implements OnInit {
                   this.store.select(selectAccount)
                      .subscribe({
                         next: (account) => {
-                           console.log(character.isLeader, typeof character.isLeader)
-                           console.log((account && account.admin >= 3), (character.factionId == faction.id && character.isLeader))
                            if ((account && account.admin >= 3) || (character.factionId == faction.id && character.isLeader)) {
                               this.showMembersActions = true;
                            }

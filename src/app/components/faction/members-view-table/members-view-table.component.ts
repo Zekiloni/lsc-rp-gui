@@ -111,7 +111,7 @@ export class MembersViewTableComponent implements OnInit {
          next: (rankName?: string) => {
             if (!rankName) return;
 
-            this.factionApiService.patchFactionMemberRank(member.characterId, { rankName })
+            this.factionApiService.patchFactionMemberRank({ rankName }, member.characterId)
                .subscribe({
                   next: (response) => {
                      const memberIndex = this.factionMembers.indexOf(member);

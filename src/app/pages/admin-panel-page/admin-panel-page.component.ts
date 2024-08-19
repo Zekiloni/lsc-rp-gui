@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
    selector: 'app-admin-panel-page',
@@ -9,6 +11,8 @@ import { MenuItem } from 'primeng/api';
    imports: [
       CardModule,
       PanelMenuModule,
+      MenuModule,
+      ButtonModule,
    ],
    templateUrl: './admin-panel-page.component.html',
    styleUrl: './admin-panel-page.component.scss',
@@ -16,48 +20,34 @@ import { MenuItem } from 'primeng/api';
 export class AdminPanelPageComponent {
    items: MenuItem[] = [
       {
-         label: 'Files',
-         icon: 'pi pi-file',
+         label: 'Dashboard',
          items: [
             {
-               label: 'Documents',
-               icon: 'pi pi-file',
-               items: [
-                  {
-                     label: 'Invoices',
-                     icon: 'pi pi-file-pdf',
-                     items: [
-                        {
-                           label: 'Pending',
-                           icon: 'pi pi-stop',
-                        },
-                        {
-                           label: 'Paid',
-                           icon: 'pi pi-check-circle',
-                        },
-                     ],
-                  },
-                  {
-                     label: 'Clients',
-                     icon: 'pi pi-users',
-                  },
-               ],
+               label: 'Početna',
+               icon: 'pi pi-home',
+               routerLink: '/admin',
+            },
+         ]
+      },
+      {
+         label: 'Korisnički računi',
+         icon: 'pi pi-user',
+         items: [
+            {
+               label: 'Pretraga',
+               icon: 'pi pi-search',
+               routerLink: 'accounts',
             },
             {
-               label: 'Images',
-               icon: 'pi pi-image',
-               items: [
-                  {
-                     label: 'Logos',
-                     icon: 'pi pi-image',
-                  },
-               ],
+               label: 'Pretraga Karaktera',
+               icon: 'pi pi-search',
+               routerLink: 'characters',
             },
          ],
       },
       {
-         label: 'Cloud',
-         icon: 'pi pi-cloud',
+         label: 'Fakcije',
+         icon: 'pi pi-users',
          items: [
             {
                label: 'Upload',
@@ -74,22 +64,11 @@ export class AdminPanelPageComponent {
          ],
       },
       {
-         label: 'Devices',
-         icon: 'pi pi-desktop',
-         items: [
-            {
-               label: 'Phone',
-               icon: 'pi pi-mobile',
-            },
-            {
-               label: 'Desktop',
-               icon: 'pi pi-desktop',
-            },
-            {
-               label: 'Tablet',
-               icon: 'pi pi-tablet',
-            },
-         ],
+         label: 'Logovi',
+         icon: 'pi pi-file',
+         items: [],
       },
    ];
+
+   activeMenuItem: MenuItem = this.items[0];
 }

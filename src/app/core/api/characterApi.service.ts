@@ -75,6 +75,13 @@ export class CharacterApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -122,6 +129,13 @@ export class CharacterApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
         ];
@@ -147,16 +161,35 @@ export class CharacterApiService {
     /**
      * Get a list of characters
      * 
+     * @param name Filter character by name
+     * @param accountUsername Filter characters by account username
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listCharacters(observe?: 'body', reportProgress?: boolean): Observable<Array<Character>>;
-    public listCharacters(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Character>>>;
-    public listCharacters(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Character>>>;
-    public listCharacters(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listCharacters(name?: string, accountUsername?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Character>>;
+    public listCharacters(name?: string, accountUsername?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Character>>>;
+    public listCharacters(name?: string, accountUsername?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Character>>>;
+    public listCharacters(name?: string, accountUsername?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (name !== undefined && name !== null) {
+            queryParameters = queryParameters.set('name', <any>name);
+        }
+        if (accountUsername !== undefined && accountUsername !== null) {
+            queryParameters = queryParameters.set('accountUsername', <any>accountUsername);
+        }
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -172,6 +205,7 @@ export class CharacterApiService {
 
         return this.httpClient.request<Array<Character>>('get',`${this.basePath}/character`,
             {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -203,6 +237,13 @@ export class CharacterApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -250,6 +291,13 @@ export class CharacterApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'

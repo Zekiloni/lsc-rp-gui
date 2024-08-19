@@ -17,6 +17,8 @@ export interface Character {
     id: number;
     name: string;
     birthday: string;
+    accountId: number;
+    accountUsername: string;
     gender: CharacterGender;
     health: number;
     armour: number;

@@ -5,6 +5,8 @@ import { AuthenticationApiService } from './core/api/api';
 import { Store } from '@ngrx/store';
 import { setAccount } from './stores/account/account.actions';
 import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ApiError } from './core/model/apiError';
 
 @Component({
    selector: 'app-root',
@@ -15,23 +17,24 @@ import { ToastModule } from 'primeng/toast';
    styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-   title = 'Zeki RP';
 
-   constructor(private localStorageService: LocalStorageService, private authApiService: AuthenticationApiService, @Inject(Store) private store: Store) {
+   constructor(private localStorageService: LocalStorageService,
+               private authApiService: AuthenticationApiService,
+               private messageService: MessageService,
+               @Inject(Store) private store: Store) {
    }
 
    ngOnInit(): void {
       const token = this.localStorageService.retrieve<string | undefined>(StorageItemKey.AccessToken);
-
       if (token) {
          this.authApiService.configuration.accessToken = token;
          this.authApiService.validate().subscribe({
-            next: (account) => {
-               this.store.dispatch(setAccount({ account }));
+            next: (response) => {
+               this.store.dispatch(setAccount({ account: response }));
             },
-            error: (err) => {
+            error: (response: ApiError) => {
                this.localStorageService.delete(StorageItemKey.AccessToken);
-               console.log(err);
+               this.messageService.add({severity: 'error', detail: response.message})
             },
          });
       }

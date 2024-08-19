@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { QuestionAnswerSubmit } from '../../core/model/questionAnswerSubmit';
 import { QuizSubmit } from '../../core/model/quizSubmit';
 import { QuizResult } from '../../core/model/quizResult';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
    selector: 'app-roleplay-quiz',
@@ -17,6 +18,7 @@ import { QuizResult } from '../../core/model/quizResult';
       ReactiveFormsModule,
       RadioButtonModule,
       ButtonModule,
+      ProgressBarModule,
    ],
    providers: [QuizApiService],
    templateUrl: './roleplay-quiz.component.html',
@@ -29,6 +31,8 @@ export class RoleplayQuizComponent implements AfterViewInit {
 
    questions: Question[] | undefined;
 
+   currentQuestionIndex = 0;
+
    submitBtnDisabled: boolean = false;
 
    quizForm = this.formBuilder.group({});
@@ -36,6 +40,10 @@ export class RoleplayQuizComponent implements AfterViewInit {
    constructor(private quizApiService: QuizApiService,
                private messageService: MessageService,
                private formBuilder: FormBuilder) {
+   }
+
+   get currentQuestion() {
+      return this.questions![this.currentQuestionIndex];
    }
 
    ngAfterViewInit() {
@@ -54,6 +62,8 @@ export class RoleplayQuizComponent implements AfterViewInit {
             next: (questions) => this.handleFetchQuizQuestions(questions),
             error: (error: ApiError) => this.messageService.add({ severity: 'error', summary: error.message }),
          });
+
+      this.currentQuestionIndex = 0;
    }
 
    private handleFetchQuizQuestions(questions: Array<Question>) {
@@ -64,6 +74,20 @@ export class RoleplayQuizComponent implements AfterViewInit {
    }
 
    submitQuizForm() {
+      if (this.currentQuestionIndex == (this.questions!.length - 1)) {
+         this.completeQuiz();
+         return;
+      }
+
+      const question = this.questions![this.currentQuestionIndex];
+      if (question && this.quizForm.get(question.id)!.invalid) {
+         return;
+      }
+
+      this.currentQuestionIndex++;
+   }
+
+   private completeQuiz() {
       if (this.quizForm.invalid || !this.questions) {
          this.messageService.add({
             severity: 'error',
@@ -109,4 +133,7 @@ export class RoleplayQuizComponent implements AfterViewInit {
       maksimalan broj netačnih pitanja je ${response.maxFailedAnswers}, kviz će biti regenerisan za
       ${this.REGENERATE_QUIZ_MS / 1000} sekundi`;
    }
+
+   protected readonly parseInt = parseInt;
+   protected readonly String = String;
 }

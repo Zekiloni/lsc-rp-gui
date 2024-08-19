@@ -1,9 +1,9 @@
 <div class="card flex justify-content-center">
-   <p-card class="xl:-m-3" [header]="getHeaderTitle">
+   <p-card class="xl:-m-3 md:col-6" [header]="getHeaderTitle">
       @if (selectedOption == AuthOptionType.SIGN_UP) {
-         <app-register (onSubmitCreateAccount)="handleCreateAccountSubmit($event)" />
+         <app-register (onSubmitCreateAccount)="handleCreateAccountSubmit($event)" class="w-full"/>
       } @else {
-         <app-login (onAuthSubmit)="handleAccountAuthSubmit($event)" />
+         <app-login (onAuthSubmit)="handleAccountAuthSubmit($event)" class="w-full" />
       }
 
       <div class="flex justify-content-center">

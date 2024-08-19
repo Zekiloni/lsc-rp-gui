@@ -8,15 +8,16 @@ export const enum StorageItemKey {
    providedIn: 'root',
 })
 export class LocalStorageService {
-   constructor() {}
+   constructor() {
+   }
 
    retrieve<T>(key: string) {
       return localStorage.getItem(key) as T;
    }
 
    save(key: string, value: any) {
+      localStorage.setItem(key, (typeof value === 'object') ? JSON.stringify(value) : value);
       console.log(`LocalStorageService.save ${key} = ${value}`);
-      localStorage.setItem(key, JSON.stringify(value));
    }
 
    delete(key: string) {

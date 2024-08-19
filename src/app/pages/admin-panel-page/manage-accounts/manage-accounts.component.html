@@ -1,0 +1,36 @@
+<p-table [value]="accounts">
+   <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+         Korisnički računi
+         <form [formGroup]="filterAccountForm" (ngSubmit)="submitAccountFilterForm()"
+               class="flex align-items-center justify-content-between">
+            <input type="text" pInputText formControlName="username" id="username" placeholder="Korisničko ime" class="mr-2" />
+            <input type="text" pInputText formControlName="emailAddress" id="emailAddress" placeholder="Korisničko e-adresa" class="mr-3" />
+
+            <button pButton type="submit" label="Pretraga"></button>
+         </form>
+      </div>
+   </ng-template>
+   <ng-template pTemplate="header">
+      <tr>
+         <th>Korisničko ime</th>
+         <th>E-mail adresa</th>
+         <th>Datum registracije</th>
+         <th>Datum zadnje prijave</th>
+      </tr>
+   </ng-template>
+   <ng-template pTemplate="body" let-account>
+      <tr>
+         <td>{{ account['username'] }}</td>
+         <td>{{ account['email'] }}</td>
+         <td>{{ account['createdAt']  | date : 'dd MMMM YYYY, HH:mm:ss' }}</td>
+         <td>{{ account['lastLoginAt']  | date : 'dd MMMM YYYY, HH:mm:ss' }}</td>
+      </tr>
+   </ng-template>
+
+   <ng-template pTemplate="emptymessage">
+      <tr>
+         <td colspan="4">Nema računa po odredjenim filterima.</td>
+      </tr>
+   </ng-template>
+</p-table>

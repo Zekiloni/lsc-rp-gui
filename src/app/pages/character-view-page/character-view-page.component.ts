@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe, JsonPipe, NgIf, NgOptimizedImage } from '@angular/common';
+import { DatePipe, JsonPipe, Location, NgIf, NgOptimizedImage } from '@angular/common';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { beautifyName, getSkinImage } from '../../util/character.util';
 import { getVehicleImage, getVehicleName } from '../../util/vehicle.util';
 import { formatCurrency } from '../../util/currency.util';
@@ -45,17 +45,24 @@ export class CharacterViewPageComponent implements OnInit {
 
    breadcrumbItems: MenuItem[] | undefined;
 
-   back: MenuItem = { icon: 'pi pi-user', routerLink: '/ucp' };
+   back: MenuItem = {
+      icon: 'pi pi-home',
+      command: () => {
+         this.location.back();
+      },
+   };
 
    characterMenuItems: MenuItem[] | undefined;
 
-   constructor(private characterApiService: CharacterApiService, private route: ActivatedRoute,
-               private router: Router) {
+   constructor(
+      private location: Location,
+      private characterApiService: CharacterApiService,
+      private route: ActivatedRoute,
+      private router: Router) {
    }
 
    ngOnInit(): void {
       const characterId = this.route.snapshot.params['id'];
-
       this.characterApiService.retrieveCharacter(characterId)
          .subscribe({
             next: (character) => {

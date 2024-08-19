@@ -77,6 +77,13 @@ export class FactionApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -118,6 +125,13 @@ export class FactionApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -144,23 +158,33 @@ export class FactionApiService {
     /**
      * Update a faction member rank by character ID
      * 
-     * @param characterId ID of the character to update rank
      * @param body 
+     * @param characterId ID of the character to update rank
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchFactionMemberRank(characterId: number, body?: MemberRankUpdate, observe?: 'body', reportProgress?: boolean): Observable<FactionMember>;
-    public patchFactionMemberRank(characterId: number, body?: MemberRankUpdate, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<FactionMember>>;
-    public patchFactionMemberRank(characterId: number, body?: MemberRankUpdate, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<FactionMember>>;
-    public patchFactionMemberRank(characterId: number, body?: MemberRankUpdate, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public patchFactionMemberRank(body: MemberRankUpdate, characterId: number, observe?: 'body', reportProgress?: boolean): Observable<FactionMember>;
+    public patchFactionMemberRank(body: MemberRankUpdate, characterId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<FactionMember>>;
+    public patchFactionMemberRank(body: MemberRankUpdate, characterId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<FactionMember>>;
+    public patchFactionMemberRank(body: MemberRankUpdate, characterId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling patchFactionMemberRank.');
+        }
 
         if (characterId === null || characterId === undefined) {
             throw new Error('Required parameter characterId was null or undefined when calling patchFactionMemberRank.');
         }
 
-
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -208,6 +232,13 @@ export class FactionApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'

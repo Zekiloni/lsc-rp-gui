@@ -75,6 +75,13 @@ export class AccountApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -122,6 +129,13 @@ export class AccountApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
         ];
@@ -147,16 +161,35 @@ export class AccountApiService {
     /**
      * Get a list of all accounts
      * 
+     * @param username Filter accounts by username
+     * @param emailAddress Filter accounts by email address
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listAccount(observe?: 'body', reportProgress?: boolean): Observable<Array<Account>>;
-    public listAccount(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Account>>>;
-    public listAccount(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Account>>>;
-    public listAccount(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listAccount(username?: string, emailAddress?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Account>>;
+    public listAccount(username?: string, emailAddress?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Account>>>;
+    public listAccount(username?: string, emailAddress?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Account>>>;
+    public listAccount(username?: string, emailAddress?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (username !== undefined && username !== null) {
+            queryParameters = queryParameters.set('username', <any>username);
+        }
+        if (emailAddress !== undefined && emailAddress !== null) {
+            queryParameters = queryParameters.set('emailAddress', <any>emailAddress);
+        }
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
@@ -172,6 +205,7 @@ export class AccountApiService {
 
         return this.httpClient.request<Array<Account>>('get',`${this.basePath}/account`,
             {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -203,6 +237,13 @@ export class AccountApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
         ];
@@ -249,6 +290,13 @@ export class AccountApiService {
 
         let headers = this.defaultHeaders;
 
+        // authentication (bearerAuth) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
             'application/json'
