@@ -1,16 +1,21 @@
-<ng-container *ngIf='(pendingCharacters | async ) as pendingChars; else nemaPending'>
-   <div class="table-responsive">
-      <table class="table table-striped">
-         <thead>
-         <tr *ngFor='let char of pendingChars'>
-            <th scope="col">Character Name</th>
-         </tr>
-         </thead>
-      </table>
-   </div>
-</ng-container>
-<ng-template #nemaPending>
-  <div class="alert alert-info" role="alert">
-    There are no pending characters.
-  </div>
-</ng-template>
+
+<p-table
+   *ngIf="($pendingCharacters | async) as pendingCharacters;"
+   [value]="pendingCharacters" >
+   <ng-template pTemplate="header">
+      <tr>
+         <th>Name</th>
+      </tr>
+   </ng-template>
+   <ng-template pTemplate="body" let-character>
+      <tr>
+         <td>{{ character['name'] }}</td>
+      </tr>
+   </ng-template>
+
+   <ng-template pTemplate="emptymessage">
+      <tr>
+         <td colspan="5">No apps found.</td>
+      </tr>
+   </ng-template>
+</p-table>
