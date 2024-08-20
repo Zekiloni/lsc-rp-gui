@@ -1,1 +1,16 @@
-<p>manage-pending-characters works!</p>
+<ng-container *ngIf='(pendingCharacters | async ) as pendingChars; else nemaPending'>
+   <div class="table-responsive">
+      <table class="table table-striped">
+         <thead>
+         <tr *ngFor='let char of pendingChars'>
+            <th scope="col">Character Name</th>
+         </tr>
+         </thead>
+      </table>
+   </div>
+</ng-container>
+<ng-template #nemaPending>
+  <div class="alert alert-info" role="alert">
+    There are no pending characters.
+  </div>
+</ng-template>
