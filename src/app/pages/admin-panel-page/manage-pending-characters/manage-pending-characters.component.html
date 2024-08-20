@@ -1,21 +1,31 @@
-
 <p-table
-   *ngIf="($pendingCharacters | async) as pendingCharacters;"
-   [value]="pendingCharacters" >
-   <ng-template pTemplate="header">
+   *ngIf='($pendingCharacters | async) as pendingCharacters;'
+   [value]='pendingCharacters'>
+   <ng-template pTemplate='header'>
       <tr>
+         <th>Master Account</th>
          <th>Name</th>
+         <th>Created At</th>
+         <th class='flex justify-content-center'>Action</th>
       </tr>
    </ng-template>
-   <ng-template pTemplate="body" let-character>
+   <ng-template pTemplate='body' let-character>
       <tr>
+         <td>{{ character['accountUsername'] }}</td>
          <td>{{ character['name'] }}</td>
+         <td>{{ character['createdAt'] | date }}</td>
+         <td class='flex justify-content-center px-5 '>
+            <button class='p-button p-button-success mr-3'><i class='pi pi-check'
+                                                         (click)=" acceptPlayer(character['id'])"></i></button>
+            <button class='p-button p-button-danger'><i class='pi pi-times '
+                                                        (click)="denyPlayer(character['id'])"></i></button>
+         </td>
       </tr>
    </ng-template>
 
-   <ng-template pTemplate="emptymessage">
+   <ng-template pTemplate='emptymessage'>
       <tr>
-         <td colspan="5">No apps found.</td>
+         <td colspan='5'>No apps found.</td>
       </tr>
    </ng-template>
 </p-table>

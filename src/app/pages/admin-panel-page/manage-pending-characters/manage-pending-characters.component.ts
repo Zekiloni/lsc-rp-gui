@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CharacterApiService } from '../../../core/api/characterApi.service';
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 
@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
       AsyncPipe,
       TableModule,
       ButtonModule,
+      DatePipe,
    ],
    providers: [CharacterApiService],
    templateUrl: './manage-pending-characters.component.html',
@@ -22,5 +23,17 @@ export class ManagePendingCharactersComponent {
    $pendingCharacters = this.characterApiService.listUnapprovedCharacter();
 
    constructor(private characterApiService: CharacterApiService) {
+   }
+
+   updateCharaterPending(id: string) {
+      console.log('RADIDIII');
+   }
+
+   acceptPlayer(characterElement: any) {
+      console.log('PRIHVATI');
+   }
+
+   denyPlayer(characterElement: any) {
+      console.log('ODBIJ');
    }
 }
