@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CharacterApiService } from '../../../core/api/characterApi.service';
 import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { Character } from '../../../core/model/character';
 
 @Component({
    selector: 'app-manage-pending-characters',
@@ -25,15 +26,14 @@ export class ManagePendingCharactersComponent {
    constructor(private characterApiService: CharacterApiService) {
    }
 
-   updateCharaterPending(id: string) {
-      console.log('RADIDIII');
+   resolveCharacterApplication(character: Character, approved: boolean) {
+      this.characterApiService.patchCharacter({ isApproved: approved }, character.id)
+         .subscribe({
+            next: this.handleResolveCharacterApplication
+         });
    }
 
-   acceptPlayer(characterElement: any) {
-      console.log('PRIHVATI');
-   }
+   private handleResolveCharacterApplication = (response: Character) => {
 
-   denyPlayer(characterElement: any) {
-      console.log('ODBIJ');
    }
 }
