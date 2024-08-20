@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageService, SharedModule } from 'primeng/api';
@@ -8,6 +8,9 @@ import { TableModule } from 'primeng/table';
 import { Router } from '@angular/router';
 import { CharacterApiService } from '../../../core/api/api';
 import { ApiError, Character } from '../../../core/model/models';
+import { getCharacterStatusClass, getCharacterStatusLabel } from '../../../core/util';
+import { TooltipModule } from 'primeng/tooltip';
+import { getSkinImage } from '../../../util/character.util';
 
 @Component({
    selector: 'app-manage-characters',
@@ -20,6 +23,8 @@ import { ApiError, Character } from '../../../core/model/models';
       ReactiveFormsModule,
       SharedModule,
       TableModule,
+      TooltipModule,
+      NgOptimizedImage,
    ],
    providers: [CharacterApiService],
    templateUrl: './manage-characters.component.html',
@@ -74,4 +79,13 @@ export class ManageCharactersComponent implements AfterViewInit {
    openSingleCharacter(character: Character) {
       this.router.navigate(['character', character.id]);
    }
+
+   protected readonly getCharacterStatusClass = getCharacterStatusClass;
+   protected readonly getCharacterStatusLabel = getCharacterStatusLabel;
+
+   getCharacterApplicationTooltip(character: Character) {
+      return `Aplikaciju je pregledao ${character.approvedBy ?? 'Niko'}`;
+   }
+
+   protected readonly getSkinImage = getSkinImage;
 }

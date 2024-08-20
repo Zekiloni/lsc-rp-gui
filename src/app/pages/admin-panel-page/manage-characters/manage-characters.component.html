@@ -35,7 +35,9 @@
             Datum kreiranja
             <p-sortIcon field="createdAt" />
          </th>
-
+         <th>
+            Status
+         </th>
          <th>
             Akcije
          </th>
@@ -43,11 +45,28 @@
    </ng-template>
    <ng-template pTemplate="body" let-character>
       <tr>
-         <td>{{ character['name'] }}</td>
+         <td class="flex align-items-center">
+            <img
+               class="surface-ground w-2rem h-2rem relative mr-3 border-circle"
+               [ngSrc]="getSkinImage(character['skin'], true)"
+               alt="character-skin-preview"
+               fill
+               priority
+                />
+            {{ character['name'] }}
+         </td>
          <td>{{ character['accountUsername'] }}</td>
          <td>{{ character['level'] }}</td>
          <td>{{ character['hours'] }}</td>
          <td>{{ character['createdAt']  | date : 'dd MMMM YYYY, HH:mm:ss' }}</td>
+         <td>
+            <span
+               [pTooltip]="getCharacterApplicationTooltip(character)"
+               tooltipPosition="bottom"
+               [class]="getCharacterStatusClass(character['isApproved'])">
+               {{ getCharacterStatusLabel(character['isApproved']) }}
+            </span>
+         </td>
          <td>
             <p-button [link]="true">
                <i class="pi pi-external-link" (click)="openSingleCharacter(character)"></i>

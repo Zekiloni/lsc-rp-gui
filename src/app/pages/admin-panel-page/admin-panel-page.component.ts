@@ -30,11 +30,11 @@ export class AdminPanelPageComponent {
          ]
       },
       {
-         label: 'Korisnički računi',
+         label: 'Korisnici',
          icon: 'pi pi-user',
          items: [
             {
-               label: 'Pretraga',
+               label: 'Pretraga računa',
                icon: 'pi pi-search',
                routerLink: 'accounts',
             },

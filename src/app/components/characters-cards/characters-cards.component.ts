@@ -8,6 +8,7 @@ import { selectAccount } from '../../stores/account/account.selector';
 import { Character } from '../../core/model/models';
 import { RippleModule } from 'primeng/ripple';
 import { beautifyName, getSkinImage } from '../../util/character.util';
+import { getCharacterStatusClass, getCharacterStatusLabel } from '../../core/util';
 
 @Component({
    selector: 'app-characters-cards',
@@ -58,4 +59,8 @@ export class CharactersCardsComponent implements OnInit {
    createCharacter() {
       this.router.navigate(['create-character']);
    }
+
+
+   protected readonly getCharacterStatusClass = getCharacterStatusClass;
+   protected readonly getCharacterStatusLabel = getCharacterStatusLabel;
 }

@@ -4,6 +4,7 @@ import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { Character } from '../../../core/model/character';
+import { MessageService } from 'primeng/api';
 
 @Component({
    selector: 'app-manage-pending-characters',
@@ -23,17 +24,25 @@ import { Character } from '../../../core/model/character';
 export class ManagePendingCharactersComponent {
    $pendingCharacters = this.characterApiService.listUnapprovedCharacter();
 
-   constructor(private characterApiService: CharacterApiService) {
+   constructor(
+      private characterApiService: CharacterApiService,
+      private messageService: MessageService,
+   ) {
    }
 
    resolveCharacterApplication(character: Character, approved: boolean) {
       this.characterApiService.patchCharacter({ isApproved: approved }, character.id)
          .subscribe({
-            next: this.handleResolveCharacterApplication
+            next: this.handleResolveCharacterApplication,
          });
    }
 
    private handleResolveCharacterApplication = (response: Character) => {
-
-   }
+      this.$pendingCharacters = this.characterApiService.listUnapprovedCharacter();
+      this.messageService.add({
+         severity: 'success',
+         summary: 'Aplikacija je rešena',
+         detail: `${response.isApproved ? 'Prihvatili' : 'Odbili'} ste aplikaciju ${response.name}`,
+      });
+   };
 }
