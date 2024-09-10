@@ -1,0 +1,1 @@
+export * from './online-player-stat.component';

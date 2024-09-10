@@ -13,6 +13,8 @@ import { formatCurrency } from '../../util/currency.util';
 import { CharacterApiService } from '../../core/api/characterApi.service';
 import { Character } from '../../core/model/character';
 import { MenuModule } from 'primeng/menu';
+import { MessagesModule } from 'primeng/messages';
+import { getCharacterStatusLabel, getCharacterStatusSeverity } from '../../core/util';
 
 @Component({
    selector: 'app-character-view-page',
@@ -28,6 +30,7 @@ import { MenuModule } from 'primeng/menu';
       NgOptimizedImage,
       BreadcrumbModule,
       MenuModule,
+      MessagesModule,
    ],
    providers: [CharacterApiService],
    templateUrl: './character-view-page.component.html',
@@ -102,4 +105,7 @@ export class CharacterViewPageComponent implements OnInit {
          },
       ];
    }
+
+   protected readonly getCharacterStatusLabel = getCharacterStatusLabel;
+   protected readonly getCharacterStatusSeverity = getCharacterStatusSeverity;
 }

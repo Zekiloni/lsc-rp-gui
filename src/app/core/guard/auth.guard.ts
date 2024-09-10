@@ -6,9 +6,7 @@ import {
 } from '../service/services';
 
 export const authGuard: CanActivateFn = (route, state) => {
-   const token = inject(LocalStorageService).retrieve(
-      StorageItemKey.AccessToken
-   );
+   const token = inject(LocalStorageService).retrieve(StorageItemKey.AccessToken);
 
    if (!token) {
       inject(Router).navigate(['']);

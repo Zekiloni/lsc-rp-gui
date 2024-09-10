@@ -19,3 +19,14 @@ export const getCharacterStatusClass = (isApproved?: boolean) => {
          return 'text-yellow-400';
    }
 };
+
+export const getCharacterStatusSeverity = (isApproved?: boolean) => {
+   switch (isApproved) {
+      case true:
+         return 'success';
+      case false:
+         return 'error';
+      default:
+         return 'warn';
+   }
+}
