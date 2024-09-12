@@ -16,7 +16,7 @@
          }
       </div>
 
-      <p-progressBar [value]="parseInt(String((((currentQuestionIndex + 1) / questions.length) * 100)))" [showValue]="true"
+      <p-progressBar [value]="parseInt(String((((currentQuestionIndex) / (questions.length -1)) * 100)))" [showValue]="true"
                      class="mt-2 mb-2" />
 
       <button pButton type="submit" label="Nastavi" class="mb-3 mt-3 continue-btn"

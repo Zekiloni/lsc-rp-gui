@@ -9,7 +9,7 @@
    <p-messages [severity]="getCharacterStatusSeverity(character.isApproved)"
                *ngIf="character && !character?.isApproved">
       <ng-template pTemplate>
-         <p> Status aplikacije: <b>{{ getCharacterStatusLabel(character.isApproved) }}</b>, Administrator: <b>{{ character.approvedBy }}</b></p>
+         <p> Status aplikacije: <b>{{ getCharacterStatusLabel(character.isApproved) }}</b>, Administrator: <b>{{ character.approvedBy || 'Nema' }}</b></p>
       </ng-template>
    </p-messages>
 </div>
