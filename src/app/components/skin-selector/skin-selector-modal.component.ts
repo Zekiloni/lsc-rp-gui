@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { DynamicDialogComponent, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { getSkinImage } from '../../util/character.util';
-import { sampSkins } from '../../core/constant/samp-skins';
+import { forbiddenSkins, sampSkins } from '../../core/constant/samp-skins';
 
 @Component({
    selector: 'app-skin-selector-modal',
@@ -14,13 +14,11 @@ import { sampSkins } from '../../core/constant/samp-skins';
    styleUrl: './skin-selector-modal.component.scss',
 })
 export class SkinSelectorModalComponent {
-   instance: DynamicDialogComponent | undefined;
-
-   availableSkins = sampSkins;
+   availableSkins = sampSkins
+      .filter(skinId => !forbiddenSkins.includes(skinId));
 
    constructor(
-      public ref: DynamicDialogRef,
-      public config: DynamicDialogConfig,
+      public ref: DynamicDialogRef
    ) {
    }
 

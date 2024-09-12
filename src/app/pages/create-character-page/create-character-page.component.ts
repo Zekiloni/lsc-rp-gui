@@ -62,7 +62,7 @@ export class CreateCharacterPageComponent {
       birthday: ['', Validators.required, this.validateCharacterAge],
    });
 
-   selectedSkin: number = 0;
+   selectedSkin: number = 264;
 
    constructor(
       private fb: FormBuilder,
