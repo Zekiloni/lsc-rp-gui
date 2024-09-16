@@ -1,14 +1,19 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import {
+   ReactiveFormsModule,
+   FormBuilder,
+   Validators,
+   AbstractControl,
+} from '@angular/forms';
 
+import { ToastModule } from 'primeng/toast';
+import { StepsModule } from 'primeng/steps';
+import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { ButtonModule } from 'primeng/button';
+import { MenuItem, MessageService } from 'primeng/api';
 
 import { AccountCreate } from '../../../core/model/models';
-import { ToastModule } from 'primeng/toast';
-import { MenuItem, MessageService } from 'primeng/api';
-import { StepsModule } from 'primeng/steps';
 import { RoleplayQuizComponent } from '../../roleplay-quiz';
 
 @Component({
@@ -31,7 +36,7 @@ export class RegisterComponent {
 
    quizStarted: boolean = false;
 
-   activeStep: number = 0;
+   activeStep: number = 1;
    registerSteps: MenuItem[] = [
       { label: 'Roleplay kviz' }, { label: 'Kreiranje računa' },
    ];
@@ -43,6 +48,7 @@ export class RegisterComponent {
             Validators.required,
             Validators.minLength(3),
             Validators.maxLength(32),
+            this.validateUsername,
          ],
       ],
       email: ['', [Validators.required, Validators.email]],
@@ -64,6 +70,21 @@ export class RegisterComponent {
    });
 
    constructor(private fb: FormBuilder, private messageService: MessageService) {
+   }
+
+   validateUsername(control: AbstractControl) {
+      const value = control.value;
+
+      if (/\s/.test(value)) {
+         return { 'hasSpace': true };
+      }
+
+      const nameLastnamePattern = /^[A-Za-z]+_[A-Za-z]+$/;
+      if (nameLastnamePattern.test(value)) {
+         return { 'invalidFormat': true };
+      }
+
+      return null;
    }
 
    register() {
