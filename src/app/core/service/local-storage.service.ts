@@ -17,7 +17,6 @@ export class LocalStorageService {
 
    save(key: string, value: any) {
       localStorage.setItem(key, (typeof value === 'object') ? JSON.stringify(value) : value);
-      console.log(`LocalStorageService.save ${key} = ${value}`);
    }
 
    delete(key: string) {
