@@ -36,7 +36,7 @@ export class RegisterComponent {
 
    quizStarted: boolean = false;
 
-   activeStep: number = 1;
+   activeStep: number = 0;
    registerSteps: MenuItem[] = [
       { label: 'Roleplay kviz' }, { label: 'Kreiranje računa' },
    ];
