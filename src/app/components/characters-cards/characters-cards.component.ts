@@ -46,10 +46,9 @@ export class CharactersCardsComponent implements OnInit {
    ngOnInit(): void {
       this.store.select(selectAccount).subscribe(({
          next: (account) => {
-            this.characters = account!.characters;
+            this.characters = account!.characters || [];
          },
       }));
-
    }
 
    viewCharacter(id: number) {
