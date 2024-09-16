@@ -1,5 +1,5 @@
-<p>online-player-stat works!</p>
-
-<span *ngIf="($onlinePlayerStat | async) as stats">
-   {{ stats }}
-</span>
+@if ($onlinePlayerStat | async; as onlinePlayerStats) {
+   <div class="card">
+      <p-chart type="line" [data]="transformToData(onlinePlayerStats)" />
+   </div>
+}
