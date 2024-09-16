@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { OnlinePlayerStat } from '../../core/model/models';
 import { OnlinePlayerStatApiService } from '../../core/api/api';
@@ -12,19 +12,19 @@ import { OnlinePlayerStatApiService } from '../../core/api/api';
       NgIf,
       ChartModule,
    ],
-   providers: [OnlinePlayerStatApiService],
+   providers: [OnlinePlayerStatApiService, DatePipe],
    templateUrl: './online-player-stat.component.html',
    styleUrl: './online-player-stat.component.scss',
 })
 export class OnlinePlayerStatComponent {
    $onlinePlayerStat = this.onlinePlayerStatApiService.listOnlinePlayersStat();
 
-   constructor(private onlinePlayerStatApiService: OnlinePlayerStatApiService) {
+   constructor(private onlinePlayerStatApiService: OnlinePlayerStatApiService, private datePipe: DatePipe) {
    }
 
    transformToData(onlinePlayerStat: OnlinePlayerStat[]) {
       return {
-         labels: onlinePlayerStat.map(data => new Date(data.createdAt).toLocaleTimeString()),
+         labels: onlinePlayerStat.map(data => this.datePipe.transform(data.createdAt, 'HH:mm:ss')),
          datasets: [
             {
                label: 'Player Count',
