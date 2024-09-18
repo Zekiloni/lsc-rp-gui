@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ChipsModule } from 'primeng/chips';
 import { MessageService } from 'primeng/api';
@@ -14,6 +14,8 @@ import { getSkinImage } from '../../util/character.util';
 import { AccountApiService } from '../../core/api/accountApi.service';
 import { CharacterApiService } from '../../core/api/characterApi.service';
 import { SkinSelectorModalComponent } from '../../components/skin-selector';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
 
 @Component({
    selector: 'app-character-settings-page',
@@ -25,6 +27,9 @@ import { SkinSelectorModalComponent } from '../../components/skin-selector';
       CheckboxModule,
       ButtonModule,
       RippleModule,
+      CalendarModule,
+      FormsModule,
+      DatePipe,
    ],
    providers: [AccountApiService, CharacterApiService, DialogService],
    templateUrl: './character-settings-page.component.html',

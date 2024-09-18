@@ -13,6 +13,11 @@
                <input pInputText type="text" [value]="character.name" readonly id="character-name">
             </div>
 
+            <div class="mb-4">
+               <label for="character-birthday" class="block font-normal text-900 mb-2">Datum rodjenja</label>
+               <input pInputText type="text" [value]="character.birthday | date" readonly id="character-birthday">
+            </div>
+
             <div>
                <button pButton pRipple type="button" class="w-auto mt-3" label="Sacuvaj izmene"></button>
             </div>
