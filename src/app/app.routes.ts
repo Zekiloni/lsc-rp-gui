@@ -50,6 +50,13 @@ export const routes: Routes = [
                import('./pages/character-view-page').then(m => m.CharacterViewPageComponent),
          },
          {
+            title: 'Podesavanje karaktera',
+            path: 'character/:id/settings',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/character-settings-page').then(m => m.CharacterSettingsPageComponent),
+         },
+         {
             title: 'Faction panel',
             path: 'character/:id/faction',
             canActivate: [authGuard],

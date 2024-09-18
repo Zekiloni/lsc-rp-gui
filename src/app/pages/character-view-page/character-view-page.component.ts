@@ -87,6 +87,7 @@ export class CharacterViewPageComponent implements OnInit {
                {
                   label: 'Podešavanja karaktera',
                   icon: 'pi pi-cog',
+                  routerLink: `/character/${this.character!.id}/settings`
                },
                {
                   label: 'Faction Panel',

@@ -1,0 +1,27 @@
+@if ($character | async; as character) {
+   <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
+      <div class="text-900 font-semibold text-lg mt-3">Podešavanje karaktera</div>
+      <p-divider class="p-element">
+         <div role="separator" class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left">
+            <div class="p-divider-content"></div>
+         </div>
+      </p-divider>
+      <div class="flex gap-5 flex-column-reverse md:flex-row">
+         <div class="flex-auto p-fluid">
+            <div class="mb-4">
+               <label for="character-name" class="block font-normal text-900 mb-2">Ime Prezime</label>
+               <input pInputText type="text" [value]="character.name" readonly id="character-name">
+            </div>
+
+            <div>
+               <button pButton pRipple type="button" class="w-auto mt-3" label="Sacuvaj izmene"></button>
+            </div>
+         </div>
+         <div class="flex flex-column align-items-center flex-or"><span class="font-normal text-900 mb-2">Skin</span>
+            <img [src]="getSkinImage(character.skin, false)" class="w-11rem" alt="lscrp">
+            <button pButton type="button" icon="pi pi-pencil" class="-mt-4 p-button-rounded"
+                    (click)="toggleSkinSelector(character)"></button>
+         </div>
+      </div>
+   </div>
+}

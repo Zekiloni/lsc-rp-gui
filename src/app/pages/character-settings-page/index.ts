@@ -1,0 +1,1 @@
+export * from './character-settings-page.component';

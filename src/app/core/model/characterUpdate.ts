@@ -13,6 +13,7 @@
 export interface CharacterUpdate { 
     name?: string;
     health?: number;
+    skin?: number;
     armour?: number;
     isApproved?: boolean;
     approvedBy?: string;

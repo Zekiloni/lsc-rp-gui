@@ -17,6 +17,7 @@ export interface Account {
     email: string;
     characters: Array<Character>;
     lastLoginAt?: Date;
+    isInGame: boolean;
     updatedAt?: Date;
     admin: number;
     referralCode?: string;
