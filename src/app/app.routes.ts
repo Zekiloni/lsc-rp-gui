@@ -29,11 +29,24 @@ export const routes: Routes = [
                import('./pages/auth-page').then(m => m.AuthPageComponent),
          },
          {
+            title: 'Resetiranje lozinke',
+            path: 'password-reset/:token',
+            loadComponent: () =>
+               import('./pages/password-reset-page').then(m => m.PasswordResetPageComponent),
+         },
+         {
             title: 'User Control Panel',
             path: 'ucp',
             canActivate: [authGuard],
             loadComponent: () =>
                import('./pages/dashboard-page').then(m => m.DashboardPageComponent),
+         },
+         {
+            title: 'World Map',
+            path: 'map',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/world-map-page').then(m => m.WorldMapPageComponent),
          },
          {
             title: 'Podešavanja računa',
