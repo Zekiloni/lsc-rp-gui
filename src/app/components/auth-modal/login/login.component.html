@@ -1,14 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="login()" class="mt-5">
+   <p-floatLabel>
+      <input type="text" pInputText formControlName="username" id="username" />
+      <label for="username">Korisničko ime</label>
+   </p-floatLabel>
 
-<form [formGroup]="form" class="mt-5">
-    <p-floatLabel>
-        <input type="text" pInputText formControlName="username" id="username" />
-        <label for="username">Korisničko ime</label>
-    </p-floatLabel>
+   <p-floatLabel>
+      <input type="password" pInputText formControlName="password" id="password" />
+      <label for="password">Korisnička šifra</label>
+   </p-floatLabel>
 
-    <p-floatLabel>
-        <input type="password" pInputText formControlName="password" id="password" />
-        <label for="password">Korisnička šifra</label>
-    </p-floatLabel>
+   <div class="flex align-items-center justify-content-between mb-4">
+      <div class="flex align-items-center">
+         <p-checkbox id="remember-me" [binary]="true" styleClass="mr-2"></p-checkbox>
+         <label for="remember-me">Zapamti me</label>
+      </div>
+      <p-button label="Zaboravljena šifra?" [link]="true" (onClick)="openPasswordResetRequestDialog()" />
+   </div>
 
-    <button pButton type="button" (click)="login()" label="Prijavi se" class="mb-3"></button>
+   <button pButton type="submit" label="Prijavi se" class="mb-3"></button>
 </form>

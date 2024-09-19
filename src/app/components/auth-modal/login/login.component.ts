@@ -5,7 +5,16 @@ import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 
-import { Authentication } from '../../../core/model/authentication';
+import { Authentication } from '../../../core/model/models';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DialogService } from 'primeng/dynamicdialog';
+import { PasswordResetComponent } from '../password-reset';
+
+export const PASSWORD_VALIDATORS = [
+   Validators.required,
+   Validators.minLength(6),
+   Validators.maxLength(32),
+];
 
 @Component({
    selector: 'app-login',
@@ -15,42 +24,37 @@ import { Authentication } from '../../../core/model/authentication';
       InputTextModule,
       ButtonModule,
       FloatLabelModule,
+      CheckboxModule,
    ],
+   providers: [DialogService],
    templateUrl: './login.component.html',
    styleUrl: './login.component.scss',
 })
 export class LoginComponent {
    @Output() onAuthSubmit = new EventEmitter<Authentication>();
 
-   form = this.fb.group({
-      username: [
-         '',
-         [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(32),
-         ],
-      ],
-      password: [
-         '',
-         [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(32),
-         ],
-      ],
+   form = this.formBuilder.group({
+      username: ['', PASSWORD_VALIDATORS],
+      password: ['', PASSWORD_VALIDATORS],
    });
 
-   constructor(private fb: FormBuilder) {}
+   constructor(private formBuilder: FormBuilder, private dialogService: DialogService) {
+   }
 
    login() {
       if (this.form.invalid) {
          return;
       }
 
-      const username = <string>this.form.get('username')!.value;
-      const password = <string>this.form.get('password')!.value;
+      const username = this.form.get<string>('username')!.value;
+      const password = this.form.get<string>('password')!.value;
 
       this.onAuthSubmit.emit({ username, password });
+   }
+
+   openPasswordResetRequestDialog() {
+      this.dialogService.open(PasswordResetComponent, {
+         header: 'Reset korisničke šifre',
+      });
    }
 }
