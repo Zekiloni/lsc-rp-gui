@@ -29,7 +29,7 @@ export const routes: Routes = [
                import('./pages/auth-page').then(m => m.AuthPageComponent),
          },
          {
-            title: 'Resetiranje lozinke',
+            title: 'Resetiranje šifre',
             path: 'password-reset/:token',
             loadComponent: () =>
                import('./pages/password-reset-page').then(m => m.PasswordResetPageComponent),
