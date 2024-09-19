@@ -71,7 +71,7 @@ export class PasswordResetPageComponent {
          .subscribe({ next: this.handlePasswordResetResponse, error: this.handlePasswordResetErrorResponse });
    }
    private handlePasswordResetResponse = (response: MessageResponse) => {
-      this.messageService.add({ summary: 'success', severity: 'Uspešno', detail: response.message });
+      this.messageService.add({ severity: 'success', summary: 'Uspešno', detail: response.message });
       setTimeout(() => this.router.navigate(['auth']), this.REDIRECT_TO_AUTH_MS);
    };
 
