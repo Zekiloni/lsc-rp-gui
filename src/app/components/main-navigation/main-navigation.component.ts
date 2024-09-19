@@ -86,6 +86,12 @@ export class MainNavigationComponent implements OnInit {
                         routerLink: 'ucp',
                      },
 
+                     {
+                        label: 'World Map',
+                        icon: 'pi pi-map',
+                        routerLink: 'map',
+                     },
+
                      ...(admin > 0 ? [{
                         label: 'Admin Panel',
                         icon: 'pi pi-shield',
