@@ -26,6 +26,7 @@ export * from './questionAnswer';
 export * from './questionAnswerSubmit';
 export * from './quizResult';
 export * from './quizSubmit';
+export * from './resetPassword';
 export * from './vehicle';
 export * from './vehicleCreate';
 export * from './vehicleUpdate';
