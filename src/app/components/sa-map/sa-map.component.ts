@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as L from 'leaflet';
 import { LatLngTuple } from 'leaflet';
 import { environment } from '../../../environments/environment';
@@ -13,13 +13,12 @@ import { environment } from '../../../environments/environment';
 export class SaMapComponent implements OnInit {
    @Output() onMapCreated = new EventEmitter<L.Map>();
 
-   private static saMapExtent = [1022.5, 1022.5, 1022.5, 1022.5]
-   private static mapZoom = { min: 0, max: 5 };
+   private static mapExtent = [1022.5, 1022.5, 1022.5, 1022.5];
+   private static mapZoom = { min: 0, max: 3 };
    private static mapMaxResolution = 1;
    private static mapMinResolution = Math.pow(2, SaMapComponent.mapZoom.max) * SaMapComponent.mapMaxResolution;
 
    private crs: L.CRS | undefined;
-
    map: L.Map | undefined;
    layer: L.Layer | undefined;
 
@@ -42,9 +41,7 @@ export class SaMapComponent implements OnInit {
          crs: this.crs,
       });
 
-      // z, x, y
-
-      this.layer = L.tileLayer(`${environment.staticUrl}/images/tiles/sat.{z}.{x}.{y}.png`, {
+      this.layer = L.tileLayer(`${environment.staticUrl}/images/tiles-512/sat.{z}.{x}.{y}.png`, {
          minZoom: SaMapComponent.mapZoom.min,
          maxZoom: SaMapComponent.mapZoom.max,
          noWrap: true,
@@ -55,14 +52,14 @@ export class SaMapComponent implements OnInit {
       (<HTMLElement>element[0]).style.display = 'none';
 
       this.map!.fitBounds([
-         this.crs!.unproject(L.point(SaMapComponent.saMapExtent[2], SaMapComponent.saMapExtent[3])) as unknown as LatLngTuple,
-         this.crs!.unproject(L.point(SaMapComponent.saMapExtent[0], SaMapComponent.saMapExtent[1])) as unknown as LatLngTuple,
+         this.crs!.unproject(L.point(SaMapComponent.mapExtent[2], SaMapComponent.mapExtent[3])) as unknown as LatLngTuple,
+         this.crs!.unproject(L.point(SaMapComponent.mapExtent[0], SaMapComponent.mapExtent[1])) as unknown as LatLngTuple,
       ]);
 
-      this.map!.fitBounds([
-         [SaMapComponent.saMapExtent[2], SaMapComponent.saMapExtent[3]],
-         [SaMapComponent.saMapExtent[0], SaMapComponent.saMapExtent[1]],
-      ]);
+      // this.map!.fitBounds([
+      //    [SaMapComponent.mapExtent[2], SaMapComponent.mapExtent[3]],
+      //    [SaMapComponent.mapExtent[0], SaMapComponent.mapExtent[1]]
+      // ])
 
       this.onMapCreated.emit(this.map);
    }
