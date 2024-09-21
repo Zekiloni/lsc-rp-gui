@@ -15,6 +15,7 @@ import { MenuItem, MessageService } from 'primeng/api';
 
 import { AccountCreate } from '../../../core/model/models';
 import { RoleplayQuizComponent } from '../../roleplay-quiz';
+import { PASSWORD_VALIDATORS, USERNAME_VALIDATORS } from '../login';
 
 @Component({
    selector: 'app-register',
@@ -42,31 +43,10 @@ export class RegisterComponent {
    ];
 
    form = this.fb.group({
-      username: [
-         '',
-         [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(32),
-            this.validateUsername,
-         ],
-      ],
+      username: ['', USERNAME_VALIDATORS],
       email: ['', [Validators.required, Validators.email]],
-      password: [
-         '',
-         [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(32),
-         ],
-      ],
-      confirmPassword: [
-         '', [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(32),
-         ],
-      ],
+      password: ['', PASSWORD_VALIDATORS],
+      confirmPassword: ['', PASSWORD_VALIDATORS],
    });
 
    constructor(private fb: FormBuilder, private messageService: MessageService) {

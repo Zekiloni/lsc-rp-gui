@@ -2,17 +2,23 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
-import { FloatLabelModule } from 'primeng/floatlabel';
+import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
+import { DialogService } from 'primeng/dynamicdialog';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 import { Authentication } from '../../../core/model/models';
-import { CheckboxModule } from 'primeng/checkbox';
-import { DialogService } from 'primeng/dynamicdialog';
 import { PasswordResetComponent } from '../password-reset';
 
 export const PASSWORD_VALIDATORS = [
    Validators.required,
    Validators.minLength(6),
+   Validators.maxLength(32),
+];
+
+export const USERNAME_VALIDATORS = [
+   Validators.required,
+   Validators.minLength(3),
    Validators.maxLength(32),
 ];
 
@@ -34,7 +40,7 @@ export class LoginComponent {
    @Output() onAuthSubmit = new EventEmitter<Authentication>();
 
    form = this.formBuilder.group({
-      username: ['', PASSWORD_VALIDATORS],
+      username: ['', USERNAME_VALIDATORS],
       password: ['', PASSWORD_VALIDATORS],
    });
 
