@@ -27,11 +27,11 @@ export class SaMapComponent implements OnInit {
          transformation: new L.Transformation(1, 0, 1, 0),
 
          scale: function(zoom: number) {
-            return Math.pow(2, zoom) / SaMapComponent.mapMinResolution;
+            return Math.pow(2, zoom) / ((SaMapComponent.mapMinResolution / 2.932));
          },
 
          zoom: function(scale: number) {
-            return Math.log(scale * SaMapComponent.mapMinResolution) / Math.LN2;
+            return Math.log(scale * (SaMapComponent.mapMinResolution / 2.932)) / Math.LN2;
          },
       });
 

@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { bizTypes } from '../constant/biz-types';
 import { BizType } from '../model/bizType';
 
-const DEFAULT_ICON_SIZE: [number, number] = [13, 13];
+const DEFAULT_ICON_SIZE: [number, number] = [15, 15];
 
 export const HOUSE_ICON = L.icon({
    iconUrl: `${environment.staticUrl}/images/map-icons/property.gif`,
