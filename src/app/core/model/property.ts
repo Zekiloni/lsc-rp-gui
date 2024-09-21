@@ -9,13 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Character } from './character';
+import { BizType } from './bizType';
+import { PropertyType } from './propertyType';
 
 export interface Property { 
     id?: number;
-    type?: Property.TypeEnum;
+    type?: PropertyType;
+    bizType?: BizType;
     name: string;
-    owner?: Character;
+    owner?: string;
     price: number;
     address?: string;
     positionX: number;
@@ -27,14 +29,5 @@ export interface Property {
     interiorPositionY: number;
     interiorPositionZ: number;
     interior: number;
-    isLocked?: boolean;
-}
-export namespace Property {
-    export type TypeEnum = 'HOUSE' | 'BUSINESS' | 'APARTMENT' | 'WAREHOUSE';
-    export const TypeEnum = {
-        HOUSE: 'HOUSE' as TypeEnum,
-        BUSINESS: 'BUSINESS' as TypeEnum,
-        APARTMENT: 'APARTMENT' as TypeEnum,
-        WAREHOUSE: 'WAREHOUSE' as TypeEnum
-    };
+    isLocked: boolean;
 }

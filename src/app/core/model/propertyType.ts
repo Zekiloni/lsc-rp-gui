@@ -10,11 +10,12 @@
  * Do not edit the class manually.
  */
 
-export type PropertyType = 'HOUSE' | 'BUSINESS' | 'APARTMENT' | 'WAREHOUSE';
+export type PropertyType = 'HOUSE' | 'BUSINESS' | 'APARTMENT' | 'WAREHOUSE' | 'GARAGE';
 
 export const PropertyType = {
     HOUSE: 'HOUSE' as PropertyType,
     BUSINESS: 'BUSINESS' as PropertyType,
     APARTMENT: 'APARTMENT' as PropertyType,
-    WAREHOUSE: 'WAREHOUSE' as PropertyType
+    WAREHOUSE: 'WAREHOUSE' as PropertyType,
+    GARAGE: 'GARAGE' as PropertyType
 };

@@ -1,4 +1,9 @@
-<p>world-map-page works!</p>
-
-
-<app-sa-map />
+<div class="surface-card p-4 shadow-2 border-round">
+   <div class="text-3xl font-medium text-900 mb-2">Interaktivna mapa</div>
+   <div class="font-medium text-400 mb-3">Na ovoj mapi možete lako pronaći GPS koordinate ključnih destinacija, poput
+      kuća, biznisa, javnih objekata i drugih važnih tačaka na serveru. .
+   </div>
+   <div class="border-2 border-dashed surface-border world-map">
+      <app-sa-map class="w-full h-full" (onMapCreated)="handleMapCreated($event)" />
+   </div>
+</div>

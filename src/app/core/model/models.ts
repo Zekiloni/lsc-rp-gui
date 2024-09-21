@@ -6,6 +6,7 @@ export * from './authentication';
 export * from './authenticationStatus';
 export * from './ban';
 export * from './banCreate';
+export * from './bizType';
 export * from './character';
 export * from './characterCreate';
 export * from './characterGender';
