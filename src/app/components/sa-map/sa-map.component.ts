@@ -14,9 +14,9 @@ export class SaMapComponent implements OnInit {
    @Output() onMapCreated = new EventEmitter<L.Map>();
 
    private static mapExtent = [1022.5, 1022.5, 1022.5, 1022.5];
-   private static mapZoom = { min: 0, max: 3 };
+   private static mapZoom = { min: 2, max: 5 };
    private static mapMaxResolution = 1;
-   private static mapMinResolution = Math.pow(2, SaMapComponent.mapZoom.max) * SaMapComponent.mapMaxResolution;
+   private static mapMinResolution = (Math.pow(2, SaMapComponent.mapZoom.max) * SaMapComponent.mapMaxResolution);
 
    private crs: L.CRS | undefined;
    map: L.Map | undefined;
@@ -41,7 +41,7 @@ export class SaMapComponent implements OnInit {
          crs: this.crs,
       });
 
-      this.layer = L.tileLayer(`${environment.staticUrl}/images/tiles-512/sat.{z}.{x}.{y}.png`, {
+      this.layer = L.tileLayer(`${environment.staticUrl}/images/tiles/sat.{z}.{x}.{y}.png`, {
          minZoom: SaMapComponent.mapZoom.min,
          maxZoom: SaMapComponent.mapZoom.max,
          noWrap: true,
@@ -56,10 +56,7 @@ export class SaMapComponent implements OnInit {
          this.crs!.unproject(L.point(SaMapComponent.mapExtent[0], SaMapComponent.mapExtent[1])) as unknown as LatLngTuple,
       ]);
 
-      // this.map!.fitBounds([
-      //    [SaMapComponent.mapExtent[2], SaMapComponent.mapExtent[3]],
-      //    [SaMapComponent.mapExtent[0], SaMapComponent.mapExtent[1]]
-      // ])
+      this.map.setView(this.map.getCenter())
 
       this.onMapCreated.emit(this.map);
    }
