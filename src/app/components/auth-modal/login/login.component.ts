@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -16,10 +16,26 @@ export const PASSWORD_VALIDATORS = [
    Validators.maxLength(32),
 ];
 
+const validateUsername = (control: AbstractControl) => {
+   const value = control.value;
+
+   if (/\s/.test(value)) {
+      return { 'hasSpace': true };
+   }
+
+   const nameLastnamePattern = /^[A-Za-z]+_[A-Za-z]+$/;
+   if (nameLastnamePattern.test(value)) {
+      return { 'invalidFormat': true };
+   }
+
+   return null;
+}
+
 export const USERNAME_VALIDATORS = [
    Validators.required,
    Validators.minLength(3),
    Validators.maxLength(32),
+   validateUsername
 ];
 
 @Component({

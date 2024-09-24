@@ -52,21 +52,6 @@ export class RegisterComponent {
    constructor(private fb: FormBuilder, private messageService: MessageService) {
    }
 
-   validateUsername(control: AbstractControl) {
-      const value = control.value;
-
-      if (/\s/.test(value)) {
-         return { 'hasSpace': true };
-      }
-
-      const nameLastnamePattern = /^[A-Za-z]+_[A-Za-z]+$/;
-      if (nameLastnamePattern.test(value)) {
-         return { 'invalidFormat': true };
-      }
-
-      return null;
-   }
-
    register() {
       if (this.form.invalid) {
          return this.messageService.add({
