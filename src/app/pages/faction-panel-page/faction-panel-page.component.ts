@@ -8,7 +8,7 @@ import { filter, map } from 'rxjs';
 import { Character, Faction } from '../../core/model/models';
 import { CharacterApiService, FactionApiService } from '../../core/api/api';
 import { MembersViewTableComponent } from '../../components/faction/members-view-table';
-import { formatCurrency } from '../../util/currency.util';
+import { formatCurrency } from '../../core/util/currency.util';
 import { Store } from '@ngrx/store';
 import { selectAccount } from '../../stores/account/account.selector';
 

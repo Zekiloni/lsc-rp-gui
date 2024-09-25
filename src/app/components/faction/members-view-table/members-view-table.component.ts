@@ -12,7 +12,7 @@ import { MenuModule } from 'primeng/menu';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FactionMember, ApiError } from '../../../core/model/models';
 import { FactionApiService } from '../../../core/api/api';
-import { beautifyName, getSkinImage } from '../../../util/character.util';
+import { beautifyName, getSkinImage } from '../../../core/util';
 import { UpdateMemberRankDialogComponent } from '../update-member-rank-dialog';
 import { BadgeModule } from 'primeng/badge';
 

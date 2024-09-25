@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { getSkinImage } from '../../util/character.util';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { getSkinImage } from '../../core/util';
 import { forbiddenSkins, sampSkins } from '../../core/constant/samp-skins';
 
 @Component({

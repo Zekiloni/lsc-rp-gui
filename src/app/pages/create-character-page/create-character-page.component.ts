@@ -16,11 +16,11 @@ import { Store } from '@ngrx/store';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CharacterApiService } from '../../core/api/api';
 import { ApiError, CharacterCreate, CharacterGender } from '../../core/model/models';
-import { getSkinImage } from '../../util/character.util';
 import { SkinSelectorModalComponent } from '../../components/skin-selector';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { selectAccount } from '../../stores/account/account.selector';
 import { addAccountCharacter } from '../../stores/account/account.actions';
+import { getSkinImage } from '../../core/util';
 
 const [CHARACTER_MIN_AGE, CHARACTER_MAX_AGE] = [18, 90];
 

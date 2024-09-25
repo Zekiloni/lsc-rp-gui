@@ -7,14 +7,13 @@ import { RippleModule } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenuItem } from 'primeng/api';
-import { beautifyName, getSkinImage } from '../../util/character.util';
-import { getVehicleImage, getVehicleName } from '../../util/vehicle.util';
-import { formatCurrency } from '../../util/currency.util';
+import { getVehicleImage, getVehicleName } from '../../core/util/vehicle.util';
+import { formatCurrency } from '../../core/util/currency.util';
 import { CharacterApiService } from '../../core/api/characterApi.service';
 import { Character } from '../../core/model/character';
 import { MenuModule } from 'primeng/menu';
 import { MessagesModule } from 'primeng/messages';
-import { getCharacterStatusLabel, getCharacterStatusSeverity } from '../../core/util';
+import { beautifyName, getCharacterStatusLabel, getCharacterStatusSeverity, getSkinImage } from '../../core/util';
 
 @Component({
    selector: 'app-character-view-page',

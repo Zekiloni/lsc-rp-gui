@@ -10,7 +10,7 @@ import { DividerModule } from 'primeng/divider';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Character } from '../../core/model/character';
-import { getSkinImage } from '../../util/character.util';
+import { getSkinImage } from '../../core/util';
 import { AccountApiService } from '../../core/api/accountApi.service';
 import { CharacterApiService } from '../../core/api/characterApi.service';
 import { SkinSelectorModalComponent } from '../../components/skin-selector';

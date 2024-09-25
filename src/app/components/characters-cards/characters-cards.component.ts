@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { selectAccount } from '../../stores/account/account.selector';
 import { Character } from '../../core/model/models';
 import { RippleModule } from 'primeng/ripple';
-import { beautifyName, getSkinImage } from '../../util/character.util';
+import { beautifyName, getSkinImage } from '../../core/util';
 import { getCharacterStatusClass, getCharacterStatusLabel } from '../../core/util';
 
 @Component({

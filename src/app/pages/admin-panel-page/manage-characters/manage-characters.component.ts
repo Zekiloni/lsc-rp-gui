@@ -10,7 +10,7 @@ import { CharacterApiService } from '../../../core/api/api';
 import { ApiError, Character } from '../../../core/model/models';
 import { getCharacterStatusClass, getCharacterStatusLabel } from '../../../core/util';
 import { TooltipModule } from 'primeng/tooltip';
-import { getSkinImage } from '../../../util/character.util';
+import { getSkinImage } from '../../../core/util';
 
 @Component({
    selector: 'app-manage-characters',
