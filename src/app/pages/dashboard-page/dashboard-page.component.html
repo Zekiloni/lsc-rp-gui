@@ -1,15 +1,19 @@
-<p-tabView>
-   <p-tabPanel header="Pregled karaktera">
-      <app-characters-cards />
-   </p-tabPanel>
-   <p-tabPanel header="Administrativna evidencija">
-      <ng-container *ngIf="(userAccount$ | async) as userAccount">
-         <app-bans-table *ngIf="userAccount && userAccount.id != null" [accountId]="userAccount.id" />
-         <br>
-         <app-kicks-table *ngIf="userAccount && userAccount.id != null" [accountId]="userAccount.id" />
-         <br>
-         <app-warns-table *ngIf="userAccount && userAccount.id != null" [accountId]="userAccount.id" />
-      </ng-container>
-   </p-tabPanel>
-</p-tabView>
+@if ($userAccount | async; as userAccount) {
+   <p-tabView>
+      <p-tabPanel header="Osnovne informacije">
+         <app-account-info [account]="userAccount" />
+         <app-characters-cards />
+      </p-tabPanel>
+      <p-tabPanel header="Administrativna evidencija">
+         <ng-container *ngIf="($userAccount | async) as userAccount">
+            <app-bans-table [accountId]="userAccount.id" />
+            <br>
+            <app-kicks-table [accountId]="userAccount.id" />
+            <br>
+            <app-warns-table [accountId]="userAccount.id" />
+         </ng-container>
+      </p-tabPanel>
+   </p-tabView>
+
+}
 

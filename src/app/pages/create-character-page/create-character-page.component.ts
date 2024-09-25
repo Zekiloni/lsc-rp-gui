@@ -39,7 +39,7 @@ const [CHARACTER_MIN_AGE, CHARACTER_MAX_AGE] = [18, 90];
       SelectButtonModule,
       ToastModule,
    ],
-   providers: [CharacterApiService, DialogService, MessageService],
+   providers: [CharacterApiService, DialogService],
    templateUrl: './create-character-page.component.html',
    styleUrl: './create-character-page.component.scss',
 })
@@ -142,13 +142,14 @@ export class CreateCharacterPageComponent {
             };
 
             this.characterApiService.createCharacter(characterCreate)
-               .pipe(catchError(error => throwError(() => error.error)))
                .subscribe({
                   next: (character) => {
                      this.store.dispatch(addAccountCharacter({ character }));
                      this.router.navigate(['character', character.id]);
                   },
                   error: (error: ApiError) => {
+                     console.log(error);
+                     console.log(this.messageService);
                      this.messageService.add({ severity: 'error', detail: error.message });
                   },
                });

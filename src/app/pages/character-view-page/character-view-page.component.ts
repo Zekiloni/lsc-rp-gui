@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { beautifyName, getSkinImage } from '../../util/character.util';
 import { getVehicleImage, getVehicleName } from '../../util/vehicle.util';
 import { formatCurrency } from '../../util/currency.util';
@@ -43,6 +43,9 @@ export class CharacterViewPageComponent implements OnInit {
 
    protected readonly getVehicleName = getVehicleName;
    protected readonly getVehicleImage = getVehicleImage;
+
+   protected readonly getCharacterStatusLabel = getCharacterStatusLabel;
+   protected readonly getCharacterStatusSeverity = getCharacterStatusSeverity;
 
    character: Character | undefined;
 
@@ -106,7 +109,4 @@ export class CharacterViewPageComponent implements OnInit {
          },
       ];
    }
-
-   protected readonly getCharacterStatusLabel = getCharacterStatusLabel;
-   protected readonly getCharacterStatusSeverity = getCharacterStatusSeverity;
 }

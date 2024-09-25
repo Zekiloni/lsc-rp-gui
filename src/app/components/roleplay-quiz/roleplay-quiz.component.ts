@@ -6,7 +6,6 @@ import { MessageService } from 'primeng/api';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ButtonModule } from 'primeng/button';
-import { QuestionAnswerSubmit } from '../../core/model/questionAnswerSubmit';
 import { QuizSubmit } from '../../core/model/quizSubmit';
 import { QuizResult } from '../../core/model/quizResult';
 import { ProgressBarModule } from 'primeng/progressbar';

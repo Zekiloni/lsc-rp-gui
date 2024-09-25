@@ -7,6 +7,7 @@ import { CharactersCardsComponent } from '../../components/characters-cards';
 import { BansTableComponent } from '../../components/admin-record/bans-table';
 import { KicksTableComponent } from '../../components/admin-record/kicks-table';
 import { WarnsTableComponent } from '../../components/admin-record/warns-table';
+import { AccountInfoComponent } from '../../components/account-info';
 
 @Component({
    selector: 'app-dashboard-page',
@@ -19,12 +20,13 @@ import { WarnsTableComponent } from '../../components/admin-record/warns-table';
       NgIf,
       KicksTableComponent,
       WarnsTableComponent,
+      AccountInfoComponent,
    ],
    templateUrl: './dashboard-page.component.html',
    styleUrl: './dashboard-page.component.scss',
 })
 export class DashboardPageComponent {
-   userAccount$ = this.store.select(selectAccount);
+   $userAccount = this.store.select(selectAccount);
 
    constructor(@Inject(Store) private store: Store) {
    }

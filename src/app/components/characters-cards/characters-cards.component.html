@@ -1,73 +1,70 @@
-<div class=" px-4 py-8 md:px-6 lg:px-8">
-   <div class="text-900 font-bold text-6xl mb-4 text-center">Vaši karakteri</div>
-
-   <div class="grid">
-      @for (slot of characterSlots; track slot; ) {
-         @if (isSlotAvailable(slot)) {
-            <div class="col-12 lg:col-4">
-               <div class="p-3 h-full">
-                  <div
-                     class="shadow-2 p-3 h-full flex flex-column surface-card"
-                     style="border-radius: 6px">
-                     <div class="text-900 font-medium text-xl mb-2">Nema karaktera</div>
-                     <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
-                     <div class="flex align-items-center justify-content-center">
-                        <div class="skin-preview">
-                           <img
-                              class="surface-ground"
-                              ngSrc="./assets/images/no-character.png"
-                              alt="character-skin-preview"
-                              fill
-                              priority />
-                        </div>
+<div class="grid">
+   @for (slot of characterSlots; track slot; ) {
+      @if (isSlotAvailable(slot)) {
+         <div class="col-12 lg:col-4">
+            <div class="p-3 h-full">
+               <div
+                  class="shadow-2 p-3 h-full flex flex-column surface-card"
+                  style="border-radius: 6px">
+                  <div class="text-900 font-medium text-xl mb-2">Nema karaktera</div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <div class="flex align-items-center justify-content-center">
+                     <div class="skin-preview">
+                        <img
+                           class="surface-ground"
+                           ngSrc="./assets/images/no-character.png"
+                           alt="character-skin-preview"
+                           fill
+                           priority />
                      </div>
-                     <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
-                     <div class="flex align-items-center mt-5 mb-5">
-                        <span class="ml-2 font-medium text-600 text-justify">Informacije nisu dostupne</span>
-                     </div>
-                     <button pButton pRipple label="Kreiraj karaktera" (click)="createCharacter()"
-                             class="p-3 w-full mt-auto"></button>
                   </div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <div class="flex align-items-center mt-5 mb-5">
+                     <span class="ml-2 font-medium text-600 text-justify">Informacije nisu dostupne</span>
+                  </div>
+                  <button pButton pRipple label="Kreiraj karaktera" (click)="createCharacter()"
+                          class="p-3 w-full mt-auto"></button>
                </div>
             </div>
-         } @else {
-            <div class="col-12 lg:col-4">
-               <div class="p-3 h-full">
-                  <div class="shadow-2 p-3 flex flex-column surface-card" style="border-radius: 6px">
-                     <div class="text-900 font-medium text-xl mb-2">{{ beautifyName(getCharacter(slot).name) }}</div>
-                     <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
-                     <div class="flex align-items-center justify-content-center">
-                        <div class="skin-preview">
-                           <img
-                              class="surface-ground"
-                              [ngSrc]="getSkinImage(getCharacter(slot).skin, true)"
-                              alt="character-skin-preview"
-                              fill
-                              priority />
-                        </div>
+         </div>
+      } @else {
+         <div class="col-12 lg:col-4">
+            <div class="p-3 h-full">
+               <div class="shadow-2 p-3 flex flex-column surface-card" style="border-radius: 6px">
+                  <div class="text-900 font-medium text-xl mb-2">{{ beautifyName(getCharacter(slot).name) }}</div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <div class="flex align-items-center justify-content-center">
+                     <div class="skin-preview">
+                        <img
+                           class="surface-ground"
+                           [ngSrc]="getSkinImage(getCharacter(slot).skin, true)"
+                           alt="character-skin-preview"
+                           fill
+                           priority />
                      </div>
-                     <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
-                     <ul class="list-none p-0 m-0 flex-grow-1">
-                        <li class="flex align-items-center mb-3">
-                           <span class="text-900">Pol: {{ getCharacter(slot).gender ? "Muško" : "Žensko" }}</span>
-                        </li>
-                        <li class="flex align-items-center mb-3">
-                           <span class="text-900">Datum rođenja: {{ getCharacter(slot).birthday | date }}</span>
-                        </li>
+                  </div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <ul class="list-none p-0 m-0 flex-grow-1">
+                     <li class="flex align-items-center mb-3">
+                        <span class="text-900">Pol: {{ getCharacter(slot).gender ? "Muško" : "Žensko" }}</span>
+                     </li>
+                     <li class="flex align-items-center mb-3">
+                        <span class="text-900">Datum rođenja: {{ getCharacter(slot).birthday | date }}</span>
+                     </li>
 
-                        <li class="flex align-items-center mb-3">
+                     <li class="flex align-items-center mb-3">
                            <span class="text-900">Status:
-                              <span [class]="getCharacterStatusClass(getCharacter(slot).isApproved)">{{ getCharacterStatusLabel(getCharacter(slot).isApproved) }}</span>
+                              <span
+                                 [class]="getCharacterStatusClass(getCharacter(slot).isApproved)">{{ getCharacterStatusLabel(getCharacter(slot).isApproved) }}</span>
                            </span>
-                        </li>
-                     </ul>
-                     <hr class="mb-3 mx-0 border-top-1 border-none surface-border" />
-                     <button pButton pRipple label="Vise detalja" (click)="viewCharacter(getCharacter(slot).id!)"
-                             class="p-3 w-full p-button-outlined"></button>
-                  </div>
+                     </li>
+                  </ul>
+                  <hr class="mb-3 mx-0 border-top-1 border-none surface-border" />
+                  <button pButton pRipple label="Vise detalja" (click)="viewCharacter(getCharacter(slot).id!)"
+                          class="p-3 w-full p-button-outlined"></button>
                </div>
             </div>
-         }
+         </div>
       }
-   </div>
+   }
 </div>

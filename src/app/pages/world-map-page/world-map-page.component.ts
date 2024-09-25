@@ -41,6 +41,10 @@ export class WorldMapPageComponent {
    }
 
    private showPropertyOnMap = (property: Property) => {
+      if (property.exteriorVirtualWorld || (property.address && property.address.toLowerCase().includes("apartment"))) {
+         return;
+      }
+
       const [lat, lng] = this.convertToMapCoords(property.positionX, property.positionY);
       let marker: L.Marker | undefined;
       if (this.map) {
