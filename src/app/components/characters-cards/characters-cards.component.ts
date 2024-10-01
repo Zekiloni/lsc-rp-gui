@@ -46,6 +46,7 @@ export class CharactersCardsComponent implements OnInit {
    ngOnInit(): void {
       this.store.select(selectAccount).subscribe(({
          next: (account) => {
+            if (!account) return;
             this.characters = account!.characters || [];
          },
       }));

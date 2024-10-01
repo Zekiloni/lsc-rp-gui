@@ -7,6 +7,7 @@ import { HeroSectionComponent } from '../../components/home/hero-section';
 import { FaqComponent } from '../../components/home/faq/faq.component';
 import { StartPlayingComponent } from '../../components/start-playing';
 import { SaMapComponent } from '../../components/sa-map';
+import { SkinPreviewComponent } from '../../components/skin-preview/skin-preview.component';
 
 @Component({
    selector: 'app-home-page',
@@ -19,6 +20,7 @@ import { SaMapComponent } from '../../components/sa-map';
       StartPlayingComponent,
       AnimateOnScrollModule,
       SaMapComponent,
+      SkinPreviewComponent,
    ],
    templateUrl: './home-page.component.html',
    styleUrl: './home-page.component.scss',

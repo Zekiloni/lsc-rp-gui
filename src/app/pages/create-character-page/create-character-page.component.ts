@@ -119,11 +119,6 @@ export class CreateCharacterPageComponent {
 
    submitCharacterCreate() {
       if (this.form.invalid) {
-         for (const name of Object.keys(this.form.controls) as (keyof typeof this.form.controls)[]) {
-            if (this.form.controls[name].invalid) {
-               console.log(this.form.controls[name].errors);
-            }
-         }
          return;
       }
 
@@ -144,12 +139,14 @@ export class CreateCharacterPageComponent {
             this.characterApiService.createCharacter(characterCreate)
                .subscribe({
                   next: (character) => {
-                     this.store.dispatch(addAccountCharacter({ character }));
+                     this.messageService.add({
+                        severity: 'success',
+                        summary: 'Uсpešno',
+                        detail: `Kreirali ste karaktera ${character.name}`,
+                     });
                      this.router.navigate(['character', character.id]);
                   },
                   error: (error: ApiError) => {
-                     console.log(error);
-                     console.log(this.messageService);
                      this.messageService.add({ severity: 'error', detail: error.message });
                   },
                });

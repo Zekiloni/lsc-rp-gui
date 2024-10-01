@@ -1,0 +1,1 @@
+export * from './premium-panel-page.component';

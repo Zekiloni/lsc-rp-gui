@@ -49,6 +49,13 @@ export const routes: Routes = [
                import('./pages/world-map-page').then(m => m.WorldMapPageComponent),
          },
          {
+            title: 'Premium Panel',
+            path: 'premium',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/premium-panel-page').then(m => m.PremiumPanelPageComponent),
+         },
+         {
             title: 'Podešavanja računa',
             path: 'settings',
             canActivate: [authGuard],

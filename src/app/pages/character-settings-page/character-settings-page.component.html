@@ -7,7 +7,7 @@
          </div>
       </p-divider>
       <div class="flex gap-5 flex-column-reverse md:flex-row">
-         <div class="flex-auto p-fluid">
+         <div class="flex-1 p-fluid">
             <div class="mb-4">
                <label for="character-name" class="block font-normal text-900 mb-2">Ime Prezime</label>
                <input pInputText type="text" [value]="character.name" readonly id="character-name">
@@ -18,11 +18,14 @@
                <input pInputText type="text" [value]="character.birthday | date" readonly id="character-birthday">
             </div>
 
-            <div>
-               <button pButton pRipple type="button" class="w-auto mt-3" label="Sacuvaj izmene"></button>
+            <div class="flex gap-2">
+               <p-button pRipple label="Sacuvaj izmene" />
+               <p-button icon="pi pi-trash" severity="danger" label="Izbriši karaktera" (click)="deleteCharacterConfirmation($event, character)" />
+               <p-confirmPopup />
             </div>
          </div>
-         <div class="flex flex-column align-items-center flex-or"><span class="font-normal text-900 mb-2">Skin</span>
+         <div class="flex flex-1 flex-column align-items-center flex-or"><span
+            class="font-normal text-900 mb-2">Skin</span>
             <img [src]="getSkinImage(character.skin, false)" class="w-11rem" alt="lscrp">
             <button pButton type="button" icon="pi pi-pencil" class="-mt-4 p-button-rounded"
                     (click)="toggleSkinSelector(character)"></button>

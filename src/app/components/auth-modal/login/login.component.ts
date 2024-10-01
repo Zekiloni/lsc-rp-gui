@@ -77,6 +77,7 @@ export class LoginComponent {
    openPasswordResetRequestDialog() {
       this.dialogService.open(PasswordResetComponent, {
          header: 'Reset korisničke šifre',
+         width: '300px'
       });
    }
 }

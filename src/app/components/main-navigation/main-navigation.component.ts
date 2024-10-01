@@ -85,13 +85,16 @@ export class MainNavigationComponent implements OnInit {
                         icon: 'pi pi-user',
                         routerLink: 'ucp',
                      },
-
+                     {
+                        label: 'Premium Panel',
+                        icon: 'pi pi-star',
+                        routerLink: 'premium'
+                     },
                      {
                         label: 'World Map',
                         icon: 'pi pi-map',
                         routerLink: 'map',
                      },
-
                      ...(admin > 0 ? [{
                         label: 'Admin Panel',
                         icon: 'pi pi-shield',

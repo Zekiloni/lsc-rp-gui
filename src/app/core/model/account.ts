@@ -21,5 +21,7 @@ export interface Account {
     updatedAt?: Date;
     admin: number;
     referralCode?: string;
+    premium: 0 | 1;
+    premiumCoins: number;
     createdAt: Date;
 }
