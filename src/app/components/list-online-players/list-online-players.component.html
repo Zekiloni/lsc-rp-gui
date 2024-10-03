@@ -1,0 +1,15 @@
+@if ($onlinePlayers | async; as onlinePlayers) {
+   <div class="grid">
+      @for (player of onlinePlayers; track player.name) {
+         <div class="col-12 lg:col-3 p-3">
+            <div class="p-3 border-round shadow-2 flex align-items-center surface-card">
+               <img [src]="getSkinImage(player.skin, true)" (error)="getSkinImage('invalid_skin', true)" class="mr-3 surface-ground border-circle"
+                    style='width: 48px; height: 48px; border-radius: 10px;'
+                    alt="lscrp-player" />
+               <div><span class="text-900  font-medium mb-2">{{ player.name }}</span>
+                  <p class="mt-1 mb-0 text-600 font-medium text-sm"> {{ player.accountUsername }}</p></div>
+            </div>
+         </div>
+      }
+   </div>
+}
