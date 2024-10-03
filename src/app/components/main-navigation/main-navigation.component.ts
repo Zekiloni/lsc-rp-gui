@@ -78,7 +78,7 @@ export class MainNavigationComponent implements OnInit {
          .subscribe(admin => {
             this.accountNavItems = [
                {
-                  label: 'Navigacija',
+                  label: 'Upravljanje',
                   items: [
                      {
                         label: 'User Control Panel',
@@ -90,17 +90,27 @@ export class MainNavigationComponent implements OnInit {
                         icon: 'pi pi-star',
                         routerLink: 'premium'
                      },
-                     {
-                        label: 'World Map',
-                        icon: 'pi pi-map',
-                        routerLink: 'map',
-                     },
                      ...(admin > 0 ? [{
                         label: 'Admin Panel',
                         icon: 'pi pi-shield',
                         routerLink: 'admin',
                      }] : []),
                   ],
+               },
+               {
+                  label: 'Server',
+                  items: [
+                     {
+                        label: 'Statistika',
+                        icon: 'pi pi-map',
+                        routerLink: 'server',
+                     },
+                     {
+                        label: 'World Map',
+                        icon: 'pi pi-map',
+                        routerLink: 'map',
+                     },
+                  ]
                },
                {
                   label: 'Opcije',

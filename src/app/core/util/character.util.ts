@@ -1,7 +1,11 @@
 
-export const getSkinImage = (skinId: number, top: boolean = false) => {
+export const getSkinImage = (skinId: number | string, top: boolean = false) => {
    return `../assets/images/skins/skin-${skinId}${top ? '_top' : ''}.png`;
 };
+
+export const handleInvalidSkinImage = (target: EventTarget) => {
+
+}
 
 export const beautifyName = (name: string) => {
    return name.replace("_", " ");

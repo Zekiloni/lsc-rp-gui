@@ -42,6 +42,13 @@ export const routes: Routes = [
                import('./pages/dashboard-page').then(m => m.DashboardPageComponent),
          },
          {
+            title: 'Server Statistika',
+            path: 'server',
+            canActivate: [authGuard],
+            loadComponent: () =>
+               import('./pages/server-page').then(m => m.ServerPageComponent),
+         },
+         {
             title: 'World Map',
             path: 'map',
             canActivate: [authGuard],

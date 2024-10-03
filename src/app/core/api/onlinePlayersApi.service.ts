@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { OnlinePlayer } from '../model/onlinePlayer';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -60,10 +61,10 @@ export class OnlinePlayersApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOnlinePlayers(observe?: 'body', reportProgress?: boolean): Observable<Array<string>>;
-    public getOnlinePlayers(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<string>>>;
-    public getOnlinePlayers(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<string>>>;
-    public getOnlinePlayers(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listOnlinePlayers(observe?: 'body', reportProgress?: boolean): Observable<Array<OnlinePlayer>>;
+    public listOnlinePlayers(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<OnlinePlayer>>>;
+    public listOnlinePlayers(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<OnlinePlayer>>>;
+    public listOnlinePlayers(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -87,7 +88,7 @@ export class OnlinePlayersApiService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<string>>('get',`${this.basePath}/online-players`,
+        return this.httpClient.request<Array<OnlinePlayer>>('get',`${this.basePath}/online-players`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

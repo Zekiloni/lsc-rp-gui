@@ -100,7 +100,7 @@ export class OnlinePlayerStatApiService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<OnlinePlayerStat>>('get',`${this.basePath}/stats/online-players`,
+        return this.httpClient.request<Array<OnlinePlayerStat>>('get',`${this.basePath}/online-players/stats`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

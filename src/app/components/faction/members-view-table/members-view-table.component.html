@@ -65,7 +65,7 @@
          <td>
             <p-tag [value]="member['isLeader'] ? 'Da' : 'Ne'" [severity]="member['isLeader'] ? 'success' :'danger'" />
          </td>
-         <td>{{ member['averageActivity'] }}</td>
+         <td>{{ (member['averageActivity'] || 0.00).toFixed(2) }}</td>
 
          <td *ngIf="showActions">
             <div class="member-actions">

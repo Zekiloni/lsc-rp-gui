@@ -12,8 +12,8 @@
 
 export interface OnlinePlayer { 
     accountUsername: string;
-    characterName: string;
-    characterSkin?: number;
-    factionName: string;
+    name: string;
+    skin: number;
+    faction?: string;
     administrator: number;
 }
