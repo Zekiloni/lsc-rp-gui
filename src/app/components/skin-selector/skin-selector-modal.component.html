@@ -1,7 +1,18 @@
 <div class="skin-selector">
-   @for (skinId of availableSkins; track skinId) {
-    <div class="skin-preview" (click)="selectSkin(skinId)">
-       <img [src]="getSkinImage(skinId)" alt="skin preview model"/>
-    </div>
-   }
+   <div class="flex flex-wrap gap-2">
+      @for (skinId of paginatedSkins; track skinId) {
+         <div class="skin-preview" (dblclick)="selectSkin(skinId)">
+            <div class="w-14rem h-19rem">
+               <app-skin-preview [skinId]="skinId.toString()" />
+            </div>
+         </div>
+      }
+   </div>
+
+   <p-paginator
+      [rows]="pageSize"
+      class="w-full mt-3"
+      [totalRecords]="availableSkins.length"
+      (onPageChange)="onPageChange($event)">
+   </p-paginator>
 </div>

@@ -1,9 +1,9 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { LocalStorageService, StorageItemKey } from '../service/local-storage.service';
+import { SessionStorageService, StorageItemKey } from '../service/session-storage.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-   const token = inject(LocalStorageService).retrieve<string | null>(
+   const token = inject(SessionStorageService).retrieve<string | null>(
       StorageItemKey.AccessToken,
    );
 

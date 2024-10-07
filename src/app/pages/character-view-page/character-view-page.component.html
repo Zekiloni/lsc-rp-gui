@@ -9,7 +9,8 @@
    <p-messages [severity]="getCharacterStatusSeverity(character.isApproved)"
                *ngIf="character && !character?.isApproved">
       <ng-template pTemplate>
-         <p> Status aplikacije: <b>{{ getCharacterStatusLabel(character.isApproved) }}</b>, Administrator: <b>{{ character.approvedBy || 'Nema' }}</b></p>
+         <p> Status aplikacije: <b>{{ getCharacterStatusLabel(character.isApproved) }}</b>, Administrator:
+            <b>{{ character.approvedBy || 'Nema' }}</b></p>
       </ng-template>
    </p-messages>
 </div>
@@ -68,36 +69,36 @@
          <li class="flex align-items-center py-3 px-2 flex-wrap">
             <div class="text-500 w-full md:w-2 font-medium">Dozvole</div>
             <div class="text-900 w-full md:w-10">
-<!--               <p-tag styleClass="mr-2" class="p-element"><span-->
-<!--                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Vozačka dozvola</span></span>-->
-<!--               </p-tag>-->
-<!--               <p-tag styleClass="mr-2" class="p-element"><span-->
-<!--                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Dozvola za kamion</span></span>-->
-<!--               </p-tag>-->
-<!--               <p-tag styleClass="mr-2" class="p-element"><span-->
-<!--                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Dozvola za taksi</span></span>-->
-<!--               </p-tag>-->
+               <!--               <p-tag styleClass="mr-2" class="p-element"><span-->
+               <!--                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Vozačka dozvola</span></span>-->
+               <!--               </p-tag>-->
+               <!--               <p-tag styleClass="mr-2" class="p-element"><span-->
+               <!--                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Dozvola za kamion</span></span>-->
+               <!--               </p-tag>-->
+               <!--               <p-tag styleClass="mr-2" class="p-element"><span-->
+               <!--                  class=" p-tag p-component p-tag-rounded"><span class="p-tag-value">Dozvola za taksi</span></span>-->
+               <!--               </p-tag>-->
             </div>
          </li>
          <li class="flex align-items-center py-3 px-2 flex-wrap surface-ground">
             <div class="text-500 w-full md:w-2 font-medium">Imovina</div>
             <div class="text-900 w-full md:w-10">
-<!--               <div class="grid mt-0 mr-0">-->
-<!--                  <div class="col-12 md:col-6">-->
-<!--                     <div class="p-3 border-1 surface-border border-round surface-card">-->
-<!--                        <div class="text-900 mb-2"><i class="pi pi-home mr-2"></i><span-->
-<!--                           class="font-medium">Kuća</span></div>-->
-<!--                        <div class="text-700">Jeffrey's St. 24</div>-->
-<!--                     </div>-->
-<!--                  </div>-->
-<!--                  <div class="col-12 md:col-6">-->
-<!--                     <div class="p-3 border-1 surface-border border-round surface-card">-->
-<!--                        <div class="text-900 mb-2"><i class="pi pi-briefcase mr-2"></i><span-->
-<!--                           class="font-medium">Idlewood Gas Station</span></div>-->
-<!--                        <div class="text-700">Idlewood 15</div>-->
-<!--                     </div>-->
-<!--                  </div>-->
-<!--               </div>-->
+               <!--               <div class="grid mt-0 mr-0">-->
+               <!--                  <div class="col-12 md:col-6">-->
+               <!--                     <div class="p-3 border-1 surface-border border-round surface-card">-->
+               <!--                        <div class="text-900 mb-2"><i class="pi pi-home mr-2"></i><span-->
+               <!--                           class="font-medium">Kuća</span></div>-->
+               <!--                        <div class="text-700">Jeffrey's St. 24</div>-->
+               <!--                     </div>-->
+               <!--                  </div>-->
+               <!--                  <div class="col-12 md:col-6">-->
+               <!--                     <div class="p-3 border-1 surface-border border-round surface-card">-->
+               <!--                        <div class="text-900 mb-2"><i class="pi pi-briefcase mr-2"></i><span-->
+               <!--                           class="font-medium">Idlewood Gas Station</span></div>-->
+               <!--                        <div class="text-700">Idlewood 15</div>-->
+               <!--                     </div>-->
+               <!--                  </div>-->
+               <!--               </div>-->
             </div>
          </li>
          <li class="flex align-items-center py-3 px-2 flex-wrap">
@@ -110,10 +111,18 @@
                            <div class="p-3 border-1 surface-border border-round surface-ground">
                               <div class="text-900 mb-2"><i class="pi pi-car mr-2"></i><span
                                  class="font-medium">{{ getVehicleName(vehicle.model) }}</span></div>
-                              <div class="text-700">#{{ vehicle.numberplate }}</div>
+                              <div class='flex gap-2 align-items-center'>
+                                 <div class="text-700">Primarna boja </div>
+                                 <div class='border-round w-1rem h-1rem' [style]="{ 'background-color': getVehicleHexColor(vehicle.primaryColor) }"></div>
+                              </div>
+                              <div class='flex gap-2 align-items-center'>
+                                 <div class="text-700">Sekundarna boja </div>
+                                 <div class='border-round w-1rem h-1rem' [style]="{ 'background-color': getVehicleHexColor(vehicle.secondaryColor) }"></div>
+                              </div>
+                              <div class="text-700">{{ vehicle.numberplate || 'Nije registrovan' }}</div>
                               <div class="text-700  mb-4 money">{{ formatCurrency(vehicle.price) }}</div>
                               <p-button (click)="vehiclePhoto.show($event, vehicleInfo)" icon="pi pi-image"
-                                        label="See Photo"></p-button>
+                                        label="Pogledaj sliku"></p-button>
                            </div>
                         </div>
 

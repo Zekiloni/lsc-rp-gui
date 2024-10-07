@@ -9,7 +9,7 @@ import { AuthenticationApiService } from '../../core/api/authenticationApi.servi
 import { ApiError } from '../../core/model/apiError';
 import { MessageService } from 'primeng/api';
 import { Authentication } from '../../core/model/authentication';
-import { LocalStorageService, StorageItemKey } from '../../core/service/local-storage.service';
+import { SessionStorageService, StorageItemKey } from '../../core/service/session-storage.service';
 import { Store } from '@ngrx/store';
 import { setAccount, setAuthenticated } from '../../stores/account/account.actions';
 import { Router } from '@angular/router';
@@ -40,7 +40,7 @@ export class AuthPageComponent {
    constructor(private accountApiService: AccountApiService,
                private authApiService: AuthenticationApiService,
                private messageService: MessageService,
-               private localStorageService: LocalStorageService,
+               private sessionStorageService: SessionStorageService,
                @Inject(Store) private readonly store: Store,
                private router: Router) {
    }
@@ -91,7 +91,7 @@ export class AuthPageComponent {
                   detail: `Prijavili ste se na ${authentication.username}`,
                });
 
-               this.localStorageService.save(
+               this.sessionStorageService.save(
                   StorageItemKey.AccessToken,
                   response.token,
                );

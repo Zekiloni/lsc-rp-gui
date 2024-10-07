@@ -1,11 +1,19 @@
-<p-table [value]="accounts">
+<p-table [value]="accounts"
+         [lazy]="true"
+         [paginator]='true'
+         [rows]='limit'
+         [rowsPerPageOptions]='[10, 25, 50]'
+         (onLazyLoad)="onLazyLoad($event)"
+         [totalRecords]="totalAccounts">
    <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
          Korisnički računi
          <form [formGroup]="filterAccountForm" (ngSubmit)="submitAccountFilterForm()"
                class="flex align-items-center justify-content-between">
-            <input type="text" pInputText formControlName="username" id="username" placeholder="Korisničko ime" class="mr-2" />
-            <input type="text" pInputText formControlName="emailAddress" id="emailAddress" placeholder="Korisničko e-adresa" class="mr-3" />
+            <input type="text" pInputText formControlName="username" id="username" placeholder="Korisničko ime"
+                   class="mr-2" />
+            <input type="text" pInputText formControlName="emailAddress" id="emailAddress"
+                   placeholder="Korisničko e-adresa" class="mr-3" />
 
             <button pButton type="submit" label="Pretraga"></button>
          </form>

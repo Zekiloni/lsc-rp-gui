@@ -62,7 +62,7 @@ export class CharacterSettingsPageComponent {
    toggleSkinSelector(character: Character) {
       const skinSelectDialogRef = this.dialogService.open(SkinSelectorModalComponent, {
          header: 'Odaberite skin',
-         width: '50%',
+         width: '40%',
       });
 
       this.accountApiService.retrieveAccount(character.accountId)

@@ -7,13 +7,11 @@
   flex-wrap: wrap;
 
   .skin-preview {
-    width: 75px;
-    height: 205px;
     transition: all .35s ease;
 
     &:hover {
       position: relative;
-      filter: brightness(2.0);
+      filter: brightness(1.3);
       z-index: 999;
     }
 

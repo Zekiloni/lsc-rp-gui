@@ -21,6 +21,7 @@ export interface Vehicle {
     price: number;
     health?: number;
     numberplate?: string;
+    mileage: number;
     positionX: number;
     positionY: number;
     positionZ: number;

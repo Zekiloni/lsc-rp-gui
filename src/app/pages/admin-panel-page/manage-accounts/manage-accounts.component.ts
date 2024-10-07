@@ -4,12 +4,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Account } from '../../../core/model/account';
 import { MessageService } from 'primeng/api';
 import { ApiError } from '../../../core/model/apiError';
-import { TableModule } from 'primeng/table';
-import { DatePipe } from '@angular/common';
+import { TableLazyLoadEvent, TableModule, TablePageEvent } from 'primeng/table';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
+import { Observable } from 'rxjs';
 
 @Component({
    selector: 'app-manage-accounts',
@@ -22,13 +23,17 @@ import { InputTextModule } from 'primeng/inputtext';
       ReactiveFormsModule,
       FloatLabelModule,
       InputTextModule,
+      AsyncPipe,
    ],
    providers: [AccountApiService],
    templateUrl: './manage-accounts.component.html',
    styleUrl: './manage-accounts.component.scss',
 })
-export class ManageAccountsComponent implements AfterViewInit {
+export class ManageAccountsComponent {
    accounts: Account[] = [];
+   totalAccounts = 0;
+   offset = 0;
+   limit = 10;
 
    filterAccountForm: FormGroup = this.formBuilder.group({
       username: [''],
@@ -36,8 +41,8 @@ export class ManageAccountsComponent implements AfterViewInit {
    });
 
    constructor(private accountApiService: AccountApiService,
-               private messageService: MessageService,
                private formBuilder: FormBuilder) {
+      this.retrieveAccounts();
    }
 
    get accountFilterQuery() {
@@ -52,22 +57,28 @@ export class ManageAccountsComponent implements AfterViewInit {
       return value && value.length > 0 ? value : undefined;
    }
 
-   ngAfterViewInit() {
-      this.fetchAccounts();
+   submitAccountFilterForm() {
+      this.retrieveAccounts();
    }
 
-   private fetchAccounts() {
+   private retrieveAccounts() {
       const { username, emailAddress } = this.accountFilterQuery;
-      this.accountApiService.listAccount(username, emailAddress)
+      this.accountApiService.listAccount(this.offset, this.limit, username, emailAddress, 'response')
          .subscribe({
             next: (response) => {
-               this.accounts = response;
+               this.accounts = response.body as Account[];
+               console.log(response)
+               this.totalAccounts = parseInt(response.headers.get('X-Total-Count')!);
             },
-            error: (response: ApiError) => this.messageService.add({ severity: 'error', detail: response.message }),
          });
    }
 
-   submitAccountFilterForm() {
-      this.fetchAccounts();
+   onLazyLoad(event: TableLazyLoadEvent) {
+      console.log('onPage')
+      const pageNumber = (event.first === 0 || event.first == undefined) ? 0 : event.first / (event.rows == undefined ? 1 : event.rows) + 1;
+      this.limit = event.rows == undefined ? 10 : event.rows;
+      this.offset = pageNumber;
+      console.log('aa')
+      this.retrieveAccounts();
    }
 }

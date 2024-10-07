@@ -162,15 +162,25 @@ export class AccountApiService {
     /**
      * Get a list of all accounts
      * 
+     * @param offset 
+     * @param limit 
      * @param username Filter accounts by username
      * @param emailAddress Filter accounts by email address
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listAccount(username?: string, emailAddress?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Account>>;
-    public listAccount(username?: string, emailAddress?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Account>>>;
-    public listAccount(username?: string, emailAddress?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Account>>>;
-    public listAccount(username?: string, emailAddress?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listAccount(offset: number, limit: number, username?: string, emailAddress?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Account>>;
+    public listAccount(offset: number, limit: number, username?: string, emailAddress?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Account>>>;
+    public listAccount(offset: number, limit: number, username?: string, emailAddress?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Account>>>;
+    public listAccount(offset: number, limit: number, username?: string, emailAddress?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (offset === null || offset === undefined) {
+            throw new Error('Required parameter offset was null or undefined when calling listAccount.');
+        }
+
+        if (limit === null || limit === undefined) {
+            throw new Error('Required parameter limit was null or undefined when calling listAccount.');
+        }
 
 
 
@@ -180,6 +190,12 @@ export class AccountApiService {
         }
         if (emailAddress !== undefined && emailAddress !== null) {
             queryParameters = queryParameters.set('emailAddress', <any>emailAddress);
+        }
+        if (offset !== undefined && offset !== null) {
+            queryParameters = queryParameters.set('offset', <any>offset);
+        }
+        if (limit !== undefined && limit !== null) {
+            queryParameters = queryParameters.set('limit', <any>limit);
         }
 
         let headers = this.defaultHeaders;

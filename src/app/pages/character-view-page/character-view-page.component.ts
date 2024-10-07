@@ -7,7 +7,7 @@ import { RippleModule } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenuItem } from 'primeng/api';
-import { getVehicleImage, getVehicleName } from '../../core/util/vehicle.util';
+import { getVehicleHexColor, getVehicleImage, getVehicleName } from '../../core/util/vehicle.util';
 import { formatCurrency } from '../../core/util/currency.util';
 import { CharacterApiService } from '../../core/api/characterApi.service';
 import { Character } from '../../core/model/character';
@@ -108,4 +108,6 @@ export class CharacterViewPageComponent implements OnInit {
          },
       ];
    }
+
+   protected readonly getVehicleHexColor = getVehicleHexColor;
 }

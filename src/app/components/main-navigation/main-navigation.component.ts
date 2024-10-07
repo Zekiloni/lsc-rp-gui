@@ -11,7 +11,7 @@ import { MenuModule } from 'primeng/menu';
 import { selectAccount } from '../../stores/account/account.selector';
 import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
 import { setAccount, setAuthenticated } from '../../stores/account/account.actions';
-import { LocalStorageService, StorageItemKey } from '../../core/service/local-storage.service';
+import { SessionStorageService, StorageItemKey } from '../../core/service/session-storage.service';
 import { environment } from '../../../environments/environment';
 import { DiscordApiService } from '../../core/api/discordApi.service';
 
@@ -26,7 +26,7 @@ import { DiscordApiService } from '../../core/api/discordApi.service';
       AsyncPipe,
       NgOptimizedImage,
    ],
-   providers: [LocalStorageService, DiscordApiService],
+   providers: [SessionStorageService, DiscordApiService],
    templateUrl: './main-navigation.component.html',
    styleUrl: './main-navigation.component.scss',
 })
@@ -39,7 +39,7 @@ export class MainNavigationComponent implements OnInit {
    constructor(
       @Inject(Store) private store: Store,
       private discordApiService: DiscordApiService,
-      private localStorageService: LocalStorageService,
+      private sessionStorageService: SessionStorageService,
       private router: Router,
    ) {
    }
@@ -134,7 +134,7 @@ export class MainNavigationComponent implements OnInit {
    logout() {
       this.store.dispatch(setAccount({ account: null }));
       this.store.dispatch(setAuthenticated({ isAuthenticated: false }));
-      this.localStorageService.delete(StorageItemKey.AccessToken);
+      this.sessionStorageService.delete(StorageItemKey.AccessToken);
       this.router.navigate(['/']);
    }
 

@@ -5,7 +5,14 @@ export const forbiddenSkins = [
    310, 311,
 ];
 
-export const sampSkins = [
+const customSkinStartId = 20000;
+const customSkinEndId = 20105;
+
+
+const customSkins = Array.from({ length: (customSkinEndId - customSkinStartId + 1) },
+   (_, index) => customSkinStartId + index);
+
+const sampSkins = [
    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
    10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
    20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
@@ -37,5 +44,8 @@ export const sampSkins = [
    280, 281, 282, 283, 284, 285, 286, 287, 288, 289,
    290, 291, 292, 293, 294, 295, 296, 297, 298, 299,
    300, 301, 302, 303, 304, 305, 306, 307, 308, 309,
-   310, 311,
-]
+   310, 311, ...customSkins
+];
+
+
+export { sampSkins };
