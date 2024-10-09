@@ -70,7 +70,8 @@ export class SkinPreviewComponent implements AfterViewInit, OnDestroy {
       const modelMesh = await rwModel.create();
 
       modelMesh.position.set(0, 0, 0);
-      modelMesh.rotation.set(90 * (Math.PI / 180), 0, 90 * (Math.PI / 180), 'ZXY');
+      //modelMesh.rotation.set(90 * (Math.PI / 180), 0, 90 * (Math.PI / 180), 'ZXY');
+      modelMesh.rotation.set(0, 0, 0, 'ZXY');
       this.scene.add(modelMesh);
 
       const ambientLight = new THREE.AmbientLight(0xFFFFFF, 4);
@@ -86,8 +87,9 @@ export class SkinPreviewComponent implements AfterViewInit, OnDestroy {
       this.scene.add(ambientLight);
       this.scene.add(spotLight)
 
-      this.camera.position.set(0, 0, this.camera.position.z)
-      this.camera.fov = 60;
+
+      this.camera.position.set(0, 0.3, 3)
+      this.camera.fov = 48;
       this.camera.updateProjectionMatrix();
    }
 

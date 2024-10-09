@@ -12,12 +12,12 @@ export const getAdministratorLabel = (admin: number) => {
    return administratorLabels[admin] || 'None';
 };
 
-export const getAdministratorSeverity = (admin: number) => {
+export const getAdministratorColor = (admin: number) => {
    if (admin == 1) {
-      return 'success';
+      return 'text-green-300';
    } else if (admin > 1) {
-      return 'danger';
+      return 'text-red-500';
    } else {
-      return 'primary';
+      return 'text-white';
    }
-};
+}

@@ -4,12 +4,15 @@ import { OnlinePlayersApiService } from '../../core/api/onlinePlayersApi.service
 import { OnlinePlayer } from '../../core/model/onlinePlayer';
 import { AsyncPipe } from '@angular/common';
 import { getSkinImage } from '../../core/util';
+import { TooltipModule } from 'primeng/tooltip';
+import { getAdministratorColor } from '../../core/util/account.util';
 
 @Component({
    selector: 'app-list-online-players',
    standalone: true,
    imports: [
       AsyncPipe,
+      TooltipModule,
    ],
    providers: [OnlinePlayersApiService],
    templateUrl: './list-online-players.component.html',
@@ -24,4 +27,5 @@ export class ListOnlinePlayersComponent {
    }
 
    protected readonly getSkinImage = getSkinImage;
+   protected readonly getAdministratorColor = getAdministratorColor;
 }
